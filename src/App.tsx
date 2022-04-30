@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import BoardPage from './components/BoardPage/BoardPage';
 import HomePage from './components/HomePage/HomePage';
 import LoginPage from './components/LoginPage/LoginPage';
@@ -11,7 +11,7 @@ const App = () => {
     <>
       <Routes>
         <Route path="" element={<HomePage />}>
-          <Route path="" element={<WelcomePage />}></Route>
+          <Route index element={<WelcomePage />}></Route>
 
           <Route path="login" element={<LoginPage />}></Route>
 
@@ -19,7 +19,9 @@ const App = () => {
 
           <Route path="board" element={<BoardPage />}></Route>
 
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="404" element={<NotFoundPage />} />
+
+          <Route path="*" element={<Navigate to="404" />} />
         </Route>
       </Routes>
     </>
