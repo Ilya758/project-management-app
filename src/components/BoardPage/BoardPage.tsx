@@ -1,5 +1,5 @@
 const BoardPage = () => {
-  return <div>BoardPage</div>;
+  return <div className="wrapper-component">BoardPage</div>;
 };
 
 export default BoardPage;

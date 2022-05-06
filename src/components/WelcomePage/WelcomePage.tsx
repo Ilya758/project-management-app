@@ -63,12 +63,12 @@ export const WelcomePage = () => {
         </div>
       </section>
       <section className="developers-content">
-        <h2 className="subheading">Наша команда</h2>
+        <h2 className="subheading">Meet Team</h2>
         <div className="developers-content-container">
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>Илья Скарына</em> - Team lead, developer
+                <em>Illia Skaryna</em> - Team lead, developer
               </h3>
               <div className="scills-developer">
                 <p>- Базовые настройки проекта, роутинг приложения</p>
@@ -83,7 +83,7 @@ export const WelcomePage = () => {
             <div className="image-developer developer2"></div>
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>Андрей Корозеев</em> - developer
+                <em>Andrei Korozeev</em> - developer
               </h3>
               <div className="scills-developer">
                 <p>- Регистрация и авторизация пользователя;</p>
@@ -96,7 +96,7 @@ export const WelcomePage = () => {
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>Татьяна Тузова</em> - developer
+                <em>Tatsiana Tuzava</em> - developer
               </h3>
               <div className="scills-developer">
                 <p>- Главная страница приложения;</p>

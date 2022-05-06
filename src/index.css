@@ -57,3 +57,7 @@ section {
   color: var(--color-active);
   cursor: default;
 }
+
+.errorImage {
+  width: 100%;
+}
