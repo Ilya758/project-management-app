@@ -1,0 +1,15 @@
+# Ignore artifacts:
+dist
+node_modules
+package
+package-lock
+webpack.config
+
+# Ignore icons/pictures
+*.png
+*.gif
+*.svg
+*.jpeg
+*.jpg
+*.ico
+*.snap

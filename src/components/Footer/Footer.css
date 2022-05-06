@@ -1,0 +1,50 @@
+footer {
+  height: 7vh;
+  flex: 0 0 auto;
+  padding: 0 10px;
+  background: #262637;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
+    Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  color: #61dafb;
+  box-shadow: 4px -2px 8px 0px rgba(34, 60, 80, 0.2);
+}
+
+.containerFooter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  height: 100%;
+}
+
+.containerDevelopUsers {
+  display: flex;
+  justify-content: space-between;
+  width: 320px;
+}
+
+.imageLogo {
+  width: 65px;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+  color: #61dafb;
+}
+
+i {
+  margin-right: 5px;
+}
+
+.rsschool-link {
+  height: 40px;
+  width: 65px;
+  background-image: url('../../assets/svg/logoSchool.svg');
+  background-repeat: no-repeat;
+  background-size: 100% 30px;
+  background-position: left center;
+}

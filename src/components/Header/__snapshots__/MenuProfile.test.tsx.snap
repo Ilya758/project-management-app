@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu Component Should render 1`] = `
+<body>
+  <div>
+    <div
+      class="nav-container-link"
+    >
+      <a
+        class=""
+        href="/board"
+      >
+        Create new board
+      </a>
+      <a
+        class=""
+        href="/edit_profile"
+      >
+        Edit profile
+      </a>
+      <a
+        class=""
+        href="/login"
+      >
+        logout
+      </a>
+      <button
+        class="delete-user"
+      >
+        Delete User
+      </button>
+    </div>
+  </div>
+</body>
+`;

@@ -1,5 +1,16 @@
-const Header = () => {
-  return <div>Header</div>;
-};
+import { NavLink } from 'react-router-dom';
+import { Menu } from './MenuProfile';
+import { Authorization } from './Authorization';
+import './Header.css';
 
-export default Header;
+export const Header = () => {
+  return (
+    <header>
+      <div className="nav-container">
+        <NavLink to="/" className="logo"></NavLink>
+        <Menu />
+      </div>
+      <Authorization />
+    </header>
+  );
+};

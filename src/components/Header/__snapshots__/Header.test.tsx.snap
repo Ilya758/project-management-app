@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component Should render 1`] = `
+<body>
+  <div>
+    <header>
+      <div
+        class="nav-container"
+      >
+        <a
+          aria-current="page"
+          class="logo active"
+          href="/"
+        />
+        <div
+          class="nav-container-link"
+        >
+          <a
+            class=""
+            href="/board"
+          >
+            Create new board
+          </a>
+          <a
+            class=""
+            href="/edit_profile"
+          >
+            Edit profile
+          </a>
+          <a
+            class=""
+            href="/login"
+          >
+            logout
+          </a>
+          <button
+            class="delete-user"
+          >
+            Delete User
+          </button>
+        </div>
+      </div>
+      <nav>
+        <button
+          class="language"
+        >
+          Ru / En
+        </button>
+        <button>
+          Log In
+        </button>
+        <button>
+          Sign Up
+        </button>
+      </nav>
+    </header>
+  </div>
+</body>
+`;

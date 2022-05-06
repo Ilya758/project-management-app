@@ -1,0 +1,13 @@
+.wrapper-component {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.component {
+  max-width: 1000px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

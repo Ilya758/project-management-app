@@ -1,5 +1,11 @@
-const NotFoundPage = () => {
-  return <div>NotFoundPage</div>;
-};
+import IMAGE_ERROR from '../../assets/jpg/notFound.jpg';
 
-export default NotFoundPage;
+export const NotFoundPage = () => {
+  return (
+    <>
+      <div className="containerErrorPage">
+        <img src={IMAGE_ERROR} className="ErrorImage" alt="Error-image" />
+      </div>
+    </>
+  );
+};

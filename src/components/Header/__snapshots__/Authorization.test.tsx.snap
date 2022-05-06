@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Authorization Component Should render 1`] = `
+<body>
+  <div>
+    <nav>
+      <button
+        class="language"
+      >
+        Ru / En
+      </button>
+      <button>
+        Log In
+      </button>
+      <button>
+        Sign Up
+      </button>
+    </nav>
+  </div>
+</body>
+`;
