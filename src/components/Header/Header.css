@@ -95,12 +95,13 @@ nav {
   cursor: pointer;
 }
 
-.signUp, nav > button {
+.signUp,
+nav > button {
   border: 1px solid #00deb6;
   border-radius: 3px;
   padding: 5px 10px;
   cursor: pointer !important;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 nav > button {

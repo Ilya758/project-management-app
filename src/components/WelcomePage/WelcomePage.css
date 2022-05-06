@@ -95,7 +95,7 @@
   max-width: 850px;
   border-radius: 40px;
   overflow: hidden;
-  background-color: #EDF1F2;
+  background-color: #edf1f2;
   height: 350px;
   padding: 10px 15px;
   display: flex;
@@ -106,7 +106,7 @@
 }
 
 .info-developer {
-  padding:  10px;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -190,12 +190,12 @@
   width: 300px;
 }
 
-.developer1{
+.developer1 {
   background: url('../../assets/jpg/ilia.jpg') no-repeat center center;
   background-size: cover;
 }
 
-.developer2{
+.developer2 {
   background: url('../../assets/jpg/andrey.jpg') no-repeat center center;
   background-size: cover;
 }
