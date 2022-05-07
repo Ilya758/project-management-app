@@ -11,13 +11,13 @@ export const WelcomePage = () => {
     <div className="home-wrapper">
       <section className="about-wrapper">
         <div>Project Management</div>
-        <div>... Ваши неограниченные варианты использования</div>
+        <div>...your unlimited use cases</div>
       </section>
       <section className="project-content">
         <div>
-          <h1 className="subheading">Надежное Управление Задачами для Команд</h1>
+          <h1 className="subheading">Reliable Task Management for the Team</h1>
           <span className="primary-title">
-            <span>Объедините</span> Вашу Команду
+            <span>Unite</span> Your Team
           </span>
           <div className="container-images">
             <img className="imageOne" src={ImageOne} alt="image" />
@@ -29,36 +29,34 @@ export const WelcomePage = () => {
       <section className="project-info-content">
         <div className="card-info">
           <img className="imageFour" src={ImageFour} alt="image" />
-          <h3>Время Стать Организованными</h3>
+          <h3>TIME TO GET ORGANIZED</h3>
           <p>
-            &nbsp; Управление задачами является связующим звеном между планированием дел и их
-            выполнением. Программное обеспечение для управления задачами должно обеспечивать обзор
-            работы, чтобы видеть превращение идеи в результат.
+            &nbsp; Task management is the link between the planning of cases and their
+            implementation. The task management software needed to provide an overview of the work
+            in order to translate the idea into a result.
             <br />
-            &nbsp; Попробуйте <b>ProjectManagement:</b> присоединяйтесь к командам со всего мира,
-            которые используют наши доски для цифровизации рабочих процессов и получения четкого
-            обзора прогресса задач. Станем организованными вместе!
+            &nbsp; Try <b>ProjectManagement:</b> Join the world as our teams use our teams to
+            digitize workflows and get a clear overview of task progress. Let,s get organized
+            together!
           </p>
         </div>
         <div className="card-info">
           <img className="imageFour" src={ImageFive} alt="image" />
-          <h3>Проекты, Которые Работают</h3>
+          <h3>PROJECTS, THAT WORK</h3>
           <p>
-            &nbsp; Независимо от того, управляете ли вы своим следующим крупным проектом или
-            переводите управление задачами в цифровую форму для повседневной работы своей команды,
-            вам нужно знать, кто, чем и когда занимается. <b>ProjectManagement</b> поможет вам
-            управлять задачами в красивой настраиваемой среде, которая идеально адаптируется к вашим
-            потребностям.
+            &nbsp; Whether you are managing your next big project or digitizing task management for
+            your team is day-to-day work, you need to know who is doing what, when.{' '}
+            <b>ProjectManagement</b> helps you manage tasks in a beautifully customizable
+            environment that adapts perfectly to your needs.
           </p>
         </div>
         <div className="card-info">
           <img className="imageFour" src={ImageSix} alt="image" />
-          <h3>Удаленная Работа</h3>
+          <h3>DISTANT WORK</h3>
           <p>
-            &nbsp; Когда ваша команда работает из дома, эффективный способ обмена информацией имеет
-            важное значение для продуктивной работы. Используйте <b>ProjectManagement</b>, чтобы
-            улучшить взаимодействие, эффективно управлять задачами и обеспечить гладкое выполнение
-            проектов.
+            &nbsp; When your team is working from home, an efficient way to share information is
+            essential to being productive. Use <b>ProjectManagement</b> to improve collaboration,
+            manage tasks efficiently, and ensure projects run smoothly.
           </p>
         </div>
       </section>
@@ -71,8 +69,8 @@ export const WelcomePage = () => {
                 <em>Illia Skaryna</em> - Team lead, developer
               </h3>
               <div className="scills-developer">
-                <p>- Базовые настройки проекта, роутинг приложения</p>
-                <p>- Поддержка корректной работы приложения;</p>
+                <p>- Basic project settings, application routing</p>
+                <p>- Support for the correct operation of the application</p>
                 <p></p>
                 <p></p>
               </div>
@@ -83,10 +81,10 @@ export const WelcomePage = () => {
             <div className="image-developer developer2"></div>
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>Andrei Korozeev</em> - developer
+                <em>Andrei Korozeev </em> - developer
               </h3>
               <div className="scills-developer">
-                <p>- Регистрация и авторизация пользователя;</p>
+                <p>- Registration and authorization of the user</p>
                 <p></p>
                 <p></p>
                 <p></p>
@@ -99,7 +97,7 @@ export const WelcomePage = () => {
                 <em>Tatsiana Tuzava</em> - developer
               </h3>
               <div className="scills-developer">
-                <p>- Главная страница приложения;</p>
+                <p>- Main page of the application</p>
                 <p></p>
                 <p></p>
                 <p></p>
