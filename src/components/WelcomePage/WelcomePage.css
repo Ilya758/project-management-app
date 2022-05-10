@@ -116,6 +116,7 @@
 .title-developer {
   font-size: 30px;
   text-align: center;
+  color: #61dafb;
 }
 
 .scills-developer {
@@ -132,7 +133,7 @@
   margin: 15px 0;
 }
 
-.card-info {
+.project-info-content-card {
   width: 450px;
   margin: 15px;
   text-align: justify;
@@ -146,7 +147,7 @@
   box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
 }
 
-.card-info > div:first-child {
+.project-info-content-card > div:first-child {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -203,28 +204,4 @@
 .developer3 {
   background: url('../../assets/jpg/tatiana.jpg') no-repeat center center;
   background-size: cover;
-}
-
-@media screen and (min-width: 320px) and (max-width: 1160px) {
-  .developers-content-container {
-    flex-wrap: wrap;
-    flex-direction: initial;
-  }
-  .developers-content {
-    height: auto;
-  }
-  .box-wrapper {
-    max-width: 550px;
-    flex-direction: column;
-    align-items: center;
-    height: 600px;
-    margin: 15px 0;
-  }
-  .image-developer {
-    width: 400px;
-    height: 450px;
-  }
-  .subheading {
-    margin-bottom: 50px;
-  }
 }

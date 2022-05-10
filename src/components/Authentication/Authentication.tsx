@@ -1,4 +1,4 @@
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import './Authentication.css';
 
 export const Authentication = () => {
@@ -7,7 +7,6 @@ export const Authentication = () => {
       <div className="component">
         <NavLink to="login">Login</NavLink>
         <NavLink to="registration">Registration</NavLink>
-        <Outlet />
       </div>
     </div>
   );

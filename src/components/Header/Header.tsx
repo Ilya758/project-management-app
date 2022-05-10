@@ -5,7 +5,7 @@ import './Header.css';
 
 export const Header = () => {
   return (
-    <header>
+    <header className="header">
       <div className="nav-container">
         <NavLink to="/" className="logo"></NavLink>
         <Menu />

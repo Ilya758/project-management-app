@@ -1,4 +1,4 @@
-footer {
+.footer {
   height: 7vh;
   flex: 0 0 auto;
   padding: 0 10px;
@@ -12,7 +12,7 @@ footer {
   box-shadow: 4px -2px 8px 0px rgba(34, 60, 80, 0.2);
 }
 
-.containerFooter {
+.container-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -20,23 +20,23 @@ footer {
   height: 100%;
 }
 
-.containerDevelopUsers {
+.container-develop-users {
   display: flex;
   justify-content: space-between;
   width: 320px;
 }
 
-.imageLogo {
+.image-logo {
   width: 65px;
 }
 
-a {
+.users-link {
   cursor: pointer;
   text-decoration: none;
   color: #61dafb;
 }
 
-i {
+.fab.fa-github {
   margin-right: 5px;
 }
 

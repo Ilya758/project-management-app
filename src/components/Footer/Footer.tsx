@@ -5,7 +5,7 @@ export const Footer = () => {
   const nickTemplate = () => {
     return DEVELOPERS.map((elem) => {
       return (
-        <a href={elem.host} key={elem.name}>
+        <a href={elem.host} key={elem.name} className="users-link">
           <i className="fab fa-github"></i>
           {elem.name}
         </a>
@@ -14,10 +14,10 @@ export const Footer = () => {
   };
 
   return (
-    <footer>
-      <div className="containerFooter">
+    <footer className="footer">
+      <div className="container-footer">
         <span>© 2022</span>
-        <div className="containerDevelopUsers">{nickTemplate()}</div>
+        <div className="container-develop-users">{nickTemplate()}</div>
         <a
           href="https://rs.school/react/"
           target="_blank"

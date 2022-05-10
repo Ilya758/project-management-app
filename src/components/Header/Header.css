@@ -1,4 +1,4 @@
-header {
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -16,19 +16,7 @@ header {
   padding: 10px;
 }
 
-header > a,
-.linkMovie {
-  color: #00deb6;
-  text-decoration: none;
-  padding: 0 1rem;
-  font-size: 18px;
-}
-
-header > a:hover {
-  text-decoration: underline;
-}
-
-nav {
+.nav {
   width: 80px;
   height: 100%;
   display: flex;
@@ -50,7 +38,7 @@ nav {
   align-items: center;
 }
 
-.nav-container-link {
+.container-link {
   width: 150px;
   height: 100%;
   display: flex;
@@ -60,13 +48,14 @@ nav {
   margin: 0 3%;
 }
 
-.nav-container-link > a,
+.link-profile,
 .delete-user {
   transition: 0.5s;
   color: #61dafb;
+  text-decoration: none;
 }
 
-.nav-container-link > a:hover {
+.link-profile:hover {
   color: #00deb6;
 }
 .delete-user:hover {
@@ -96,7 +85,7 @@ nav {
 }
 
 .signUp,
-nav > button {
+.language {
   border: 1px solid #00deb6;
   border-radius: 3px;
   padding: 5px 10px;
@@ -104,16 +93,18 @@ nav > button {
   transition: 0.5s;
 }
 
-nav > button {
+.language {
   background: none;
   color: #61dafb;
 }
-.signUp > i {
+
+.signUp > .fas.fa-user {
   margin-right: auto;
+  color: #61dafb;
 }
 
-.signUp:hover,
-nav > button:hover {
+.signUp > .fas.fa-user:hover,
+.language:hover {
   border-color: #61dafb;
   color: #00deb6;
   box-shadow: 4px 4px 8px 0 rgb(0 188 212 / 56%);

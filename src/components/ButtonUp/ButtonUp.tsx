@@ -24,7 +24,7 @@ export const ButtonUp: FC = () => {
 
   return (
     <button className={visible ? 'button-up flex' : 'button-up flex hide'} onClick={smoothJumpUp}>
-      <span></span>
+      <span />
     </button>
   );
 };

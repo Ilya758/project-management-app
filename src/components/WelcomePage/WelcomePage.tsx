@@ -10,8 +10,8 @@ export const WelcomePage = () => {
   return (
     <div className="home-wrapper">
       <section className="about-wrapper">
-        <div>Project Management</div>
-        <div>...your unlimited use cases</div>
+        <div className="title-primary-page">Project Management</div>
+        <div className="title-primary-page">...your unlimited use cases</div>
       </section>
       <section className="project-content">
         <div>
@@ -27,9 +27,9 @@ export const WelcomePage = () => {
         </div>
       </section>
       <section className="project-info-content">
-        <div className="card-info">
+        <div className="project-info-content-card">
           <img className="imageFour" src={ImageFour} alt="image" />
-          <h3>TIME TO GET ORGANIZED</h3>
+          <h3 className="card-info-title">TIME TO GET ORGANIZED</h3>
           <p>
             &nbsp; Task management is the link between the planning of cases and their
             implementation. The task management software needed to provide an overview of the work
@@ -40,9 +40,9 @@ export const WelcomePage = () => {
             together!
           </p>
         </div>
-        <div className="card-info">
+        <div className="project-info-content-card">
           <img className="imageFour" src={ImageFive} alt="image" />
-          <h3>PROJECTS, THAT WORK</h3>
+          <h3 className="card-info-title">PROJECTS, THAT WORK</h3>
           <p>
             &nbsp; Whether you are managing your next big project or digitizing task management for
             your team is day-to-day work, you need to know who is doing what, when.{' '}
@@ -50,9 +50,9 @@ export const WelcomePage = () => {
             environment that adapts perfectly to your needs.
           </p>
         </div>
-        <div className="card-info">
+        <div className="project-info-content-card">
           <img className="imageFour" src={ImageSix} alt="image" />
-          <h3>DISTANT WORK</h3>
+          <h3 className="card-info-title">DISTANT WORK</h3>
           <p>
             &nbsp; When your team is working from home, an efficient way to share information is
             essential to being productive. Use <b>ProjectManagement</b> to improve collaboration,
@@ -68,27 +68,33 @@ export const WelcomePage = () => {
               <h3 className="title-developer">
                 <em>Illia Skaryna</em> - Team lead, developer
               </h3>
-              <div className="scills-developer">
-                <p>- Basic project settings, application routing</p>
-                <p>- Support for the correct operation of the application</p>
-                <p></p>
-                <p></p>
+              <div className="skills-developer">
+                <p className="skills-developer-text">
+                  - Basic project settings, application routing
+                </p>
+                <p className="skills-developer-text">
+                  - Support for the correct operation of the application
+                </p>
+                <p className="skills-developer-text" />
+                <p className="skills-developer-text" />
               </div>
             </div>
             <div className="image-developer developer1"></div>
           </div>
           <div className="box-wrapper">
-            <div className="image-developer developer2"></div>
             <div className="info-developer">
               <h3 className="title-developer">
                 <em>Andrei Korozeev </em> - developer
               </h3>
-              <div className="scills-developer">
-                <p>- Registration and authorization of the user</p>
-                <p></p>
-                <p></p>
-                <p></p>
+              <div className="skills-developer">
+                <p className="skills-developer-text">
+                  - Registration and authorization of the user
+                </p>
+                <p className="skills-developer-text" />
+                <p className="skills-developer-text" />
+                <p className="skills-developer-text" />
               </div>
+              <div className="image-developer developer2"></div>
             </div>
           </div>
           <div className="box-wrapper">
@@ -96,11 +102,11 @@ export const WelcomePage = () => {
               <h3 className="title-developer">
                 <em>Tatsiana Tuzava</em> - developer
               </h3>
-              <div className="scills-developer">
-                <p>- Main page of the application</p>
-                <p></p>
-                <p></p>
-                <p></p>
+              <div className="skills-developer">
+                <p className="skills-developer-text">- Main page of the applicationead</p>
+                <p className="skills-developer-text" />
+                <p className="skills-developer-text" />
+                <p className="skills-developer-text" />
               </div>
             </div>
             <div className="image-developer developer3"></div>
