@@ -15,7 +15,6 @@ const App = () => {
       <Routes>
         <Route path="" element={<HomePage />}>
           <Route index element={<WelcomePage />}></Route>
-
           <Route path="login" element={<LoginPage />}></Route>
 
           <Route path="authentication" element={<Authentication />}>
@@ -24,11 +23,8 @@ const App = () => {
           </Route>
 
           <Route path="main" element={<MainPage />}></Route>
-
           <Route path="board" element={<BoardPage />}></Route>
-
           <Route path="404" element={<NotFoundPage />} />
-
           <Route path="*" element={<Navigate to="404" />} />
         </Route>
       </Routes>
