@@ -67,7 +67,7 @@
   height: 90%;
   background: url('../../assets/jpg/project-manager-logo.jpg') no-repeat center center;
   background-size: cover;
-  // box-shadow: 4px 4px 8px 0 rgb(0 188 212 / 56%);
+  box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
   cursor: pointer;
   margin: 0 1%;
 }
@@ -109,5 +109,5 @@
 .language:hover {
   border-color: #61dafb;
   color: #00deb6;
-  // box-shadow: 4px 4px 8px 0 rgb(0 188 212 / 56%);
+  box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
 }
