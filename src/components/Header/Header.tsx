@@ -1,7 +1,8 @@
 import { NavLink } from 'react-router-dom';
 import { Menu } from './MenuProfile';
 import { Authorization } from './Authorization';
-import './Header.css';
+
+import './Header.scss';
 
 export const Header = () => {
   return (

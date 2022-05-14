@@ -25,3 +25,17 @@
   background-color: #262637;
   color: #00deb6;
 }
+
+.container-login-form {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.visible {
+  display: flex;
+}
+
+.no-visible {
+  display: none;
+}

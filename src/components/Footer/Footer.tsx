@@ -1,5 +1,5 @@
 import { DEVELOPERS } from '../../constants/developers';
-import './Footer.css';
+import './Footer.scss';
 
 export const Footer = () => {
   const nickTemplate = () => {

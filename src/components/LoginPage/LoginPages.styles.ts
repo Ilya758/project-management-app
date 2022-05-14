@@ -5,8 +5,8 @@ export const StyledLoginPage = styled.div`
   display: flex;
   justify-content: center;
 
-  border: 1px solid black;
   border-radius: 10px;
+  box-shadow: 2px 2px 6px 0px rgb(0 0 0 / 30%);
 
   padding: 20px;
 

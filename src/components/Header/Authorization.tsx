@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { LANGUAGE } from '../../constants/utils';
-import './Header.css';
+import './Header.scss';
 
 export const Authorization = () => {
   return (

@@ -1,4 +1,4 @@
-import './WelcomePage.css';
+import './WelcomePage.scss';
 import ImageOne from '../../assets/jpg/heroWelcome.jpg';
 import ImageTwo from '../../assets/svg/el1.svg';
 import ImageThree from '../../assets/svg/el2.svg';

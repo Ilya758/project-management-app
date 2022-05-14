@@ -11,20 +11,20 @@
   transition: 1s;
   opacity: 0.8;
   border-radius: 50%;
-}
 
-.button-up:hover {
-  border-color: #00deb6;
-  background: #262637;
-  box-shadow: 0 0.5em 0.5em -0.4em #262637;
-}
+  &:hover {
+    border-color: #00deb6;
+    background: #262637;
+    box-shadow: 0 0.5em 0.5em -0.4em #262637;
+  }
 
-.button-up > span {
-  background: url('../../assets/png/prew.png') no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  transform: rotate(90deg);
+  & > span {
+    background: url('../../assets/png/prew.png') no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    transform: rotate(90deg);
+  }
 }
 
 .flex {

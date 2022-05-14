@@ -1,5 +1,6 @@
+import './MainPage.scss';
 const MainPage = () => {
-  return <div>MainPage</div>;
+  return <div className="wrapper-component">MainPage</div>;
 };
 
 export default MainPage;

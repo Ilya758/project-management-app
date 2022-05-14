@@ -1,7 +1,6 @@
-import { NavLink } from 'react-router-dom';
-import { LOGIN_SUBTITLE } from '../../constants/utils';
-import './Authentication.css';
-import '../Header/Header.css';
+import { NavLink, Outlet } from 'react-router-dom';
+import './Authentication.scss';
+import '../Header/Header.scss';
 
 export const Authentication = () => {
   return (
@@ -14,7 +13,9 @@ export const Authentication = () => {
           Registration
         </NavLink>
       </div>
-      <div className="login-subtitle">{LOGIN_SUBTITLE[0]}</div>
+      <div className="container-login-form">
+        <Outlet />
+      </div>
     </div>
   );
 };

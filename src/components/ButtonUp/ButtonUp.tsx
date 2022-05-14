@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from 'react';
-import './ButtonUp.css';
+import './ButtonUp.scss';
 
 export const ButtonUp: FC = () => {
   const [visible, setVisible] = useState(false);
