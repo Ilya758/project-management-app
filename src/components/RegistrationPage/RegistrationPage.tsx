@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import authService from '../../services/services.auth';
-import { StyledLoginPage } from '../LoginPage/LoginPages.styles';
+import { StyledLoginPage } from './RegistrationPage.styles';
 
 const RegistrationPage = () => {
   const [name, setName] = useState('');
@@ -22,8 +22,7 @@ const RegistrationPage = () => {
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const token = await authService.singup(name, login, password);
-      console.log(token);
+      await authService.singup(name, login, password);
     } catch (error) {
       setError((error as { message: string }).message);
     }

@@ -12,11 +12,11 @@ export const Menu = () => {
 
   return (
     <div className="container-link">
-      <NavLink to="board" className="link-profile">
-        Create New Board
-      </NavLink>
       {isAuthorize && (
         <>
+          <NavLink to="board" className="link-profile">
+            Create New Board
+          </NavLink>
           <NavLink to="profile" className="link-profile">
             Edit Profile
           </NavLink>
