@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Gideon+Roman&family=Playfair+Display:ital,wght@1,600&family=Prata&family=Roboto&family=Sansita+Swashed:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Gideon+Roman&family=Playfair+Display:ital,wght@1,600&family=Prata&family=Roboto&family=Sansita+Swashed:wght@500&display=swap');
+
+.home-wrapper {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
+
+.about-wrapper {
+  position: relative;
+  height: 500px;
+  background: url('../../assets/jpg/project-management-back.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.about-wrapper div:first-child,
+.about-wrapper div:last-child {
+  position: absolute;
+  width: auto;
+  height: auto;
+  top: 5%;
+  left: 5%;
+  background: #030325fa;
+  color: #61dafb;
+  opacity: 0.7;
+  padding: 10px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  // box-shadow: 6px 6px 3px 0 rgb(5 28 37 / 73%);
+  font-size: 30px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.about-wrapper div:last-child {
+  top: 22%;
+  left: 5%;
+  font-size: 20px;
+  text-transform: none;
+  letter-spacing: 1px;
+}
+
+.primary-title {
+  font-size: 80px;
+  font-weight: 700;
+  line-height: 100%;
+  letter-spacing: -2px;
+  text-align: center;
+}
+
+.primary-title span:first-child {
+  color: rgba(61, 71, 77, 0.5);
+  line-height: 110%;
+}
+
+.project-content {
+  overflow: hidden;
+}
+
+.project-content div:first-child {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.project-info-content {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.developers-content {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 1150px;
+}
+
+.developers-content-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  align-items: center;
+}
+
+.box-wrapper {
+  width: 100%;
+  max-width: 850px;
+  border-radius: 40px;
+  overflow: hidden;
+  background-color: #edf1f2;
+  height: 350px;
+  padding: 10px 15px;
+  display: flex;
+  position: relative;
+  justify-content: space-between;
+  // box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+  margin: 20px 0;
+}
+
+.info-developer {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-developer {
+  font-size: 30px;
+  text-align: center;
+  color: #61dafb;
+}
+
+.scills-developer {
+  width: 100%;
+  height: 60%;
+  font-size: 20px;
+  text-align: justify;
+  color: #262637;
+  font-family: 'ROBOTO';
+  font-weight: 400;
+}
+
+.scills-developer > p {
+  margin: 15px 0;
+}
+
+.project-info-content-card {
+  width: 450px;
+  margin: 15px;
+  text-align: justify;
+  height: auto;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f7f9fa;
+  padding: 10px;
+  // box-shadow: 4px 4px 8px 0 rgb(34 60 80 / 20%);
+}
+
+.project-info-content-card > div:first-child {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.container-images {
+  width: 100%;
+  height: 500px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.imageOne {
+  height: 100%;
+}
+
+.imageTwo,
+.imageThree {
+  position: absolute;
+  max-width: 100%;
+}
+
+.imageFour {
+  max-width: 100%;
+  margin-bottom: 30px;
+}
+
+.subheading {
+  font-size: 32px;
+  font-weight: 500;
+  color: rgba(61, 71, 77, 0.5);
+  letter-spacing: normal;
+  text-align: center;
+}
+
+.image-developer {
+  border-radius: 25px;
+  width: 300px;
+}
+
+.developer1 {
+  background: url('../../assets/jpg/ilia.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.developer2 {
+  background: url('../../assets/jpg/andrey.jpg') no-repeat center center;
+  background-size: cover;
+}
+
+.developer3 {
+  background: url('../../assets/jpg/tatiana.jpg') no-repeat center center;
+  background-size: cover;
+}

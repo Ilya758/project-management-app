@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import authService from '../../services/services.auth';
 import { StyledLoginPage } from './LoginPages.styles';
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
   const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement>) => {
     setLogin(e.currentTarget.value as string);
@@ -17,9 +20,10 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       const token = await authService.singin(login, password);
+      navigate('/main');
       console.log(token);
     } catch (error) {
-      console.log(error);
+      setError((error as { message: string }).message);
     }
   };
 
@@ -44,13 +48,14 @@ const LoginPage = () => {
             <div className="form__row-input">
               <input
                 className="form__input"
-                type="text"
+                type="password"
                 value={password}
                 onChange={handleOnChangePassword}
               />
             </div>
           </div>
           <div className="form__row form__row-fotter">
+            <div>{error}</div>
             <input
               className="form__submit"
               type="submit"
