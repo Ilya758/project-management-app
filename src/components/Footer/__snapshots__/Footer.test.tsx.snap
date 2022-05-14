@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer Component Should render 1`] = `
+<body>
+  <div>
+    <footer>
+      <div
+        class="containerFooter"
+      >
+        <span>
+          © 2022
+        </span>
+        <div
+          class="containerDevelopUsers"
+        >
+          <a
+            href="https://github.com/ilya758"
+          >
+            <i
+              class="fab fa-github"
+            />
+            ilya758
+          </a>
+          <a
+            href="https://github.com/inord777dev"
+          >
+            <i
+              class="fab fa-github"
+            />
+            inord777dev
+          </a>
+          <a
+            href="https://github.com/tyzikova"
+          >
+            <i
+              class="fab fa-github"
+            />
+            tyzikova
+          </a>
+        </div>
+        <a
+          class="rsschool-link"
+          href="https://rs.school/react/"
+          rel="noreferrer"
+          target="_blank"
+        />
+      </div>
+    </footer>
+  </div>
+</body>
+`;

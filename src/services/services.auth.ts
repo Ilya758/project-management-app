@@ -1,36 +1,53 @@
 import axios from 'axios';
 import { API_URL } from '../common/constants';
 
+interface IErrorMessage {
+  response: { data: { message: string } };
+}
+
 const singin = async (login: string, password: string) => {
-  let token = '';
   try {
     const resp = await axios.post(API_URL + 'signin', { login, password });
-    token = resp.data.token;
+    const token = resp.data.token;
+
+    if (token) {
+      localStorage.setItem('login', JSON.stringify(login));
+      document.cookie = `token=${token}; max-age=3600`;
+    }
+    return token;
   } catch (error) {
-    throw new Error(`signin error!`);
+    throw new Error((error as IErrorMessage).response.data.message);
   }
-
-  if (token) {
-    localStorage.setItem('login', JSON.stringify(login));
-  }
-
-  return token;
 };
 
 const singout = () => {
   localStorage.removeItem('login');
+  document.cookie = 'token=;max-age=-1';
 };
 
-const singup = (name: string, login: string, password: string) => {
-  return axios.post(API_URL + 'signup', { name, login, password }).then((response) => {
+const singup = async (name: string, login: string, password: string) => {
+  try {
+    const response = await axios.post(API_URL + 'signup', { name, login, password });
     return !!response.data.login;
-  });
+  } catch (error) {
+    throw new Error((error as IErrorMessage).response.data.message);
+  }
 };
+
+const getCookie = (name: string) => {
+  const matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
+const isAuthorize = () => Boolean(getCookie('token'));
 
 const authService = {
   singin,
   singout,
   singup,
+  isAuthorize,
 };
 
 export default authService;
