@@ -1,8 +1,14 @@
 import axios from 'axios';
-import { API_URL } from '../common/constants';
+import { API_URL } from '../constants/path';
 
-interface IErrorMessage {
+export interface IErrorMessage {
   response: { data: { message: string } };
+}
+const token = localStorage.getItem('token');
+if (token) {
+  axios.defaults.headers.common = {
+    Authorization: `Bearer ${token}`,
+  };
 }
 
 const singin = async (login: string, password: string) => {
@@ -11,7 +17,12 @@ const singin = async (login: string, password: string) => {
     const token = resp.data.token;
 
     if (token) {
-      localStorage.setItem('login', JSON.stringify(login));
+      axios.defaults.headers.common = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      localStorage.setItem('login', login);
+      localStorage.setItem('token', token);
     }
     return token;
   } catch (error) {

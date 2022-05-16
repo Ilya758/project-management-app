@@ -1,3 +1,25 @@
 main {
   flex: 1 0 auto;
 }
+
+.board-card {
+  width: 250px;
+  height: 300px;
+  border-radius: 10px;
+  box-shadow: 2px 4px 4px 1px #262637;
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  & .board-card-button {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    top: 3%;
+    right: 3%;
+    background: url("../../assets/png/remove.png") no-repeat center center;
+    background-size: cover;
+    cursor: pointer;
+  }
+}
+

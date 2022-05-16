@@ -19,9 +19,8 @@ const LoginPage = () => {
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const token = await authService.singin(login, password);
+      await authService.singin(login, password);
       navigate('/main');
-      console.log(token);
     } catch (error) {
       setError((error as { message: string }).message);
     }
