@@ -23,7 +23,7 @@ const App = () => {
 
           <Route path="main" element={<MainPage />}></Route>
           <Route path="profile" element={<EditProfile />}></Route>
-          <Route path="board" element={<BoardPage />}></Route>
+          <Route path="board/:id" element={<BoardPage />}></Route>
           <Route path="404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate to="404" />} />
         </Route>
