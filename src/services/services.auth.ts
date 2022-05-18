@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 import { API_URL } from '../common/common.constants';
-import { IResponce } from './services.types';
+import { IResponceError } from './services.types';
 
 const singin = async (login: string, password: string) => {
   try {
@@ -13,7 +13,7 @@ const singin = async (login: string, password: string) => {
     }
     return token;
   } catch (error) {
-    throw new Error((error as IResponce).response.data.message);
+    throw new Error((error as IResponceError).response.data.message);
   }
 };
 
@@ -27,7 +27,7 @@ const singup = async (name: string, login: string, password: string) => {
     const response = await axios.post(API_URL + 'signup', { name, login, password });
     return !!response.data.login;
   } catch (error) {
-    throw new Error((error as IResponce).response.data.message);
+    throw new Error((error as IResponceError).response.data.message);
   }
 };
 

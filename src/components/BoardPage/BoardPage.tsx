@@ -3,13 +3,19 @@ import { Alert } from '@mui/material';
 import { BoardInfo } from '../../common/common.types';
 import boardsService from '../../services/services.boards';
 import Column from './Column/Column';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import './BoardPage.scss';
+import AddIcon from '@mui/icons-material/Add';
 
 const BoardPage = () => {
-  const { id } = useParams();
+  const { boardId } = useParams();
+  const navigate = useNavigate();
   const [board, setBoard] = useState<BoardInfo>();
   const [error, setError] = useState('');
+
+  const handleCreateColumn = () => {
+    navigate(`/boards/${boardId}/columns`);
+  };
 
   useEffect(() => {
     async function getBoard(boardId: string) {
@@ -21,12 +27,12 @@ const BoardPage = () => {
       }
     }
 
-    if (id) {
-      getBoard(id);
+    if (boardId) {
+      getBoard(boardId);
     } else {
       setError('Parameter Id is required.');
     }
-  }, [id]);
+  }, [boardId]);
 
   return (
     <>
@@ -34,12 +40,16 @@ const BoardPage = () => {
         <div className="board">
           <div className="board__header">
             <div className="board__title">{board.title}</div>
-            <div className="board__btn">+</div>
+            <div className="board__add-column">
+              <AddIcon onClick={handleCreateColumn} color="success" />
+            </div>
           </div>
           <div className="board__container">
-            {board.columns.map((column) => (
-              <Column key={column.id} column={column} />
-            ))}
+            {board.columns
+              .sort((a, b) => a.order - b.order)
+              .map((column) => (
+                <Column key={column.id} column={column} boardId={board.id} />
+              ))}
           </div>
         </div>
       )}

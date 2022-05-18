@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { TaskProps } from './Task.types';
 import './Task.scss';
 import {
@@ -11,7 +12,9 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-const Task = ({ task }: TaskProps) => {
+const Task = ({ task, boardId, columnId }: TaskProps) => {
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -22,10 +25,14 @@ const Task = ({ task }: TaskProps) => {
     setOpen(false);
   };
 
+  const handleUpdateTask = () => {
+    navigate(`/boards/${boardId}/columns/${columnId}/tasks/${task.id}`);
+  };
+
   return (
     <>
       <div className="task">
-        <div className="task__title" onClick={handleClickOpen}>
+        <div className="task__title" onClick={handleUpdateTask}>
           {task.title}
         </div>
         <div className="task__delete" onClick={handleClickOpen}>

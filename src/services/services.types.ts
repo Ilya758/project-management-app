@@ -1,4 +1,4 @@
-export interface IResponce {
+export interface IResponceError {
   response: {
     data: {
       statusCode: number;

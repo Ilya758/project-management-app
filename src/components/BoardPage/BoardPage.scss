@@ -5,11 +5,12 @@
   padding-top: 24px;
 
   height: calc(100vh - 168px);
-  overflow: hidden;
+  overflow-y: hidden;
 
   &__header {
     display: flex;
     justify-content: center;
+    align-items: center;
     gap: 10px;
 
     padding: 8px;
@@ -28,17 +29,7 @@
     margin: 24px;
   }
 
-  &__btn {
-    text-align: center;
-    width: 28px;
-    height: 28px;
-    border: 1px solid rgb(197, 197, 197);
-    border-radius: 12px;
-
-    font-weight: 700;
-
-    color: green;
-
+  &__add-column {
     cursor: pointer;
   }
 }

@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Task from '../Task/Task';
 import { ColumnProps } from './Column.types';
+import { useNavigate } from 'react-router-dom';
 import './Column.scss';
 import {
+  Alert,
   Button,
   Dialog,
   DialogActions,
@@ -12,41 +14,62 @@ import {
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import AddIcon from '@mui/icons-material/Add';
+import columnsService from '../../../services/services.columns';
 
-const Column = ({ column }: ColumnProps) => {
+const Column = ({ column, boardId }: ColumnProps) => {
+  const navigate = useNavigate();
+
   const [open, setOpen] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleClose = () => {
     setOpen(false);
   };
 
   const handleDeleteColumn = () => {
-    setOpen(true);
+    columnsService
+      .deleteColumn(boardId, column.id)
+      .then(() => {
+        setOpen(false);
+      })
+      .catch((error) => {
+        setError((error as { message: string }).message);
+      });
   };
 
-  const handleAddTask = () => {
-    setOpen(true);
+  const handleUpdateColumn = () => {
+    navigate(`/boards/${boardId}/columns/${column.id}`);
+  };
+
+  const handleCreateTask = () => {
+    navigate(`/boards/${boardId}/columns/${column.id}/tasks`);
   };
 
   return (
     <>
       <div className="column">
         <div className="column__header">
-          <div className="column__title" onClick={handleDeleteColumn}>
+          <div className="column__title" onClick={handleUpdateColumn}>
             {column.title}
           </div>
-          <div className="column__delete" onClick={handleDeleteColumn}>
+          <div className="column__delete" onClick={handleOpen}>
             <DeleteIcon color="action" fontSize="small" />
           </div>
         </div>
-        <div className="column__container">
-          {column.tasks.map((task) => (
-            <Task key={task.id} task={task} />
-          ))}
-        </div>
+        {column.tasks.length > 0 && (
+          <div className="column__container">
+            {column.tasks.map((task) => (
+              <Task key={task.id} task={task} boardId={boardId} columnId={column.id} />
+            ))}
+          </div>
+        )}
         <div className="column__footer">
-          <div className="column__add-task" onClick={handleDeleteColumn}>
-            <AddIcon onClick={handleAddTask} color="success" />
+          <div className="column__add-task" onClick={handleCreateTask}>
+            <AddIcon color="success" />
           </div>
         </div>
       </div>
@@ -64,10 +87,11 @@ const Column = ({ column }: ColumnProps) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose} autoFocus>
+          <Button onClick={handleDeleteColumn} autoFocus>
             Yes
           </Button>
         </DialogActions>
+        {error && <Alert severity="error">{error}</Alert>}
       </Dialog>
     </>
   );
