@@ -53,7 +53,7 @@ const updateColumn = async (boardId: string, columnId: string, column: ColumnInf
   try {
     const resp = await axios.put(
       API_URL + `boards/${boardId}/columns/${columnId}`,
-      JSON.stringify(column),
+      { title: column.title, order: column.order },
       authService.getConfig()
     );
     return resp.data;

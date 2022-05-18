@@ -4,4 +4,5 @@ export type TaskProps = {
   task: TaskInfo;
   boardId: string;
   columnId: string;
+  updateBoard: (boardId: string) => void;
 };

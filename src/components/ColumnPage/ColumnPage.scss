@@ -11,4 +11,12 @@
     font-size: 48px;
     font-weight: 500;
   }
+
+  &__footer {
+    display: flex;
+    justify-content: center;
+
+    padding-top: 24px;
+  }
 }
+

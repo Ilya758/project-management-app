@@ -13,10 +13,11 @@ import {
   DialogTitle,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import columnsService from '../../../services/services.columns';
 
-const Column = ({ column, boardId }: ColumnProps) => {
+const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
   const navigate = useNavigate();
 
   const [open, setOpen] = useState(false);
@@ -35,6 +36,7 @@ const Column = ({ column, boardId }: ColumnProps) => {
       .deleteColumn(boardId, column.id)
       .then(() => {
         setOpen(false);
+        updateBoard(boardId);
       })
       .catch((error) => {
         setError((error as { message: string }).message);
@@ -53,22 +55,31 @@ const Column = ({ column, boardId }: ColumnProps) => {
     <>
       <div className="column">
         <div className="column__header">
-          <div className="column__title" onClick={handleUpdateColumn}>
-            {column.title}
-          </div>
-          <div className="column__delete" onClick={handleOpen}>
-            <DeleteIcon color="action" fontSize="small" />
+          <div className="column__title">{column.title}</div>
+          <div className="column__commands">
+            <div className="column__edit column__btn" onClick={handleUpdateColumn}>
+              <EditIcon color="action" fontSize="small" />
+            </div>
+            <div className="column__delete column__btn" onClick={handleOpen}>
+              <DeleteIcon color="action" fontSize="small" />
+            </div>
           </div>
         </div>
         {column.tasks.length > 0 && (
           <div className="column__container">
             {column.tasks.map((task) => (
-              <Task key={task.id} task={task} boardId={boardId} columnId={column.id} />
+              <Task
+                key={task.id}
+                task={task}
+                boardId={boardId}
+                columnId={column.id}
+                updateBoard={updateBoard}
+              />
             ))}
           </div>
         )}
         <div className="column__footer">
-          <div className="column__add-task" onClick={handleCreateTask}>
+          <div className="column__add-task column__btn" onClick={handleCreateTask}>
             <AddIcon color="success" />
           </div>
         </div>

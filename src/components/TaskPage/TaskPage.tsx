@@ -10,13 +10,14 @@ const TaskPage = () => {
 
   const navigate = useNavigate();
 
-  const [task, setColumn] = useState<TaskInfo>(
+  const [task, setTask] = useState<TaskInfo>(
     (taskId ? {} : { title: 'New task', order: 1 }) as TaskInfo
   );
 
   const [error, setError] = useState('');
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (boardId && columnId) {
       if (taskId) {
         try {
@@ -40,7 +41,7 @@ const TaskPage = () => {
     async function getTask(boardId: string, columnId: string, taskId: string) {
       try {
         const result = await tasksService.getTask(boardId, columnId, taskId);
-        setColumn(result);
+        setTask(result);
       } catch (error) {
         setError((error as { message: string }).message);
       }
@@ -75,7 +76,7 @@ const TaskPage = () => {
                   autoFocus
                   value={task.title}
                   onChange={(e) => {
-                    setColumn({ ...task, title: e.currentTarget.value });
+                    setTask({ ...task, title: e.currentTarget.value });
                   }}
                 />
                 <TextField
@@ -86,21 +87,19 @@ const TaskPage = () => {
                   onChange={(e) => {
                     const order = Number.parseInt(e.currentTarget.value);
                     if (!Number.isNaN(order)) {
-                      setColumn({ ...task, order });
+                      setTask({ ...task, order });
                     }
                   }}
                 />
                 <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
                   {columnId ? 'Save' : 'Create'}
                 </Button>
-                {error && <Alert severity="error">{error}</Alert>}
               </Box>
             </div>
           </Card>
         </Container>
-        <div className="ctaskPage__footer"></div>
+        <div className="taskPage__footer">{error && <Alert severity="error">{error}</Alert>}</div>
       </div>
-      {error && <Alert severity="error">{error}</Alert>}
     </>
   );
 };
