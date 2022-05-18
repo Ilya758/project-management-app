@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Container, Alert, Typography, Box } from '@mui/material';
+import { Alert } from '@mui/material';
 import { BoardInfo } from '../../common/common.types';
 import boardsService from '../../services/services.boards';
 import Column from './Column/Column';
 import { useParams } from 'react-router-dom';
+import './BoardPage.scss';
 
 const BoardPage = () => {
   const { id } = useParams();
@@ -30,40 +31,17 @@ const BoardPage = () => {
   return (
     <>
       {board && (
-        <Container
-          maxWidth={false}
-          sx={{
-            heigth: 'auto',
-            pt: 1,
-            pb: 1,
-          }}
-        >
-          <Box
-            sx={{
-              mt: 1,
-              mb: 2,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <Typography variant="h3" component="h3">
-              {board.title}
-            </Typography>
-          </Box>
-          <Box
-            sx={{
-              mt: 1,
-              mb: 2,
-              display: 'flex',
-              gap: 4,
-            }}
-          >
+        <div className="board">
+          <div className="board__header">
+            <div className="board__title">{board.title}</div>
+            <div className="board__btn">+</div>
+          </div>
+          <div className="board__container">
             {board.columns.map((column) => (
               <Column key={column.id} column={column} />
             ))}
-          </Box>
-        </Container>
+          </div>
+        </div>
       )}
       {error && <Alert severity="error">{error}</Alert>}
     </>
