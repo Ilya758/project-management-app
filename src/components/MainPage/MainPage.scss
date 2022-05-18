@@ -6,19 +6,82 @@ main {
   width: 250px;
   height: 300px;
   border-radius: 10px;
-  box-shadow: 2px 4px 4px 1px #262637;
   display: flex;
-  justify-content: center;
   position: relative;
+  align-items: stretch;
+  background: radial-gradient(109.56% 109.56% at 0 -2.94%,hsla(0,0%,100%,.5) 0,#262637 100%);
+  box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
+  flex-direction: column;
+  font-family: Roboto,sans-serif;
+  font-size: 18px;;
+  padding: 10px;
 
   & .board-card-button {
     width: 20px;
     height: 20px;
-    position: absolute;
-    top: 3%;
-    right: 3%;
-    background: url('../../assets/png/remove.png') no-repeat center center;
+    background: url('../../assets/png/close.png') no-repeat center center;
     background-size: cover;
     cursor: pointer;
+    border: none;
   }
+
+  & .card-title-container {
+    width: 100%;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.create-board-component {
+  width: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 15px auto;
+
+  & .css-17vbkzs-MuiFormControl-root-MuiTextField-root {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  & button {
+    width: 80px;
+    height: 45px;
+    margin-top: 0;
+    margin-bottom: 0;
+    border: 1px solid #00deb6;
+    background: #262637;
+    color: #61dafb;
+    transition: 1s;
+    box-shadow: 2px 2px 6px 0 rgba(3, 11, 18, 0.7);;
+
+    & .hover:hover {
+    border-color: #61dafb;
+    color: #00deb6;
+    box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
+    }
+  }
+
+  & input {
+    width: 220px;
+  }
+
+  & form {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+  }
+}
+
+.wrapper-boards {
+  grid-gap: 10px;
+  display: grid;
+  grid-auto-flow: dense;
+  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  height: 100%;
+  justify-items: center;
+  padding: 10px;
+  width: 100%;
 }

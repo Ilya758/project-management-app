@@ -20,9 +20,8 @@ const singin = async (login: string, password: string) => {
       axios.defaults.headers.common = {
         Authorization: `Bearer ${token}`,
       };
-
       localStorage.setItem('login', login);
-      localStorage.setItem('token', token);
+      document.cookie = `token=${token}; max-age=3600`;
     }
     return token;
   } catch (error) {
@@ -32,6 +31,7 @@ const singin = async (login: string, password: string) => {
 
 const singout = () => {
   localStorage.removeItem('login');
+  document.cookie = 'token=;max-age=-1';
 };
 
 const singup = async (name: string, login: string, password: string) => {
@@ -43,7 +43,14 @@ const singup = async (name: string, login: string, password: string) => {
   }
 };
 
-const isAuthorize = () => Boolean(localStorage.getItem('login'));
+const getCookie = (name: string) => {
+  const matches = document.cookie.match(
+    new RegExp('(?:^|; )' + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)')
+  );
+  return matches ? decodeURIComponent(matches[1]) : undefined;
+};
+
+const isAuthorize = () => Boolean(getCookie('token'));
 
 const authService = {
   singin,

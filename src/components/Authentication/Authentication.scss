@@ -31,3 +31,11 @@
     justify-content: center;
   }
 }
+
+.center {
+  justify-content: center;
+
+  & h3 {
+    text-align: center;
+  }
+}

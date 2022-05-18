@@ -1,0 +1,41 @@
+.modal-wrapper {
+  position: fixed;
+  z-index: 2;
+  bottom: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, .2);
+  backdrop-filter: blur(10px);
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & .modal-component {
+    height: 400px;
+    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
+    border-radius: 5px;
+    max-width: 400px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background: #262637;
+    transition: top .7s;
+    border: 3px solid #61dafb;
+
+    & .container-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    & .close {
+      top: 7px;
+      right: 7px;
+      background: url('../../assets/png/close.png') no-repeat center center;
+      background-size: contain;
+    }
+  }
+}
+

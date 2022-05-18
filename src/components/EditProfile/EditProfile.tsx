@@ -2,7 +2,10 @@ import { useState, useEffect } from 'react';
 import { PATH } from '../../constants/path';
 import axios from 'axios';
 import { IUser } from '../../models/users';
+import { editUser } from '../../Requests/user';
 import { IErrorMessage } from '../../services/services.auth';
+import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
+import '../Authentication/Authentication.scss';
 
 export const EditProfile = () => {
   const [name, setName] = useState('');
@@ -12,9 +15,7 @@ export const EditProfile = () => {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get<IUser[]>(PATH.USERS).then((response) => {
-      const login = localStorage.getItem('login');
-      const user = response.data.find((elem) => elem.login === login);
+    editUser().then((user) => {
       if (user) {
         setUser(user);
         setName(user.name);
@@ -23,14 +24,14 @@ export const EditProfile = () => {
     });
   }, []);
 
-  const handleOnChangeName = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChangeName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setName(e.currentTarget.value as string);
   };
 
-  const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setLogin(e.currentTarget.value as string);
   };
-  const handleOnChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChangePassword = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPassword(e.currentTarget.value as string);
   };
 
@@ -44,52 +45,48 @@ export const EditProfile = () => {
   };
 
   return (
-    <div className="wrapper-component">
-      <div className="title">Edit your profile</div>
-      <form className="form" onSubmit={handerSubmit}>
-        <div className="form__row">
-          <div className="form__row-label">Name</div>
-          <div className="form__row-input">
-            <input
-              className="form__input"
-              type="text"
-              value={name}
-              onChange={handleOnChangeName}
-              autoComplete="off"
-            />
-          </div>
-        </div>
-
-        <div className="form__row">
-          <div className="form__row-label">Login</div>
-          <div className="form__row-input">
-            <input
-              className="form__input"
-              type="text"
-              value={login}
-              onChange={handleOnChangeLogin}
-              autoComplete="off"
-            />
-          </div>
-        </div>
-        <div className="form__row">
-          <div className="form__row-label">Password</div>
-          <div className="form__row-input">
-            <input
-              className="form__input"
-              type="password"
-              value={password}
-              onChange={handleOnChangePassword}
-              autoComplete="off"
-            />
-          </div>
-        </div>
-        <div></div>
-        <div className="form__row form__row-fotter">
-          <p>{error}</p>
-          <input className="form__submit" type="submit" value="Save" />
-        </div>
-      </form>
+    <div className="wrapper-component center">
+      <Container component="div" maxWidth="xs">
+        <Typography component="h3" variant="h5">
+          Edit Your Profile
+        </Typography>
+        <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Create Your Name"
+            autoComplete="name"
+            autoFocus
+            value={name}
+            onChange={handleOnChangeName}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Create Your Login"
+            autoComplete="login"
+            autoFocus
+            value={login}
+            onChange={handleOnChangeLogin}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type="password"
+            autoComplete="Create Your Password"
+            value={password}
+            onChange={handleOnChangePassword}
+          />
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            Save
+          </Button>
+          {error && <Alert severity="error">{error}</Alert>}
+        </Box>
+      </Container>
     </div>
   );
 };
