@@ -20,7 +20,12 @@ const createTask = async (boardId: string, columnId: string, task: TaskInfo) => 
   try {
     const resp = await axios.post(
       API_URL + `boards/${boardId}/columns/${columnId}/tasks`,
-      JSON.stringify(task),
+      {
+        title: task.title,
+        order: task.order,
+        description: task.description,
+        userId: task.userId,
+      },
       authService.getConfig()
     );
     return resp.data;
@@ -59,7 +64,14 @@ const updateTask = async (boardId: string, columnId: string, taskId: string, tas
   try {
     const resp = await axios.put(
       API_URL + `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
-      JSON.stringify(task),
+      {
+        title: task.title,
+        order: task.order,
+        description: task.description,
+        userId: task.userId,
+        boardId: boardId,
+        columnId: columnId,
+      },
       authService.getConfig()
     );
     return resp.data;

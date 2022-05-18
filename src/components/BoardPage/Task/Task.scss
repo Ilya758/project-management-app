@@ -17,12 +17,18 @@
     cursor: pointer;
   }
 
-  &__delete {
+  &__commands {
+    display: flex;
+    gap: 8px;
+    padding-right: 8px;
     opacity: 0;
   }
 
-  &:hover &__delete {
+  &:hover &__commands {
     opacity: 1;
+  }
+
+  &__btn {
     cursor: pointer;
   }
 }

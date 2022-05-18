@@ -8,7 +8,7 @@ const singin = async (login: string, password: string) => {
     const token = resp.data.token;
 
     if (token) {
-      localStorage.setItem('login', JSON.stringify(login));
+      localStorage.setItem('login', login);
       document.cookie = `token=${token}; max-age=3600`;
     }
     return token;
