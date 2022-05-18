@@ -1,14 +1,9 @@
-import axios from 'axios';
-import { API_URL } from '../constants/path';
+import axios, { AxiosRequestConfig } from 'axios';
+import { API_URL } from '../common/common.constants';
+import { IResponceError } from './services.types';
 
 export interface IErrorMessage {
   response: { data: { message: string } };
-}
-const token = localStorage.getItem('token');
-if (token) {
-  axios.defaults.headers.common = {
-    Authorization: `Bearer ${token}`,
-  };
 }
 
 const singin = async (login: string, password: string) => {
@@ -25,7 +20,7 @@ const singin = async (login: string, password: string) => {
     }
     return token;
   } catch (error) {
-    throw new Error((error as IErrorMessage).response.data.message);
+    throw new Error((error as IResponceError).response.data.message);
   }
 };
 
@@ -39,7 +34,7 @@ const singup = async (name: string, login: string, password: string) => {
     const response = await axios.post(API_URL + 'signup', { name, login, password });
     return !!response.data.login;
   } catch (error) {
-    throw new Error((error as IErrorMessage).response.data.message);
+    throw new Error((error as IResponceError).response.data.message);
   }
 };
 
@@ -50,13 +45,24 @@ const getCookie = (name: string) => {
   return matches ? decodeURIComponent(matches[1]) : undefined;
 };
 
-const isAuthorize = () => Boolean(getCookie('token'));
+const getToken = () => getCookie('token');
+
+const getConfig: () => AxiosRequestConfig = () => {
+  return {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  };
+};
+
+const isAuthorize = () => Boolean(getToken());
 
 const authService = {
   singin,
   singout,
   singup,
   isAuthorize,
+  getConfig,
 };
 
 export default authService;

@@ -1,0 +1,14 @@
+.taskPage {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 24px;
+
+  height: calc(100vh - 168px);
+  overflow: hidden;
+
+  &__header {
+    font-size: 48px;
+    font-weight: 500;
+  }
+}
