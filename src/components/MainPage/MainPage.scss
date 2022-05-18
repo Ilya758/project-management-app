@@ -9,11 +9,11 @@ main {
   display: flex;
   position: relative;
   align-items: stretch;
-  background: radial-gradient(109.56% 109.56% at 0 -2.94%,hsla(0,0%,100%,.5) 0,#262637 100%);
+  background: radial-gradient(109.56% 109.56% at 0 -2.94%, hsla(0, 0%, 100%, 0.5) 0, #262637 100%);
   box-shadow: 4px 4px 8px 0 rgba(34, 60, 80, 0.2);
   flex-direction: column;
-  font-family: Roboto,sans-serif;
-  font-size: 18px;;
+  font-family: Roboto, sans-serif;
+  font-size: 18px;
   padding: 10px;
 
   & .board-card-button {
@@ -55,12 +55,12 @@ main {
     background: #262637;
     color: #61dafb;
     transition: 1s;
-    box-shadow: 2px 2px 6px 0 rgba(3, 11, 18, 0.7);;
+    box-shadow: 2px 2px 6px 0 rgba(3, 11, 18, 0.7);
 
     & .hover:hover {
-    border-color: #61dafb;
-    color: #00deb6;
-    box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
+      border-color: #61dafb;
+      color: #00deb6;
+      box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
     }
   }
 
@@ -79,7 +79,7 @@ main {
   grid-gap: 10px;
   display: grid;
   grid-auto-flow: dense;
-  grid-template-columns: repeat(auto-fill,minmax(250px,1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   height: 100%;
   justify-items: center;
   padding: 10px;
