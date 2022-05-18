@@ -25,3 +25,9 @@ export type BoardInfo = {
   title: string;
   columns: ColumnInfo[];
 };
+
+export type UserInfo = {
+  id: string;
+  name: string;
+  login: string;
+};

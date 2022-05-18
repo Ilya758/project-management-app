@@ -1,9 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { Alert, Box, Button, Card, Container, TextField } from '@mui/material';
+import { Alert, Autocomplete, Box, Button, Card, Container, TextField } from '@mui/material';
 import './TaskPage.scss';
-import { TaskInfo } from '../../common/common.types';
+import { TaskInfo, UserInfo } from '../../common/common.types';
 import tasksService from '../../services/services.tasks';
+import usersService from '../../services/services.users';
 
 const TaskPage = () => {
   const { boardId, columnId, taskId } = useParams();
@@ -14,6 +15,8 @@ const TaskPage = () => {
     (taskId ? {} : { title: 'New task', order: 1 }) as TaskInfo
   );
 
+  const [users, setUsers] = useState<UserInfo[]>([]);
+  const [user, setUser] = useState<UserInfo | null>(null);
   const [error, setError] = useState('');
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -38,6 +41,15 @@ const TaskPage = () => {
   };
 
   useEffect(() => {
+    async function getUsers() {
+      try {
+        const result = await usersService.getUsers();
+        setUsers(result);
+      } catch (error) {
+        setError((error as { message: string }).message);
+      }
+    }
+
     async function getTask(boardId: string, columnId: string, taskId: string) {
       try {
         const result = await tasksService.getTask(boardId, columnId, taskId);
@@ -47,6 +59,7 @@ const TaskPage = () => {
       }
     }
 
+    getUsers();
     if (taskId) {
       if (boardId && columnId) {
         getTask(boardId, columnId, taskId);
@@ -55,6 +68,23 @@ const TaskPage = () => {
       }
     }
   }, [boardId, columnId, taskId]);
+
+  useEffect(() => {
+    const selectedUser = users.find((x) => x.id == task.userId);
+    if (selectedUser) {
+      setUser(selectedUser);
+    }
+  }, [users, task]);
+
+  const handleChangeUser = (
+    event: React.SyntheticEvent<Element, Event>,
+    newValue: UserInfo | null
+  ) => {
+    setUser(newValue);
+    if (newValue) {
+      setTask({ ...task, userId: newValue.id });
+    }
+  };
 
   return (
     <>
@@ -90,6 +120,24 @@ const TaskPage = () => {
                       setTask({ ...task, order });
                     }
                   }}
+                />
+                <TextField
+                  margin="normal"
+                  required
+                  label="Description"
+                  value={task.description}
+                  onChange={(e) => {
+                    setTask({ ...task, description: e.currentTarget.value });
+                  }}
+                />
+                <Autocomplete
+                  options={users}
+                  getOptionLabel={(option: UserInfo) => `${option.name} (${option.login})`}
+                  value={user}
+                  onChange={handleChangeUser}
+                  renderInput={(params) => (
+                    <TextField {...params} label="User" variant="standard" />
+                  )}
                 />
                 <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
                   {columnId ? 'Save' : 'Create'}
