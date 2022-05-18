@@ -1,0 +1,66 @@
+.column {
+  min-width: 275px;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 10px;
+
+  position: relative;
+
+  box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.39);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 8px;
+
+    cursor: pointer;
+  }
+
+  &__delete {
+    padding-right: 8px;
+    opacity: 0;
+  }
+
+  &__add-task {
+    cursor: pointer;
+  }
+
+  &__header:hover &__delete {
+    opacity: 1;
+    cursor: pointer;
+  }
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 8px 8px;
+    background-color: rgb(231, 235, 240);
+  }
+
+  &__footer {
+    display: flex;
+    gap: 10px;
+
+    padding: 8px;
+  }
+
+  &__btn {
+    text-align: center;
+    width: 28px;
+    height: 28px;
+    border: 1px solid rgb(197, 197, 197);
+    border-radius: 12px;
+
+    font-weight: 700;
+
+    color: green;
+
+    cursor: pointer;
+  }
+}
