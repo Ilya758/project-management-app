@@ -8,7 +8,6 @@ import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import { EditProfile } from './components/EditProfile/EditProfile';
-import ColumnPage from './components/ColumnPage/ColumnPage';
 import TaskPage from './components/TaskPage/TaskPage';
 
 const App = () => {
@@ -24,9 +23,6 @@ const App = () => {
           <Route path="main" element={<MainPage />}></Route>
           <Route path="profile" element={<EditProfile />}></Route>
           <Route path="boards/:boardId" element={<BoardPage />}></Route>
-          <Route path="boards/:boardId/columns" element={<ColumnPage />}>
-            <Route path=":columnId" element={<ColumnPage />}></Route>
-          </Route>
           <Route path="boards/:boardId/columns/:columnId/tasks" element={<TaskPage />}>
             <Route path=":taskId" element={<TaskPage />}></Route>
           </Route>

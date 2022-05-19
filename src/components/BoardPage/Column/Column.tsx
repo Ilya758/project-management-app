@@ -47,11 +47,6 @@ const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
       });
   };
 
-  const handleUpdateColumn = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    navigate(`/boards/${boardId}/columns/${column.id}`);
-  };
-
   const handleClickTitle = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsEditing(true);
@@ -96,21 +91,30 @@ const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
           )}
           {isEditing && (
             <div className="column__title">
-              <form>
-                <input type="text" value={title} onChange={handleChangeTitle} />
-                <div onClick={handleClickTitleCancel}>
-                  <CancelIcon color="action" fontSize="small" />
-                </div>
-                <div onClick={handleClickTitleDone}>
-                  <DoneIcon color="action" fontSize="small" />
-                </div>
-              </form>
+              <input
+                className="column__title-input"
+                type="text"
+                value={title}
+                onChange={handleChangeTitle}
+              />
             </div>
           )}
           <div className="column__commands">
-            <div className="column__edit column__btn" onClick={handleUpdateColumn}>
-              <EditIcon color="action" fontSize="small" />
-            </div>
+            {isEditing || (
+              <div className="column__edit column__btn" onClick={handleClickTitle}>
+                <EditIcon color="action" fontSize="small" />
+              </div>
+            )}
+            {isEditing && (
+              <>
+                <div onClick={handleClickTitleDone}>
+                  <DoneIcon color="action" fontSize="small" />
+                </div>
+                <div onClick={handleClickTitleCancel}>
+                  <CancelIcon color="action" fontSize="small" />
+                </div>
+              </>
+            )}
             <div className="column__delete column__btn" onClick={handleOpen}>
               <DeleteIcon color="action" fontSize="small" />
             </div>
