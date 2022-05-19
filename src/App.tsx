@@ -17,12 +17,10 @@ const App = () => {
       <Routes>
         <Route path="" element={<HomePage />}>
           <Route index element={<WelcomePage />}></Route>
-
           <Route path="authentication" element={<Authentication />}>
             <Route path="login" element={<LoginPage />}></Route>
             <Route path="registration" element={<RegistrationPage />}></Route>
           </Route>
-
           <Route path="main" element={<MainPage />}></Route>
           <Route path="profile" element={<EditProfile />}></Route>
           <Route path="boards/:boardId" element={<BoardPage />}></Route>

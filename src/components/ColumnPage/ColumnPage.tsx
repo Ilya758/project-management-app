@@ -20,14 +20,7 @@ const ColumnPage = () => {
     if (boardId) {
       if (columnId) {
         try {
-          await columnsService.updateColumn(boardId, columnId, column);
-          navigate(-1);
-        } catch (error) {
-          setError((error as { message: string }).message);
-        }
-      } else {
-        try {
-          await columnsService.createColumn(boardId, column);
+          await columnsService.updateColumn(boardId, columnId, column.title, column.order);
           navigate(-1);
         } catch (error) {
           setError((error as { message: string }).message);

@@ -14,8 +14,8 @@ export const Menu = () => {
     <div className="container-link">
       {isAuthorize && (
         <>
-          <NavLink to="board" className="link-profile">
-            Create New Board
+          <NavLink to="main" className="link-profile">
+            Boards
           </NavLink>
           <NavLink to="profile" className="link-profile">
             Edit Profile

@@ -15,13 +15,17 @@ import {
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
+import CancelIcon from '@mui/icons-material/Cancel';
+import DoneIcon from '@mui/icons-material/Done';
 import columnsService from '../../../services/services.columns';
 
 const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
   const navigate = useNavigate();
+  const [title, setTitle] = useState(column.title);
 
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
@@ -43,19 +47,66 @@ const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
       });
   };
 
-  const handleUpdateColumn = () => {
+  const handleUpdateColumn = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     navigate(`/boards/${boardId}/columns/${column.id}`);
   };
 
-  const handleCreateTask = () => {
+  const handleClickTitle = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setIsEditing(true);
+  };
+
+  const handleCreateTask = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     navigate(`/boards/${boardId}/columns/${column.id}/tasks`);
+  };
+
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value);
+  };
+
+  const handleClickTitleCancel = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setTitle(column.title);
+    setIsEditing(false);
+  };
+
+  const handleClickTitleDone = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    columnsService
+      .updateColumn(boardId, column.id, title, column.order)
+      .then(() => {
+        setIsEditing(false);
+        updateBoard(boardId);
+      })
+      .catch((error) => {
+        setError((error as { message: string }).message);
+      });
   };
 
   return (
     <>
       <div className="column">
         <div className="column__header">
-          <div className="column__title">{column.title}</div>
+          {isEditing || (
+            <div className="column__title" onClick={handleClickTitle}>
+              {title}
+            </div>
+          )}
+          {isEditing && (
+            <div className="column__title">
+              <form>
+                <input type="text" value={title} onChange={handleChangeTitle} />
+                <div onClick={handleClickTitleCancel}>
+                  <CancelIcon color="action" fontSize="small" />
+                </div>
+                <div onClick={handleClickTitleDone}>
+                  <DoneIcon color="action" fontSize="small" />
+                </div>
+              </form>
+            </div>
+          )}
           <div className="column__commands">
             <div className="column__edit column__btn" onClick={handleUpdateColumn}>
               <EditIcon color="action" fontSize="small" />
