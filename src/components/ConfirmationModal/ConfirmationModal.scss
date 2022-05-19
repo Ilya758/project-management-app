@@ -11,7 +11,7 @@
   align-items: center;
 
   & .modal-component {
-    height: 400px;
+    height: 200px;
     box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
     border-radius: 5px;
     max-width: 400px;
@@ -25,9 +25,45 @@
     transition: top 0.7s;
     border: 3px solid #61dafb;
 
+    & h2 {
+      color: #61dafb;
+      position: absolute;
+      top: 5%;
+      left: 5%;
+    }
+
     & .container-buttons {
       display: flex;
       justify-content: space-between;
+      flex-direction: column;
+      height: 120px;
+      align-items: end;
+
+      & span {
+        margin-top: 50px;
+        color: #61dafb;
+      }
+
+      & div {
+        width: 120px;
+        display: flex;
+        justify-content: space-between;
+
+        & button {
+          border: 1px solid #61dafb;
+          color: #61dafb;
+          border-radius: 3px;
+          padding: 5px 10px;
+          cursor: pointer !important;
+          transition: 0.5s;
+          background-color: #262637;
+        }
+        & button:hover {
+          border-color: #00deb6;
+          box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
+          color: #00deb6;
+        }
+      }
     }
 
     & .close {

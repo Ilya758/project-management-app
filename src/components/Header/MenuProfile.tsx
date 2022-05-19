@@ -37,7 +37,7 @@ const MenuComponent: FC<IProps> = ({ openModal }) => {
     <div className="container-link">
       {isAuthorize && (
         <>
-          <NavLink to="board" className="link-profile">
+          <NavLink to="boards/:boardId/columns/:columnId/tasks" className="link-profile">
             Create New Board
           </NavLink>
           <NavLink to="profile" className="link-profile">
