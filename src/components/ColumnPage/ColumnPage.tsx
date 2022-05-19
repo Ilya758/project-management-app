@@ -1,12 +1,13 @@
 import { Alert, Box, Button, Card, Container, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { ColumnInfo } from '../../common/common.types';
 import columnsService from '../../services/services.columns';
 import './ColumnPage.scss';
 
 const ColumnPage = () => {
   const { boardId, columnId } = useParams();
+  const navigate = useNavigate();
 
   const [column, setColumn] = useState<ColumnInfo>(
     (columnId ? {} : { title: 'New column', order: 1 }) as ColumnInfo
@@ -14,17 +15,20 @@ const ColumnPage = () => {
 
   const [error, setError] = useState('');
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     if (boardId) {
       if (columnId) {
         try {
           await columnsService.updateColumn(boardId, columnId, column);
+          navigate(-1);
         } catch (error) {
           setError((error as { message: string }).message);
         }
       } else {
         try {
           await columnsService.createColumn(boardId, column);
+          navigate(-1);
         } catch (error) {
           setError((error as { message: string }).message);
         }
@@ -89,14 +93,12 @@ const ColumnPage = () => {
                 <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
                   {columnId ? 'Save' : 'Create'}
                 </Button>
-                {error && <Alert severity="error">{error}</Alert>}
               </Box>
             </div>
           </Card>
         </Container>
-        <div className="columnPage__footer"></div>
+        <div className="columnPage__footer">{error && <Alert severity="error">{error}</Alert>}</div>
       </div>
-      {error && <Alert severity="error">{error}</Alert>}
     </>
   );
 };

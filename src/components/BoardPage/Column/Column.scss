@@ -21,17 +21,18 @@
     cursor: pointer;
   }
 
-  &__delete {
+  &__commands {
+    display: flex;
+    gap: 8px;
     padding-right: 8px;
     opacity: 0;
   }
 
-  &__add-task {
-    cursor: pointer;
+  &__header:hover &__commands {
+    opacity: 1;
   }
 
-  &__header:hover &__delete {
-    opacity: 1;
+  &__btn {
     cursor: pointer;
   }
 
@@ -48,19 +49,5 @@
     gap: 10px;
 
     padding: 8px;
-  }
-
-  &__btn {
-    text-align: center;
-    width: 28px;
-    height: 28px;
-    border: 1px solid rgb(197, 197, 197);
-    border-radius: 12px;
-
-    font-weight: 700;
-
-    color: green;
-
-    cursor: pointer;
   }
 }

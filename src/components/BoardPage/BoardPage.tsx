@@ -17,18 +17,18 @@ const BoardPage = () => {
     navigate(`/boards/${boardId}/columns`);
   };
 
-  useEffect(() => {
-    async function getBoard(boardId: string) {
-      try {
-        const result = await boardsService.getBoard(boardId);
-        setBoard(result);
-      } catch (error) {
-        setError((error as { message: string }).message);
-      }
+  async function updateBoard(boardId: string) {
+    try {
+      const result = await boardsService.getBoard(boardId);
+      setBoard(result);
+    } catch (error) {
+      setError((error as { message: string }).message);
     }
+  }
 
+  useEffect(() => {
     if (boardId) {
-      getBoard(boardId);
+      updateBoard(boardId);
     } else {
       setError('Parameter Id is required.');
     }
@@ -48,7 +48,12 @@ const BoardPage = () => {
             {board.columns
               .sort((a, b) => a.order - b.order)
               .map((column) => (
-                <Column key={column.id} column={column} boardId={board.id} />
+                <Column
+                  key={column.id}
+                  column={column}
+                  boardId={board.id}
+                  updateBoard={updateBoard}
+                />
               ))}
           </div>
         </div>
