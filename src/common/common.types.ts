@@ -13,6 +13,16 @@ export type TaskInfo = {
   files: FileInfo[];
 };
 
+export const taskDefault: TaskInfo = {
+  id: '',
+  title: '',
+  order: 1,
+  done: false,
+  description: '',
+  userId: '',
+  files: [],
+};
+
 export type ColumnInfo = {
   id: string;
   title: string;

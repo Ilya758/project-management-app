@@ -103,7 +103,6 @@ export const WelcomePage = () => {
                 <em>Tatsiana Tuzava</em> - developer
               </h3>
               <div className="skills-developer">
-                <p className="skills-developer-text">- Main page of the applicationead;</p>
                 <p className="skills-developer-text">- Edit and delete profile of users;</p>
                 <p className="skills-developer-text">- Sign Out from profile of users;</p>
                 <p className="skills-developer-text" />

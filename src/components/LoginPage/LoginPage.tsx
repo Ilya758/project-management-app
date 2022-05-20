@@ -4,8 +4,10 @@ import authService from '../../services/services.auth';
 import Button from '@mui/material/Button';
 import { Alert, Avatar, Box, Container, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useTranslation } from 'react-i18next';
 
 const LoginPage = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
@@ -42,7 +44,7 @@ const LoginPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Login to your account
+          {t('login.title')}
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -72,7 +74,7 @@ const LoginPage = () => {
             sx={{ mt: 3, mb: 2 }}
             disabled={!login.length || !password.length}
           >
-            Sign In
+            {t('login.signin')}
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>

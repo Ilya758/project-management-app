@@ -1,4 +1,4 @@
-.board {
+.boardPage {
   display: flex;
   flex-direction: column;
 
@@ -30,7 +30,10 @@
     margin: 24px;
   }
 
-  &__add-column {
+  &__add {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 8px;
     cursor: pointer;
   }
 }

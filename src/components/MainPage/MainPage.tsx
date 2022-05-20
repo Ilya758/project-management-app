@@ -1,79 +1,107 @@
-import axios from 'axios';
-import { useState, useEffect, FC, SyntheticEvent } from 'react';
-import { PATH } from '../../constants/path';
-import { IBoard } from '../../models/boards';
-import { Modal, IProps } from '../ConfirmationModal/ConfirmationModal';
-import { Box, Button, TextField } from '@mui/material';
 import './MainPage.scss';
-import { useNavigate } from 'react-router-dom';
+import AddIcon from '@mui/icons-material/Add';
+import React, { useEffect, useState } from 'react';
+import { BoardInfo } from '../../common/common.types';
+import boardsService from '../../services/services.boards';
+import {
+  Alert,
+  Button,
+  Card,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from '@mui/material';
+import Board from './Board/Board';
 
-const MainPage: FC<IProps> = ({ openModal }) => {
-  const [boards, setBoards] = useState<IBoard[]>([]);
+const MainPage = () => {
+  const [boards, setBoards] = useState<BoardInfo[]>([]);
+  const [error, setError] = useState('');
+  const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
-  const navigate = useNavigate();
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const updateBoards = () => {
+    boardsService
+      .getBoards()
+      .then((result) => {
+        setBoards(result);
+      })
+      .catch((error) => {
+        setError((error as { message: string }).message);
+      });
+  };
 
   useEffect(() => {
-    getBoardUpdate();
+    updateBoards();
   }, []);
 
-  const getBoardUpdate = () => {
-    axios.get(PATH.BOARDS).then((response) => {
-      setBoards(response.data);
-    });
+  const handleCreateBoard = () => {
+    boardsService
+      .createBoard(title)
+      .then(() => {
+        setTitle('');
+        updateBoards();
+        setOpen(false);
+      })
+      .catch((error) => {
+        setError((error as { message: string }).message);
+      });
   };
 
-  const handleOnChangeBoard = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setTitle(e.currentTarget.value as string);
+  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitle(e.currentTarget.value);
   };
 
-  const deleteBoard = (id: string, event: SyntheticEvent) => {
-    event.stopPropagation();
-    openModal(() => {
-      axios.delete(PATH.DELETE_BOARD(id)).then(getBoardUpdate);
-    });
-  };
-
-  const onBoardOpen = (id: string) => {
-    navigate(`/boards/${id}`);
-  };
-
-  const boardSubmit = () => {
-    axios.post(PATH.BOARDS, { title }).then(() => {
-      getBoardUpdate();
-      setTitle('');
-    });
-  };
   return (
-    <div className="wrapper-component">
-      <div className="create-board-component">
-        <Box component="form" noValidate sx={{ mt: 1 }}>
-          <TextField
-            fullWidth
-            label="Create Your New Board"
-            autoFocus
-            value={title}
-            onChange={handleOnChangeBoard}
-          />
-        </Box>
-        <Button type="submit" className="hover" onClick={boardSubmit}>
-          CREATE
-        </Button>
-      </div>
-      <div className="wrapper-boards">
-        {boards.map((board) => (
-          <div key={board.id} className="board-card" onClick={() => onBoardOpen(board.id)}>
-            <div className="card-title-container">
-              <h3 className="title">{board.title}</h3>
-              <button
-                onClick={(event) => deleteBoard(board.id, event)}
-                className="board-card-button"
-              ></button>
+    <>
+      <div className="mainPage">
+        <div className="mainPage__header">
+          <div className="mainPage__title">Boards</div>
+        </div>
+        <div className="mainPage__container">
+          {boards.map((board) => (
+            <Board key={board.id} board={board} updateBoards={updateBoards}></Board>
+          ))}
+          <Card sx={{ height: 'min-content' }}>
+            <div className="mainPage__add" onClick={handleClickOpen}>
+              <AddIcon color="success" />
             </div>
-          </div>
-        ))}
+          </Card>
+        </div>
       </div>
-    </div>
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle>New board</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            label="Title"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={title}
+            onChange={handleChangeTitle}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleCreateBoard}>Create</Button>
+        </DialogActions>
+      </Dialog>
+      {error && <Alert severity="error">{error}</Alert>}
+    </>
   );
 };
 
-export default Modal(MainPage);
+export default MainPage;

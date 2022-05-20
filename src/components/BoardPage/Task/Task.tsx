@@ -1,9 +1,6 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { TaskProps } from './Task.types';
-import './Task.scss';
 import {
-  Alert,
   Button,
   Dialog,
   DialogActions,
@@ -11,39 +8,37 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
+import './Task.scss';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import tasksService from '../../../services/services.tasks';
 
-const Task = ({ task, boardId, columnId, updateBoard }: TaskProps) => {
-  const navigate = useNavigate();
-
-  const [open, setOpen] = useState(false);
-  const [error, setError] = useState('');
+const Task = ({ task, boardId, columnId, editTask, updateBoard, showError }: TaskProps) => {
+  const [openDelete, setOpenDelete] = useState(false);
 
   const handleClickOpen = () => {
-    setOpen(true);
+    setOpenDelete(true);
   };
 
   const handleClose = () => {
-    setOpen(false);
-    updateBoard(boardId);
-  };
-
-  const handleUpdateTask = () => {
-    navigate(`/boards/${boardId}/columns/${columnId}/tasks/${task.id}`);
+    setOpenDelete(false);
+    updateBoard();
   };
 
   const handleDeleteTask = () => {
     tasksService
       .deleteTask(boardId, columnId, task.id)
       .then(() => {
-        setOpen(false);
-        updateBoard(boardId);
+        setOpenDelete(false);
+        updateBoard();
       })
       .catch((error) => {
-        setError((error as { message: string }).message);
+        showError((error as { message: string }).message);
       });
+  };
+
+  const handleUpdateTask = () => {
+    editTask(task);
   };
 
   return (
@@ -60,7 +55,7 @@ const Task = ({ task, boardId, columnId, updateBoard }: TaskProps) => {
         </div>
       </div>
       <Dialog
-        open={open}
+        open={openDelete}
         onClose={handleClose}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
@@ -77,7 +72,6 @@ const Task = ({ task, boardId, columnId, updateBoard }: TaskProps) => {
             Yes
           </Button>
         </DialogActions>
-        {error && <Alert severity="error">{error}</Alert>}
       </Dialog>
     </>
   );
