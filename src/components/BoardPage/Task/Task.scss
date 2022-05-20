@@ -1,0 +1,36 @@
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 4px;
+
+  background-color: white;
+
+  padding: 4px;
+
+  position: relative;
+
+  box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.39);
+
+  cursor: pointer;
+
+  &__title {
+    cursor: pointer;
+  }
+
+  &__commands {
+    display: flex;
+    gap: 8px;
+    padding-right: 8px;
+    opacity: 0;
+  }
+
+  &:hover &__commands {
+    opacity: 1;
+  }
+
+  &__btn {
+    cursor: pointer;
+  }
+}

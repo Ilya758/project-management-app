@@ -1,0 +1,195 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomePage Component Should render 1`] = `
+<body>
+  <div>
+    <div
+      class="home-wrapper"
+    >
+      <section
+        class="about-wrapper"
+      >
+        <div>
+          Project Management
+        </div>
+        <div>
+          ... Ваши неограниченные варианты использования
+        </div>
+      </section>
+      <section
+        class="project-content"
+      >
+        <div>
+          <h1
+            class="subheading"
+          >
+            Надежное Управление Задачами для Команд
+          </h1>
+          <span
+            class="primary-title"
+          >
+            <span>
+              Объедините
+            </span>
+             Вашу Команду
+          </span>
+          <div
+            class="container-images"
+          >
+            <img
+              alt="image"
+              class="imageOne"
+              src="heroWelcome.jpg"
+            />
+            <img
+              alt="image"
+              class="imageTwo"
+              src="el1.svg"
+            />
+            <img
+              alt="image"
+              class="imageThree"
+              src="el2.svg"
+            />
+          </div>
+        </div>
+      </section>
+      <section
+        class="project-info-content"
+      >
+        <div
+          class="card-info"
+        >
+          <img
+            alt="image"
+            class="imageFour"
+            src="el4.svg"
+          />
+          <h3>
+            Время Стать Организованными
+          </h3>
+          <p>
+              Управление задачами является связующим звеном между планированием дел и их выполнением. Программное обеспечение для управления задачами должно обеспечивать обзор работы, чтобы видеть превращение идеи в результат.
+            <br />
+              Попробуйте 
+            <b>
+              ProjectManagement:
+            </b>
+             присоединяйтесь к командам со всего мира, которые используют наши доски для цифровизации рабочих процессов и получения четкого обзора прогресса задач. Станем организованными вместе!
+          </p>
+        </div>
+        <div
+          class="card-info"
+        >
+          <img
+            alt="image"
+            class="imageFour"
+            src="el5.svg"
+          />
+          <h3>
+            Проекты, Которые Работают
+          </h3>
+          <p>
+              Независимо от того, управляете ли вы своим следующим крупным проектом или переводите управление задачами в цифровую форму для повседневной работы своей команды, вам нужно знать, кто, чем и когда занимается. 
+            <b>
+              ProjectManagement
+            </b>
+             поможет вам управлять задачами в красивой настраиваемой среде, которая идеально адаптируется к вашим потребностям.
+          </p>
+        </div>
+        <div
+          class="card-info"
+        >
+          <img
+            alt="image"
+            class="imageFour"
+            src="el6.svg"
+          />
+          <h3>
+            Удаленная Работа
+          </h3>
+          <p>
+              Когда ваша команда работает из дома, эффективный способ обмена информацией имеет важное значение для продуктивной работы. Используйте 
+            <b>
+              ProjectManagement
+            </b>
+            , чтобы улучшить взаимодействие, эффективно управлять задачами и обеспечить гладкое выполнение проектов.
+          </p>
+        </div>
+      </section>
+      <section
+        class="developers-content"
+      >
+        <h2
+          class="subheading"
+        >
+          Наша команда
+        </h2>
+        <div
+          class="developers-content-container"
+        >
+          <div
+            class="card-info"
+          >
+            <h3>
+              <em>
+                Илья Скарына
+              </em>
+               - Team lead, developer
+            </h3>
+            <div
+              class="image-developer developer1"
+            />
+            <p>
+              - Базовые настройки проекта, роутинг приложения
+            </p>
+            <p>
+              - Поддержка корректной работы приложения;
+            </p>
+            <p />
+            <p />
+          </div>
+          <div
+            class="card-info"
+          >
+            <h3>
+              <em>
+                Андрей Корозеев
+              </em>
+               - developer
+            </h3>
+            <div
+              class="image-developer developer2"
+            />
+            <p>
+              - Регистрация и авторизация пользователя;
+            </p>
+            <p />
+            <p />
+            <p />
+          </div>
+          <div
+            class="card-info"
+          >
+            <h3>
+              <em>
+                Татьяна Тузова
+              </em>
+               - developer
+            </h3>
+            <div
+              class="image-developer developer3"
+            />
+            <p>
+              - Главная страница приложения;
+            </p>
+            <p />
+            <p />
+            <p />
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</body>
+`;
