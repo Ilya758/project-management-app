@@ -8,7 +8,7 @@ import MainPage from './components/MainPage/MainPage';
 import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
-// import { EditProfile } from './components/EditProfile/EditProfile';
+import { EditProfile } from './components/EditProfile/EditProfile';
 
 const App = () => {
   return (
@@ -21,7 +21,7 @@ const App = () => {
             <Route path="registration" element={<RegistrationPage />}></Route>
           </Route>
           <Route path="main" element={<MainPage />}></Route>
-          {/* <Route path="profile" element={<EditProfile />}></Route> */}
+          <Route path="profile" element={<EditProfile />}></Route>
           <Route path="boards/:boardId" element={<BoardPage />}></Route>
           <Route path="404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate to="404" />} />
