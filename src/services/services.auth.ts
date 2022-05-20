@@ -56,6 +56,7 @@ const authService = {
   singup,
   isAuthorize,
   getConfig,
+  getToken,
 };
 
 export default authService;

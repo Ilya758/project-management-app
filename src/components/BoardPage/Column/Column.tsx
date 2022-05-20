@@ -22,6 +22,7 @@ import columnsService from '../../../services/services.columns';
 import { taskDefault, TaskInfo, UserInfo } from '../../../common/common.types';
 import usersService from '../../../services/services.users';
 import tasksService from '../../../services/services.tasks';
+import filesService from '../../../services/services.files';
 
 const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
   const [title, setTitle] = useState(column.title);
@@ -153,6 +154,14 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
     }
   };
 
+  function bytesToSize(bytes: number): string {
+    const sizes: string[] = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
+    if (bytes === 0) return 'n/a';
+    const i: number = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)).toString());
+    if (i === 0) return `${bytes} ${sizes[i]}`;
+    return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
+  }
+
   return (
     <>
       <div className="column">
@@ -279,6 +288,40 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
                 }
               }}
             />
+            <Button variant="contained" component="label" sx={{ mt: 2 }}>
+              Upload File
+              <input
+                type="file"
+                hidden
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  if (e.currentTarget.files) {
+                    filesService
+                      .upload(task, e.currentTarget.files)
+                      .then(() => {
+                        getTask(task);
+                      })
+                      .catch((error) => {
+                        showError((error as { message: string }).message);
+                      });
+                  }
+                }}
+              />
+            </Button>
+            {task.files.length > 0 && (
+              <Box sx={{ display: 'flex', flexDirection: 'column', m: 2 }}>
+                {task.files.map((file, index) => (
+                  <div
+                    key={index}
+                    className="task__file"
+                    onClick={() => {
+                      filesService.download(task, file);
+                    }}
+                  >
+                    {`${index + 1}. ${file.filename} - ${bytesToSize(file.fileSize)}`}
+                  </div>
+                ))}
+              </Box>
+            )}
           </Box>
         </DialogContent>
         <DialogActions>
