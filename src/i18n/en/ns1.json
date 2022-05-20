@@ -1,0 +1,10 @@
+{
+  "language": {
+    "en": "Eng",
+    "ru": "Rus"
+  },
+  "login": {
+    "title": "Login",
+    "signin": "Sign In"
+  }
+}
