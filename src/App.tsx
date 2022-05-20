@@ -8,7 +8,6 @@ import { NotFoundPage } from './components/NotFoundPage/NotFoundPage';
 import { WelcomePage } from './components/WelcomePage/WelcomePage';
 import RegistrationPage from './components/RegistrationPage/RegistrationPage';
 import { EditProfile } from './components/EditProfile/EditProfile';
-import TaskPage from './components/TaskPage/TaskPage';
 
 const App = () => {
   return (
@@ -23,9 +22,6 @@ const App = () => {
           <Route path="main" element={<MainPage />}></Route>
           <Route path="profile" element={<EditProfile />}></Route>
           <Route path="boards/:boardId" element={<BoardPage />}></Route>
-          <Route path="boards/:boardId/columns/:columnId/tasks" element={<TaskPage />}>
-            <Route path=":taskId" element={<TaskPage />}></Route>
-          </Route>
           <Route path="404" element={<NotFoundPage />} />
           <Route path="*" element={<Navigate to="404" />} />
         </Route>

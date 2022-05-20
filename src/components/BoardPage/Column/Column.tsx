@@ -1,31 +1,37 @@
 import { useState } from 'react';
 import Task from '../Task/Task';
-import { ColumnProps } from './Column.types';
-import { useNavigate } from 'react-router-dom';
-import './Column.scss';
 import {
-  Alert,
+  Autocomplete,
+  Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  TextField,
 } from '@mui/material';
+import { ColumnProps } from './Column.types';
+import './Column.scss';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DoneIcon from '@mui/icons-material/Done';
 import columnsService from '../../../services/services.columns';
+import { taskDefault, TaskInfo, UserInfo } from '../../../common/common.types';
+import usersService from '../../../services/services.users';
+import tasksService from '../../../services/services.tasks';
 
-const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
-  const navigate = useNavigate();
+const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
   const [title, setTitle] = useState(column.title);
 
   const [open, setOpen] = useState(false);
-  const [error, setError] = useState('');
   const [isEditing, setIsEditing] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [users, setUsers] = useState<UserInfo[]>([]);
+  const [user, setUser] = useState<UserInfo | null>(null);
+  const [task, setTask] = useState<TaskInfo>(taskDefault);
 
   const handleOpen = () => {
     setOpen(true);
@@ -40,21 +46,16 @@ const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
       .deleteColumn(boardId, column.id)
       .then(() => {
         setOpen(false);
-        updateBoard(boardId);
+        updateBoard();
       })
       .catch((error) => {
-        setError((error as { message: string }).message);
+        showError((error as { message: string }).message);
       });
   };
 
   const handleClickTitle = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
     setIsEditing(true);
-  };
-
-  const handleCreateTask = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-    navigate(`/boards/${boardId}/columns/${column.id}/tasks`);
   };
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -73,11 +74,83 @@ const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
       .updateColumn(boardId, column.id, title, column.order)
       .then(() => {
         setIsEditing(false);
-        updateBoard(boardId);
+        updateBoard();
       })
       .catch((error) => {
-        setError((error as { message: string }).message);
+        showError((error as { message: string }).message);
       });
+  };
+
+  const handleCreateTask = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    setTask({ ...taskDefault, order: column.tasks.length + 1 });
+    setUser(null);
+    editTask(taskDefault);
+  };
+
+  const handleTaskEditClose = () => {
+    setOpenEdit(false);
+  };
+
+  const handleChangeUser = (
+    event: React.SyntheticEvent<Element, Event>,
+    newValue: UserInfo | null
+  ) => {
+    setUser(newValue);
+    if (newValue) {
+      setTask({ ...task, userId: newValue.id });
+    }
+  };
+
+  const getUsers = async () => {
+    usersService.getUsers().then((result) => {
+      setUsers(result);
+    });
+  };
+
+  const getTask = async (task: TaskInfo) => {
+    tasksService.getTask(boardId, column.id, task.id).then((result) => {
+      setTask(result);
+    });
+  };
+
+  const editTask = (task: TaskInfo) => {
+    Promise.all([getUsers(), getTask(task)])
+      .then(() => {
+        const selectedUser = users.find((x) => x.id == task.userId);
+        if (selectedUser) {
+          setUser(selectedUser);
+        }
+        setOpenEdit(true);
+        showError('');
+      })
+      .catch((error) => {
+        showError((error as { message: string }).message);
+      });
+  };
+
+  const handleTaskEdit = () => {
+    if (task.id) {
+      tasksService
+        .updateTask(boardId, column.id, task)
+        .then(() => {
+          setOpenEdit(false);
+          updateBoard();
+        })
+        .catch((error) => {
+          showError((error as { message: string }).message);
+        });
+    } else {
+      tasksService
+        .createTask(boardId, column.id, task)
+        .then(() => {
+          setOpenEdit(false);
+          updateBoard();
+        })
+        .catch((error) => {
+          showError((error as { message: string }).message);
+        });
+    }
   };
 
   return (
@@ -122,15 +195,19 @@ const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
         </div>
         {column.tasks.length > 0 && (
           <div className="column__container">
-            {column.tasks.map((task) => (
-              <Task
-                key={task.id}
-                task={task}
-                boardId={boardId}
-                columnId={column.id}
-                updateBoard={updateBoard}
-              />
-            ))}
+            {column.tasks
+              .sort((a, b) => a.order - b.order)
+              .map((task) => (
+                <Task
+                  key={task.id}
+                  task={task}
+                  boardId={boardId}
+                  columnId={column.id}
+                  updateBoard={updateBoard}
+                  editTask={editTask}
+                  showError={showError}
+                />
+              ))}
           </div>
         )}
         <div className="column__footer">
@@ -157,7 +234,57 @@ const Column = ({ column, boardId, updateBoard }: ColumnProps) => {
             Yes
           </Button>
         </DialogActions>
-        {error && <Alert severity="error">{error}</Alert>}
+      </Dialog>
+      <Dialog open={openEdit} onClose={handleTaskEditClose}>
+        <DialogTitle>{task.id ? `${task.title}` : 'New task'}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
+          <Box sx={{ display: 'flex', flexDirection: 'column', m: 2 }}>
+            <TextField
+              margin="normal"
+              required
+              label="Title"
+              autoFocus
+              value={task.title}
+              onChange={(e) => {
+                setTask({ ...task, title: e.currentTarget.value });
+              }}
+            />
+            <TextField
+              margin="normal"
+              required
+              label="Description"
+              value={task.description}
+              onChange={(e) => {
+                setTask({ ...task, description: e.currentTarget.value });
+              }}
+            />
+            <Autocomplete
+              options={users}
+              getOptionLabel={(option: UserInfo) => `${option.name} (${option.login})`}
+              value={user}
+              onChange={handleChangeUser}
+              renderInput={(params) => (
+                <TextField {...params} margin="normal" required label="User" />
+              )}
+            />
+            <TextField
+              margin="normal"
+              label="Order"
+              value={task.order}
+              onChange={(e) => {
+                const order = Number.parseInt(e.currentTarget.value);
+                if (!Number.isNaN(order)) {
+                  setTask({ ...task, order });
+                }
+              }}
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleTaskEditClose}>Cancel</Button>
+          <Button onClick={handleTaskEdit}>{task.id ? 'Save' : 'Create'}</Button>
+        </DialogActions>
       </Dialog>
     </>
   );

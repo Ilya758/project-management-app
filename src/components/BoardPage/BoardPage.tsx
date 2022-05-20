@@ -22,9 +22,8 @@ const BoardPage = () => {
   const { boardId } = useParams();
   const [board, setBoard] = useState<BoardInfo>();
   const [error, setError] = useState('');
-  const [openCreate, setOpenCreate] = useState(false);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [title, setTitle] = useState('');
+  const [openCreateColumn, setOpenCreateColumn] = useState(false);
+  const [titleColumn, setTitleColumn] = useState('');
 
   function updateBoard() {
     if (boardId) {
@@ -32,12 +31,13 @@ const BoardPage = () => {
         .getBoard(boardId)
         .then((result) => {
           setBoard(result);
+          setError('');
         })
         .catch((error) => {
           setError((error as { message: string }).message);
         });
     } else {
-      setError('Parameter Id is required.');
+      setError('Id is required.');
     }
   }
 
@@ -56,26 +56,22 @@ const BoardPage = () => {
     }
   }, [boardId]);
 
-  const handleOpenCreate = () => {
-    setOpenCreate(true);
+  const handleCreateColumnOpen = () => {
+    setOpenCreateColumn(true);
   };
 
-  const handleCloseCreate = () => {
-    setOpenCreate(false);
-  };
-
-  const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value);
+  const handleCreateColumnClose = () => {
+    setOpenCreateColumn(false);
   };
 
   const handleCreateColumn = () => {
     if (board) {
       columnsService
-        .createColumn(board.id, title, board.columns.length + 1)
+        .createColumn(board.id, titleColumn, board.columns.length + 1)
         .then(() => {
-          setTitle('');
+          setTitleColumn('');
           updateBoard();
-          setOpenCreate(false);
+          setOpenCreateColumn(false);
         })
         .catch((error) => {
           setError((error as { message: string }).message);
@@ -83,15 +79,13 @@ const BoardPage = () => {
     }
   };
 
-  const handleOpenEdit = () => {
-    setOpenEdit(true);
+  const handleChangeTitleColumn = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setTitleColumn(e.currentTarget.value);
   };
 
-  const handleCloseEdit = () => {
-    setOpenEdit(false);
+  const showError = (message: string) => {
+    setError(message);
   };
-
-  const handleEditColumn = () => {};
 
   return (
     <>
@@ -109,10 +103,11 @@ const BoardPage = () => {
                   column={column}
                   boardId={board.id}
                   updateBoard={updateBoard}
+                  showError={showError}
                 />
               ))}
             <Card sx={{ height: 'min-content' }}>
-              <div className="boardPage__add" onClick={handleOpenCreate}>
+              <div className="boardPage__add" onClick={handleCreateColumnOpen}>
                 <AddIcon color="success" />
               </div>
             </Card>
@@ -120,7 +115,7 @@ const BoardPage = () => {
         </div>
       )}
       {error && <Alert severity="error">{error}</Alert>}
-      <Dialog open={openCreate} onClose={handleCloseCreate}>
+      <Dialog open={openCreateColumn} onClose={handleCreateColumnClose}>
         <DialogTitle>New column</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
@@ -131,33 +126,13 @@ const BoardPage = () => {
             type="text"
             fullWidth
             variant="standard"
-            value={title}
-            onChange={handleChangeTitle}
+            value={titleColumn}
+            onChange={handleChangeTitleColumn}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCloseCreate}>Cancel</Button>
+          <Button onClick={handleCreateColumnClose}>Cancel</Button>
           <Button onClick={handleCreateColumn}>Create</Button>
-        </DialogActions>
-      </Dialog>
-      <Dialog open={openEdit} onClose={handleOpenEdit}>
-        <DialogTitle>New column</DialogTitle>
-        <DialogContent>
-          <DialogContentText id="alert-dialog-description"></DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Title"
-            type="text"
-            fullWidth
-            variant="standard"
-            value={title}
-            onChange={handleChangeTitle}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseEdit}>Cancel</Button>
-          <Button onClick={handleEditColumn}>Save</Button>
         </DialogActions>
       </Dialog>
     </>
