@@ -60,10 +60,10 @@ const deleteTask = async (boardId: string, columnId: string, taskId: string) => 
   return result;
 };
 
-const updateTask = async (boardId: string, columnId: string, taskId: string, task: TaskInfo) => {
+const updateTask = async (boardId: string, columnId: string, task: TaskInfo) => {
   try {
     const resp = await axios.put(
-      API_URL + `boards/${boardId}/columns/${columnId}/tasks/${taskId}`,
+      API_URL + `boards/${boardId}/columns/${columnId}/tasks/${task.id}`,
       {
         title: task.title,
         order: task.order,

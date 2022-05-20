@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { API_URL } from '../common/common.constants';
-import { ColumnInfo } from '../common/common.types';
 import authService from './services.auth';
 import { IResponceError } from './services.types';
 
@@ -13,11 +12,11 @@ const getColumns = async (boardId: string) => {
   }
 };
 
-const createColumn = async (boardId: string, column: ColumnInfo) => {
+const createColumn = async (boardId: string, title: string, order: number) => {
   try {
     const resp = await axios.post(
       API_URL + `boards/${boardId}/columns`,
-      { title: column.title, order: column.order },
+      { title, order },
       authService.getConfig()
     );
     return resp.data;
@@ -49,11 +48,11 @@ const deleteColumn = async (boardId: string, columnId: string) => {
   return result;
 };
 
-const updateColumn = async (boardId: string, columnId: string, column: ColumnInfo) => {
+const updateColumn = async (boardId: string, columnId: string, title: string, order: number) => {
   try {
     const resp = await axios.put(
       API_URL + `boards/${boardId}/columns/${columnId}`,
-      { title: column.title, order: column.order },
+      { title, order },
       authService.getConfig()
     );
     return resp.data;

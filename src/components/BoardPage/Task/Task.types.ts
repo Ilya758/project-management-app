@@ -4,5 +4,7 @@ export type TaskProps = {
   task: TaskInfo;
   boardId: string;
   columnId: string;
-  updateBoard: (boardId: string) => void;
+  updateBoard: () => void;
+  editTask: (task: TaskInfo) => void;
+  showError: (message: string) => void;
 };
