@@ -1,14 +1,16 @@
 import axios from 'axios';
-import { useState, useEffect, FC } from 'react';
+import { useState, useEffect, FC, SyntheticEvent } from 'react';
 import { PATH } from '../../constants/path';
 import { IBoard } from '../../models/boards';
 import { Modal, IProps } from '../ConfirmationModal/ConfirmationModal';
 import { Box, Button, TextField } from '@mui/material';
 import './MainPage.scss';
+import { useNavigate } from 'react-router-dom';
 
 const MainPage: FC<IProps> = ({ openModal }) => {
   const [boards, setBoards] = useState<IBoard[]>([]);
   const [title, setTitle] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     getBoardUpdate();
@@ -24,10 +26,15 @@ const MainPage: FC<IProps> = ({ openModal }) => {
     setTitle(e.currentTarget.value as string);
   };
 
-  const deleteBoard = (id: string) => {
+  const deleteBoard = (id: string, event: SyntheticEvent) => {
+    event.stopPropagation();
     openModal(() => {
       axios.delete(PATH.DELETE_BOARD(id)).then(getBoardUpdate);
     });
+  };
+
+  const onBoardOpen = (id: string) => {
+    navigate(`/boards/${id}`);
   };
 
   const boardSubmit = () => {
@@ -54,10 +61,13 @@ const MainPage: FC<IProps> = ({ openModal }) => {
       </div>
       <div className="wrapper-boards">
         {boards.map((board) => (
-          <div key={board.id} className="board-card">
+          <div key={board.id} className="board-card" onClick={() => onBoardOpen(board.id)}>
             <div className="card-title-container">
               <h3 className="title">{board.title}</h3>
-              <button onClick={() => deleteBoard(board.id)} className="board-card-button"></button>
+              <button
+                onClick={(event) => deleteBoard(board.id, event)}
+                className="board-card-button"
+              ></button>
             </div>
           </div>
         ))}

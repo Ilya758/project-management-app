@@ -11,7 +11,7 @@ export const WelcomePage = () => {
     <div className="home-wrapper">
       <section className="about-wrapper">
         <div className="title-primary-page">Project Management</div>
-        <div className="title-primary-page">...your unlimited use cases</div>
+        <div className="title-primary-page second">...your unlimited use cases</div>
       </section>
       <section className="project-content">
         <div>
@@ -94,8 +94,8 @@ export const WelcomePage = () => {
                 <p className="skills-developer-text" />
                 <p className="skills-developer-text" />
               </div>
-              <div className="image-developer developer2"></div>
             </div>
+            <div className="image-developer developer2"></div>
           </div>
           <div className="box-wrapper">
             <div className="info-developer">

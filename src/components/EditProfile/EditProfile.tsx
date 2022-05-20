@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { PATH } from '../../constants/path';
 import axios from 'axios';
 import { IUser } from '../../models/users';
-import { editUser } from '../../Requests/user';
+import { editUser } from '../../requests/user';
 import { IErrorMessage } from '../../services/services.auth';
 import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
 import '../Authentication/Authentication.scss';
+import { useNavigate } from 'react-router-dom';
 
 export const EditProfile = () => {
   const [name, setName] = useState('');
@@ -13,6 +14,7 @@ export const EditProfile = () => {
   const [password, setPassword] = useState('');
   const [user, setUser] = useState<IUser>({} as IUser);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     editUser().then((user) => {
@@ -38,7 +40,9 @@ export const EditProfile = () => {
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await axios.put(PATH.UPDATE_USER(user.id), { login, name, password });
+      await axios
+        .put(PATH.UPDATE_USER(user.id), { login, name, password })
+        .then(() => navigate('/main'));
     } catch (error) {
       setError((error as IErrorMessage).response.data.message);
     }

@@ -12,21 +12,21 @@
 
   & .modal-component {
     height: 200px;
-    box-shadow: 4px 4px 8px 0px rgba(34, 60, 80, 0.2);
-    border-radius: 5px;
+    box-shadow: 0px 11px 15px -7px rgba(0, 0, 0, 0.2), 0px 24px 38px 3px rgba(0, 0, 0, 0.14), 0px 9px 46px 8px rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
     max-width: 400px;
+    width: 100%;
+    max-height: calc(100% - 64px);
     position: relative;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
-    padding: 10px;
-    background: #262637;
-    transition: top 0.7s;
-    border: 3px solid #61dafb;
+    background: #fff;
+    transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
 
     & h2 {
-      color: #61dafb;
+      color: rgba(0, 0, 0, 0.87);
       position: absolute;
       top: 5%;
       left: 5%;
@@ -40,8 +40,8 @@
       align-items: end;
 
       & span {
-        margin-top: 50px;
-        color: #61dafb;
+        margin: 50px auto;
+        color: rgba(0, 0, 0, 0.6);
       }
 
       & div {
@@ -50,13 +50,13 @@
         justify-content: space-between;
 
         & button {
-          border: 1px solid #61dafb;
-          color: #61dafb;
+          border: none;
+          color: #1976d2;
           border-radius: 3px;
           padding: 5px 10px;
           cursor: pointer !important;
-          transition: 0.5s;
-          background-color: #262637;
+          transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;;
+          background: none;
         }
         & button:hover {
           border-color: #00deb6;

@@ -10,41 +10,37 @@
   font-style: normal;
   color: #61dafb;
   box-shadow: 4px -2px 8px 0px rgba(34, 60, 80, 0.2);
-}
 
-.container-footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  height: 100%;
-}
+  & .container-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 auto;
+    height: 100%;
 
-.container-develop-users {
-  display: flex;
-  justify-content: space-between;
-  width: 320px;
-}
+    & .container-develop-users {
+      display: flex;
+      justify-content: space-between;
+      width: 320px;
 
-.image-logo {
-  width: 65px;
-}
+      & .users-link {
+        cursor: pointer;
+        text-decoration: none;
+        color: #61dafb;
 
-.users-link {
-  cursor: pointer;
-  text-decoration: none;
-  color: #61dafb;
-}
+        & .fab.fa-github {
+          margin-right: 5px;
+        }
+      }
 
-.fab.fa-github {
-  margin-right: 5px;
-}
-
-.rsschool-link {
-  height: 40px;
-  width: 65px;
-  background-image: url('../../assets/svg/logoSchool.svg');
-  background-repeat: no-repeat;
-  background-size: 100% 30px;
-  background-position: left center;
+      & .rsschool-link {
+        height: 40px;
+        width: 65px;
+        background-image: url('../../assets/svg/logoSchool.svg');
+        background-repeat: no-repeat;
+        background-size: 100% 30px;
+        background-position: left center;
+      }
+    }
+  }
 }

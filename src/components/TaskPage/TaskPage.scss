@@ -5,6 +5,7 @@
   padding-top: 24px;
 
   height: calc(100vh - 168px);
+  flex-grow: 1;
   overflow: hidden;
 
   &__header {
