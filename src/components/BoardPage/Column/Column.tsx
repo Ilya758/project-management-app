@@ -277,17 +277,19 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
                 <TextField {...params} margin="normal" required label="User" />
               )}
             />
-            <TextField
-              margin="normal"
-              label="Order"
-              value={task.order}
-              onChange={(e) => {
-                const order = Number.parseInt(e.currentTarget.value);
-                if (!Number.isNaN(order)) {
-                  setTask({ ...task, order });
-                }
-              }}
-            />
+            {task.id && (
+              <TextField
+                margin="normal"
+                label="Order"
+                value={task.order}
+                onChange={(e) => {
+                  const order = Number.parseInt(e.currentTarget.value);
+                  if (!Number.isNaN(order)) {
+                    setTask({ ...task, order });
+                  }
+                }}
+              />
+            )}
             <Button variant="contained" component="label" sx={{ mt: 2 }}>
               Upload File
               <input

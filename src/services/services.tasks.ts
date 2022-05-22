@@ -22,7 +22,6 @@ const createTask = async (boardId: string, columnId: string, task: TaskInfo) => 
       API_URL + `boards/${boardId}/columns/${columnId}/tasks`,
       {
         title: task.title,
-        order: task.order,
         description: task.description,
         userId: task.userId,
       },

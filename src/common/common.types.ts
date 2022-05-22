@@ -13,16 +13,6 @@ export type TaskInfo = {
   files: FileInfo[];
 };
 
-export const taskDefault: TaskInfo = {
-  id: '',
-  title: '',
-  order: 1,
-  done: false,
-  description: '',
-  userId: '',
-  files: [],
-};
-
 export type ColumnInfo = {
   id: string;
   title: string;
@@ -33,6 +23,7 @@ export type ColumnInfo = {
 export type BoardInfo = {
   id: string;
   title: string;
+  description: string;
   columns: ColumnInfo[];
 };
 
@@ -40,4 +31,21 @@ export type UserInfo = {
   id: string;
   name: string;
   login: string;
+};
+
+export const taskDefault: TaskInfo = {
+  id: '',
+  title: '',
+  order: 1,
+  done: false,
+  description: '',
+  userId: '',
+  files: [],
+};
+
+export const boardDefault: BoardInfo = {
+  id: '',
+  title: '',
+  description: '',
+  columns: [],
 };
