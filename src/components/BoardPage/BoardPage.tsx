@@ -67,7 +67,7 @@ const BoardPage = () => {
   const handleCreateColumn = () => {
     if (board) {
       columnsService
-        .createColumn(board.id, titleColumn, board.columns.length + 1)
+        .createColumn(board.id, titleColumn)
         .then(() => {
           setTitleColumn('');
           updateBoard();
