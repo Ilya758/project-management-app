@@ -13,11 +13,13 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { PATH } from '../../constants/path';
 import { IUser } from '../../models/users';
+import { useTranslation } from 'react-i18next';
 
 export const Menu = () => {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState<IUser>({} as IUser);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const isAuthorize = authService.isAuthorize();
 
   useEffect(() => {
@@ -53,16 +55,13 @@ export const Menu = () => {
         {isAuthorize && (
           <>
             <NavLink to="main" className="link-profile">
-              Boards
+              {t('boards.title')}
             </NavLink>
             <NavLink to="profile" className="link-profile">
-              Edit Profile
+              {t('edit_Profile.title')}
             </NavLink>
-            <button className="link-profile" onClick={signOut}>
-              Sign Out
-            </button>
             <button className="delete-user" onClick={handleClickOpen}>
-              Delete User
+              {t('delete.title')}
             </button>
           </>
         )}
@@ -73,16 +72,14 @@ export const Menu = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Delete</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Delete without possibility of recovery?
-          </DialogContentText>
+          <DialogContentText id="alert-dialog-description">{t('modal.title')}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>{t('modal.cancel')}</Button>
           <Button onClick={() => handleDeleteUser(user.id)} autoFocus>
-            Yes
+            {t('modal.yes')}
           </Button>
         </DialogActions>
       </Dialog>

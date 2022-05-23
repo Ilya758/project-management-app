@@ -7,6 +7,7 @@ import { Alert, Box, Button, Container, TextField, Typography } from '@mui/mater
 import '../Authentication/Authentication.scss';
 import { useNavigate } from 'react-router-dom';
 import { editUser } from '../../requests/user';
+import { useTranslation } from 'react-i18next';
 
 export const EditProfile = () => {
   const [name, setName] = useState('');
@@ -15,6 +16,7 @@ export const EditProfile = () => {
   const [user, setUser] = useState<IUser>({} as IUser);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     editUser().then((user) => {
@@ -52,14 +54,14 @@ export const EditProfile = () => {
     <div className="wrapper-component center">
       <Container component="div" maxWidth="xs">
         <Typography component="h3" variant="h5">
-          Edit Your Profile
+          {t('edit_Profile.edit_profile')}
         </Typography>
         <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
-            label="Create Your Name"
+            label={t('edit_Profile.name')}
             autoComplete="name"
             autoFocus
             value={name}
@@ -69,7 +71,7 @@ export const EditProfile = () => {
             margin="normal"
             required
             fullWidth
-            label="Create Your Login"
+            label={t('edit_Profile.login')}
             autoComplete="login"
             autoFocus
             value={login}
@@ -79,14 +81,14 @@ export const EditProfile = () => {
             margin="normal"
             required
             fullWidth
-            label="Password"
+            label={t('edit_Profile.password')}
             type="password"
             autoComplete="Create Your Password"
             value={password}
             onChange={handleOnChangePassword}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Save
+            {t('edit_Profile.save')}
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>

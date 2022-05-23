@@ -1,10 +1,40 @@
 {
   "language": {
-    "en": "Eng",
-    "ru": "Rus"
+    "en": "Eng"
   },
   "login": {
     "title": "Login",
     "signin": "Sign In"
+  },
+  "registration": {
+    "title": "Registration your account",
+    "signup": "Sign Up"
+  },
+  "sign_Out": {
+    "title": "Sign Out"
+  },
+  "boards": {
+    "title": "Boards",
+    "boards": "Boards",
+    "new": "New column",
+    "create": "Create",
+    "tit": "Title"
+  },
+  "edit_Profile": {
+    "title": "Edit Profile",
+    "edit_profile": "Edit Profile",
+    "name": "Create Your Name",
+    "login": "Create Your Login",
+    "password": "Create Your Password",
+    "save": "Save"
+  },
+  "delete": {
+    "title": "Delete User"
+  },
+  "modal": {
+    "title": "Delete without possibility of recovery?",
+    "yes": "Yes",
+    "cancel": "Cancel",
+    "tit": "Delete"
   }
 }

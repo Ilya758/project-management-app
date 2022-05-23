@@ -3,12 +3,14 @@ import authService from '../../services/services.auth';
 import Button from '@mui/material/Button';
 import { Alert, Avatar, Box, Container, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useTranslation } from 'react-i18next';
 
 const RegistrationPage = () => {
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { t } = useTranslation();
 
   const handleOnChangeName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setName(e.currentTarget.value as string);
@@ -44,7 +46,7 @@ const RegistrationPage = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Registration your account
+          {t('registration.title')}
         </Typography>
         <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
@@ -78,7 +80,7 @@ const RegistrationPage = () => {
             onChange={handleOnChangePassword}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            Registration
+            {t('registration.signup')}
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>

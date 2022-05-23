@@ -17,12 +17,12 @@
 }
 
 .nav {
-  width: 80px;
+  width: 120px;
   height: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
+  flex-wrap: wrap-reverse;
   align-items: center;
+  justify-content: space-evenly;
 }
 
 .container-nav-button {
@@ -39,12 +39,12 @@
 }
 
 .container-link {
-  width: 150px;
+  width: 250px;
   height: 100%;
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  justify-content: center;
+  justify-content: space-around;
   margin: 0 3%;
 }
 
@@ -92,9 +92,12 @@
 .registration-link {
   border: 1px solid #00deb6;
   border-radius: 3px;
-  padding: 5px 10px;
+  padding: 5px;
   cursor: pointer !important;
   transition: 0.5s;
+  display: block;
+  width: 41px;
+  text-align: center;
 }
 
 .language {
@@ -102,12 +105,14 @@
   color: #61dafb;
 }
 
-.signUp > .fas.fa-user {
+.signUp > .fas.fa-user,
+.signUp > .fas.fa-user-plus {
   margin-right: auto;
   color: #61dafb;
 }
 
 .signUp > .fas.fa-user:hover,
+.signUp > .fas.fa-user-plus:hover,
 .language:hover {
   border-color: #61dafb;
   color: #00deb6;

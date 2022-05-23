@@ -5,30 +5,11 @@
   align-items: center;
   flex-grow: 1;
 
-  & .container-authentication {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 250px;
-    height: 70px;
-    margin-top: 50px;
-
-    & .login-link,
-    .registration-link {
-      display: flex;
-      align-items: center;
-      width: auto;
-      height: 30px;
-      text-decoration: none;
-      background-color: #262637;
-      color: #00deb6;
-    }
-  }
-
   & .container-login-form {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-top: 50px;
   }
 }
 

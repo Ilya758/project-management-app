@@ -23,6 +23,7 @@ import { taskDefault, TaskInfo, UserInfo } from '../../../common/common.types';
 import usersService from '../../../services/services.users';
 import tasksService from '../../../services/services.tasks';
 import filesService from '../../../services/services.files';
+import { useTranslation } from 'react-i18next';
 
 const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
   const [title, setTitle] = useState(column.title);
@@ -33,6 +34,7 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
   const [users, setUsers] = useState<UserInfo[]>([]);
   const [user, setUser] = useState<UserInfo | null>(null);
   const [task, setTask] = useState<TaskInfo>(taskDefault);
+  const { t } = useTranslation();
 
   const handleOpen = () => {
     setOpen(true);
@@ -231,16 +233,14 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Delete</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Delete without possibility of recovery?
-          </DialogContentText>
+          <DialogContentText id="alert-dialog-description">{t('modal.title')}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>{t('modal.cancel')}</Button>
           <Button onClick={handleDeleteColumn} autoFocus>
-            Yes
+            {t('modal.yes')}
           </Button>
         </DialogActions>
       </Dialog>
