@@ -1,0 +1,38 @@
+.board {
+  min-width: 200px;
+  border: 1px solid rgb(197, 197, 197);
+  border-radius: 10px;
+
+  position: relative;
+
+  box-shadow: 5px 5px 5px -5px rgba(34, 60, 80, 0.39);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__title {
+    font-size: 24px;
+    font-weight: 500;
+    padding: 8px 16px;
+
+    cursor: pointer;
+  }
+
+  &__commands {
+    display: flex;
+    gap: 8px;
+    padding-right: 8px;
+    opacity: 0;
+  }
+
+  &__header:hover &__commands {
+    opacity: 1;
+  }
+
+  &__btn {
+    cursor: pointer;
+  }
+}

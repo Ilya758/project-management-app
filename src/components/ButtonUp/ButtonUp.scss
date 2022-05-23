@@ -1,0 +1,36 @@
+.button-up {
+  background: #00deb6;
+  border: 3px solid #262637;
+  height: 50px;
+  width: 50px;
+  bottom: 10%;
+  right: 4%;
+  cursor: pointer;
+  position: fixed;
+  z-index: 2;
+  transition: 1s;
+  opacity: 0.8;
+  border-radius: 50%;
+
+  &:hover {
+    border-color: #00deb6;
+    background: #262637;
+    box-shadow: 0 0.5em 0.5em -0.4em #262637;
+  }
+
+  & > span {
+    background: url('../../assets/png/prew.png') no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    transform: rotate(90deg);
+  }
+}
+
+.flex {
+  display: flex;
+}
+
+.hide.hide {
+  display: none;
+}
