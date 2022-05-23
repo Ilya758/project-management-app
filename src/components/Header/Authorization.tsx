@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faPersonWalkingArrowRight, faUserPlus, faUser } from '@fortawesome/free-solid-svg-icons';
+import { faPersonWalkingArrowRight, faUser, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LANGUAGE } from '../../constants/utils';
