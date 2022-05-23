@@ -1,5 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import authService from '../../services/services.auth';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faUserXmark } from '@fortawesome/free-solid-svg-icons';
 import {
   Button,
   Dialog,
@@ -60,8 +62,8 @@ export const Menu = () => {
             <NavLink to="profile" className="link-profile">
               {t('edit_Profile.title')}
             </NavLink>
-            <button className="delete-user" onClick={handleClickOpen}>
-              {t('delete.title')}
+            <button className="delete-user" onClick={handleClickOpen} title={t('delete.title')}>
+              <FontAwesomeIcon icon={faUserXmark} />
             </button>
           </>
         )}

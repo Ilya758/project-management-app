@@ -2,6 +2,9 @@
   "language": {
     "en": "Eng"
   },
+  "button": {
+    "back": "Back"
+  },
   "login": {
     "title": "Login",
     "signin": "Sign In"
@@ -17,6 +20,7 @@
     "title": "Boards",
     "boards": "Boards",
     "new": "New column",
+    "new_boards": "New Boards",
     "create": "Create",
     "tit": "Title"
   },
@@ -36,5 +40,34 @@
     "yes": "Yes",
     "cancel": "Cancel",
     "tit": "Delete"
+  },
+  "primary_title": {
+    "tit": "your unlimited use cases",
+    "subheading": "Reliable Task Management for the Team",
+    "primary-title_span": "Unite",
+    "primary-title_meet": "Your Team",
+    "time": "TIME TO GET ORGANIZED",
+    "time_text": "Task management is the link between the planning of cases and their implementation. The task management software needed to provide an overview of the work in order to translate the idea into a result.",
+    "time_text_br": "Try ProjectManagement: Join the world as our teams use our teams to digitize workflows and get a clear overview of task progress. Let,s get organized together!",
+    "work": "PROJECTS, THAT WORK",
+    "work_text": "Whether you are managing your next big project or digitizing task management for your team is day-to-day work, you need to know who is doing what, when ProjectManagement</b> helps you manage tasks in a beautifully customizable environment that adapts perfectly to your needs.",
+    "work_distant": "DISTANT WORK",
+    "work_distant_text": "When your team is working from home, an efficient way to share information is essential to being productive. Use ProjectManagement to improve collaboration, manage tasks efficiently, and ensure projects run smoothly.",
+    "meet_team": "Meet Team",
+    "illia": "Illia Skaryna",
+    "illia_team": "Team lead, developer",
+    "illia_text1": "Basic project settings, application routing;",
+    "illia_text2": "Support for the correct operation of the application;",
+    "andrey": "Andrei Korozeev",
+    "andrey_team": "Developer",
+    "andrey_text1": "Authorization of the user;",
+    "andrey_text2": "Full development to create and manage application projects;",
+    "andrey_text3": "",
+    "andrey_text4": "",
+    "tatsiana": "Tatsiana Tuzava",
+    "tatsiana_team": "Developer",
+    "tatsiana_text1": "Main page of the application;",
+    "tatsiana_text2": "Project localization;",
+    "tatsiana_text3": "Registering and setting up a user profile;"
   }
 }

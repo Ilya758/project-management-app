@@ -15,12 +15,14 @@ import {
   TextField,
 } from '@mui/material';
 import Board from './Board/Board';
+import { useTranslation } from 'react-i18next';
 
 const MainPage = () => {
   const [boards, setBoards] = useState<BoardInfo[]>([]);
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
   const [title, setTitle] = useState('');
+  const { t } = useTranslation();
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -66,7 +68,7 @@ const MainPage = () => {
     <>
       <div className="mainPage">
         <div className="mainPage__header">
-          <div className="mainPage__title">Boards</div>
+          <div className="mainPage__title">{t('boards.title')}</div>
         </div>
         <div className="mainPage__container">
           {boards.map((board) => (
@@ -80,13 +82,13 @@ const MainPage = () => {
         </div>
       </div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>New board</DialogTitle>
+        <DialogTitle>{t('boards.new_boards')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label="Title"
+            label={t('boards.tit')}
             type="text"
             fullWidth
             variant="standard"
@@ -95,8 +97,8 @@ const MainPage = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleCreateBoard}>Create</Button>
+          <Button onClick={handleClose}>{t('modal.cancel')}</Button>
+          <Button onClick={handleCreateBoard}>{t('boards.create')}</Button>
         </DialogActions>
       </Dialog>
       {error && <Alert severity="error">{error}</Alert>}

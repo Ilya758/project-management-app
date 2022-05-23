@@ -18,6 +18,7 @@ import './BoardPage.scss';
 import AddIcon from '@mui/icons-material/Add';
 import columnsService from '../../services/services.columns';
 import { useTranslation } from 'react-i18next';
+import { ButtonBack } from '../ButtonBack/ButtonBack';
 
 const BoardPage = () => {
   const { boardId } = useParams();
@@ -93,6 +94,9 @@ const BoardPage = () => {
     <>
       {board && (
         <div className="boardPage">
+          <div>
+            <ButtonBack />
+          </div>
           <div className="boardPage__header">
             <div className="boardPage__title">{board.title}</div>
           </div>
