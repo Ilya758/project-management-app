@@ -1,5 +1,6 @@
 import { useState } from 'react';
-// import { FontAwesomeIcon, FontAwesomeIconProps } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPersonWalkingArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LANGUAGE } from '../../constants/utils';
@@ -49,7 +50,7 @@ export const Authorization = () => {
             title={t('sign_Out.title')}
             onClick={signOut}
           >
-            {/* <FontAwesomeIcon icon="fa-solid fa-person-walking-arrow-right" /> */}
+            <FontAwesomeIcon icon={faPersonWalkingArrowRight} />
           </NavLink>
         </>
       )}
