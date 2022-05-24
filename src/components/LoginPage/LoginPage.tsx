@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/services.auth';
 import Button from '@mui/material/Button';
 import { Alert, Avatar, Box, Container, TextField, Typography } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useTranslation } from 'react-i18next';
+import { Context } from '../../common/common.context';
 
 const LoginPage = () => {
   const { t } = useTranslation();
@@ -12,6 +13,7 @@ const LoginPage = () => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { setIsAuthorize } = useContext(Context);
 
   const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setLogin(e.currentTarget.value as string);
@@ -24,6 +26,7 @@ const LoginPage = () => {
     e.preventDefault();
     try {
       await authService.singin(login, password);
+      setIsAuthorize(true);
       navigate('/main');
     } catch (error) {
       setError((error as { message: string }).message);

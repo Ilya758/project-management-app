@@ -2,8 +2,20 @@ import { useState, useEffect } from 'react';
 import { PATH } from '../../constants/path';
 import axios from 'axios';
 import { IUser } from '../../models/users';
-import { IErrorMessage } from '../../services/services.auth';
-import { Alert, Box, Button, Container, TextField, Typography } from '@mui/material';
+import authService, { IErrorMessage } from '../../services/services.auth';
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+} from '@mui/material';
 import '../Authentication/Authentication.scss';
 import { useNavigate } from 'react-router-dom';
 import { editUser } from '../../requests/user';
@@ -17,6 +29,24 @@ export const EditProfile = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
+  const signOut = () => {
+    authService.singout();
+    navigate('/authentication/login');
+  };
+
+  const handleDeleteUser = (id: string) => {
+    axios.delete(PATH.DELETE_USER(id)).then(signOut).then(handleClose);
+  };
 
   useEffect(() => {
     editUser().then((user) => {
@@ -87,12 +117,34 @@ export const EditProfile = () => {
             value={password}
             onChange={handleOnChangePassword}
           />
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            {t('edit_Profile.save')}
-          </Button>
+          <Box sx={{ display: 'flex', gap: '10px' }}>
+            <button className="delete-user" onClick={handleClickOpen} title={t('delete.title')}>
+              {t('delete.title')}
+            </button>
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              {t('edit_Profile.save')}
+            </Button>
+          </Box>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>
       </Container>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">{t('modal.title')}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>{t('modal.cancel')}</Button>
+          <Button onClick={() => handleDeleteUser(user.id)} autoFocus>
+            {t('modal.yes')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
