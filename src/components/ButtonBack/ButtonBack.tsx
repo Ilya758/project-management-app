@@ -16,7 +16,6 @@ export const ButtonBack = () => {
       className="button_back"
     >
       {t('button.back')}
-      Back
     </Button>
   );
 };

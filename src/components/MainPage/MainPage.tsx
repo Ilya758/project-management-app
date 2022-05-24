@@ -1,7 +1,7 @@
 import './MainPage.scss';
 import AddIcon from '@mui/icons-material/Add';
 import React, { useEffect, useState } from 'react';
-import { BoardInfo } from '../../common/common.types';
+import { boardDefault, BoardInfo } from '../../common/common.types';
 import boardsService from '../../services/services.boards';
 import {
   Alert,
@@ -21,8 +21,8 @@ const MainPage = () => {
   const [boards, setBoards] = useState<BoardInfo[]>([]);
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
-  const [title, setTitle] = useState('');
   const { t } = useTranslation();
+  const [board, setBoard] = useState<BoardInfo>(boardDefault);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -49,9 +49,9 @@ const MainPage = () => {
 
   const handleCreateBoard = () => {
     boardsService
-      .createBoard(title)
+      .createBoard(board)
       .then(() => {
-        setTitle('');
+        setBoard(boardDefault);
         updateBoards();
         setOpen(false);
       })
@@ -61,7 +61,11 @@ const MainPage = () => {
   };
 
   const handleChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setTitle(e.currentTarget.value);
+    setBoard({ ...board, title: e.currentTarget.value });
+  };
+
+  const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setBoard({ ...board, description: e.currentTarget.value });
   };
 
   return (
@@ -92,8 +96,17 @@ const MainPage = () => {
             type="text"
             fullWidth
             variant="standard"
-            value={title}
+            value={board.title}
             onChange={handleChangeTitle}
+          />
+          <TextField
+            margin="dense"
+            label="Description"
+            type="text"
+            fullWidth
+            variant="standard"
+            value={board.description}
+            onChange={handleChangeDescription}
           />
         </DialogContent>
         <DialogActions>

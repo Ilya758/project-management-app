@@ -12,11 +12,11 @@ const getColumns = async (boardId: string) => {
   }
 };
 
-const createColumn = async (boardId: string, title: string, order: number) => {
+const createColumn = async (boardId: string, title: string) => {
   try {
     const resp = await axios.post(
       API_URL + `boards/${boardId}/columns`,
-      { title, order },
+      { title },
       authService.getConfig()
     );
     return resp.data;

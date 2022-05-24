@@ -13,9 +13,13 @@ const getBoards = async () => {
   }
 };
 
-const createBoard = async (title: string) => {
+const createBoard = async (board: BoardInfo) => {
   try {
-    const resp = await axios.post(API_URL + `boards`, { title: title }, authService.getConfig());
+    const resp = await axios.post(
+      API_URL + `boards`,
+      { title: board.title, description: board.description },
+      authService.getConfig()
+    );
     return resp.data;
   } catch (error) {
     throw new Error((error as IResponceError).response.data.message);
