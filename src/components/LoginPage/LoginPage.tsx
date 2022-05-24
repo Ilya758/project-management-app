@@ -67,13 +67,7 @@ const LoginPage = () => {
             value={password}
             onChange={handleOnChangePassword}
           />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-            disabled={!login.length || !password.length}
-          >
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             {t('login.signin')}
           </Button>
           {error && <Alert severity="error">{error}</Alert>}

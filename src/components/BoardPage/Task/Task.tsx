@@ -12,9 +12,11 @@ import './Task.scss';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import tasksService from '../../../services/services.tasks';
+import { useTranslation } from 'react-i18next';
 
 const Task = ({ task, boardId, columnId, editTask, updateBoard, showError }: TaskProps) => {
   const [openDelete, setOpenDelete] = useState(false);
+  const { t } = useTranslation();
 
   const handleClickOpen = () => {
     setOpenDelete(true);
@@ -60,16 +62,14 @@ const Task = ({ task, boardId, columnId, editTask, updateBoard, showError }: Tas
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Delete</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Delete without possibility of recovery?
-          </DialogContentText>
+          <DialogContentText id="alert-dialog-description">{t('modal.cancel')}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>{t('modal.cancel')}</Button>
           <Button onClick={handleDeleteTask} autoFocus>
-            Yes
+            {t('modal.yes')}
           </Button>
         </DialogActions>
       </Dialog>

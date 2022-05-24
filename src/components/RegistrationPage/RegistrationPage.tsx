@@ -1,21 +1,25 @@
 import { useState } from 'react';
 import authService from '../../services/services.auth';
-import { StyledLoginPage } from './RegistrationPage.styles';
+import Button from '@mui/material/Button';
+import { Alert, Avatar, Box, Container, TextField, Typography } from '@mui/material';
+import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import { useTranslation } from 'react-i18next';
 
 const RegistrationPage = () => {
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const { t } = useTranslation();
 
-  const handleOnChangeName = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChangeName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setName(e.currentTarget.value as string);
   };
 
-  const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setLogin(e.currentTarget.value as string);
   };
-  const handleOnChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+  const handleOnChangePassword = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPassword(e.currentTarget.value as string);
   };
 
@@ -29,51 +33,59 @@ const RegistrationPage = () => {
   };
 
   return (
-    <StyledLoginPage>
-      <div className="container">
-        <div className="title">Registration your account</div>
-        <form className="form" onSubmit={handerSubmit}>
-          <div className="form__row">
-            <div className="form__row-label">Name</div>
-            <div className="form__row-input">
-              <input
-                className="form__input"
-                type="text"
-                value={name}
-                onChange={handleOnChangeName}
-              />
-            </div>
-          </div>
-
-          <div className="form__row">
-            <div className="form__row-label">Login</div>
-            <div className="form__row-input">
-              <input
-                className="form__input"
-                type="text"
-                value={login}
-                onChange={handleOnChangeLogin}
-              />
-            </div>
-          </div>
-          <div className="form__row">
-            <div className="form__row-label">Password</div>
-            <div className="form__row-input">
-              <input
-                className="form__input"
-                type="password"
-                value={password}
-                onChange={handleOnChangePassword}
-              />
-            </div>
-          </div>
-          <div>{error}</div>
-          <div className="form__row form__row-fotter">
-            <input className="form__submit" type="submit" value="Registration" />
-          </div>
-        </form>
-      </div>
-    </StyledLoginPage>
+    <Container component="div" maxWidth="xs">
+      <Box
+        sx={{
+          marginTop: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          {t('registration.title')}
+        </Typography>
+        <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Name"
+            autoComplete="name"
+            autoFocus
+            value={name}
+            onChange={handleOnChangeName}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Login"
+            autoComplete="login"
+            autoFocus
+            value={login}
+            onChange={handleOnChangeLogin}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label="Password"
+            type="password"
+            autoComplete="password"
+            value={password}
+            onChange={handleOnChangePassword}
+          />
+          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+            {t('registration.signup')}
+          </Button>
+          {error && <Alert severity="error">{error}</Alert>}
+        </Box>
+      </Box>
+    </Container>
   );
 };
 
