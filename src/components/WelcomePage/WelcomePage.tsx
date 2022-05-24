@@ -1,4 +1,5 @@
 import './WelcomePage.scss';
+import { useTranslation } from 'react-i18next';
 import ImageOne from '../../assets/jpg/heroWelcome.jpg';
 import ImageTwo from '../../assets/svg/el1.svg';
 import ImageThree from '../../assets/svg/el2.svg';
@@ -7,17 +8,20 @@ import ImageFive from '../../assets/svg/el5.svg';
 import ImageSix from '../../assets/svg/el6.svg';
 
 export const WelcomePage = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="home-wrapper">
       <section className="about-wrapper">
         <div className="title-primary-page">Project Management</div>
-        <div className="title-primary-page">...your unlimited use cases</div>
+        <div className="title-primary-page second">...{t('primary_title.tit')}</div>
       </section>
       <section className="project-content">
         <div>
-          <h1 className="subheading">Reliable Task Management for the Team</h1>
+          <h1 className="subheading">{t('primary_title.subheading')}</h1>
           <span className="primary-title">
-            <span>Unite</span> Your Team
+            <span>{t('primary_title.primary-title_span')}</span>{' '}
+            {t('primary_title.primary-title_meet')}
           </span>
           <div className="container-images">
             <img className="imageOne" src={ImageOne} alt="image" />
@@ -29,52 +33,35 @@ export const WelcomePage = () => {
       <section className="project-info-content">
         <div className="project-info-content-card">
           <img className="imageFour" src={ImageFour} alt="image" />
-          <h3 className="card-info-title">TIME TO GET ORGANIZED</h3>
+          <h3 className="card-info-title">{t('primary_title.time')}</h3>
           <p>
-            &nbsp; Task management is the link between the planning of cases and their
-            implementation. The task management software needed to provide an overview of the work
-            in order to translate the idea into a result.
+            &nbsp; {t('primary_title.time_text')}
             <br />
-            &nbsp; Try <b>ProjectManagement:</b> Join the world as our teams use our teams to
-            digitize workflows and get a clear overview of task progress. Let,s get organized
-            together!
+            &nbsp; {t('primary_title.time_text_br')}
           </p>
         </div>
         <div className="project-info-content-card">
           <img className="imageFour" src={ImageFive} alt="image" />
-          <h3 className="card-info-title">PROJECTS, THAT WORK</h3>
-          <p>
-            &nbsp; Whether you are managing your next big project or digitizing task management for
-            your team is day-to-day work, you need to know who is doing what, when.{' '}
-            <b>ProjectManagement</b> helps you manage tasks in a beautifully customizable
-            environment that adapts perfectly to your needs.
-          </p>
+          <h3 className="card-info-title">{t('primary_title.work')}</h3>
+          <p>&nbsp; {t('primary_title.work_text')}</p>
         </div>
         <div className="project-info-content-card">
           <img className="imageFour" src={ImageSix} alt="image" />
-          <h3 className="card-info-title">DISTANT WORK</h3>
-          <p>
-            &nbsp; When your team is working from home, an efficient way to share information is
-            essential to being productive. Use <b>ProjectManagement</b> to improve collaboration,
-            manage tasks efficiently, and ensure projects run smoothly.
-          </p>
+          <h3 className="card-info-title">{t('primary_title.work_distant')}</h3>
+          <p>&nbsp; {t('primary_title.work_distant_text')}</p>
         </div>
       </section>
       <section className="developers-content">
-        <h2 className="subheading">Meet Team</h2>
+        <h2 className="subheading">{t('primary_title.meet_team')}</h2>
         <div className="developers-content-container">
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>Illia Skaryna</em> - Team lead, developer
+                <em>{t('primary_title.illia')}</em> - {t('primary_title.illia_team')}
               </h3>
               <div className="skills-developer">
-                <p className="skills-developer-text">
-                  - Basic project settings, application routing
-                </p>
-                <p className="skills-developer-text">
-                  - Support for the correct operation of the application
-                </p>
+                <p className="skills-developer-text">- {t('primary_title.illia_text1')}</p>
+                <p className="skills-developer-text">- {t('primary_title.illia_text2')}</p>
                 <p className="skills-developer-text" />
                 <p className="skills-developer-text" />
               </div>
@@ -84,29 +71,26 @@ export const WelcomePage = () => {
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>Andrei Korozeev </em> - developer
+                <em>{t('primary_title.andrey')} </em> - {t('primary_title.andrey.team')}
               </h3>
               <div className="skills-developer">
-                <p className="skills-developer-text">
-                  - Registration and authorization of the user
-                </p>
-                <p className="skills-developer-text" />
-                <p className="skills-developer-text" />
-                <p className="skills-developer-text" />
+                <p className="skills-developer-text">- {t('primary_title.andrey_text1')}</p>
+                <p className="skills-developer-text">- {t('primary_title.andrey_text2')}</p>
+                <p className="skills-developer-text">- {t('primary_title.andrey_text3')}</p>
+                <p className="skills-developer-text">- {t('primary_title.andrey_text4')}</p>
               </div>
-              <div className="image-developer developer2"></div>
             </div>
+            <div className="image-developer developer2"></div>
           </div>
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>Tatsiana Tuzava</em> - developer
+                <em>{t('primary_title.tatsiana')}</em> - {t('primary_title.tatsiana_team')}
               </h3>
               <div className="skills-developer">
-                <p className="skills-developer-text">- Main page of the applicationead</p>
-                <p className="skills-developer-text" />
-                <p className="skills-developer-text" />
-                <p className="skills-developer-text" />
+                <p className="skills-developer-text">- {t('primary_title.tatsiana_text1')}</p>
+                <p className="skills-developer-text">- {t('primary_title.tatsiana_text2')}</p>
+                <p className="skills-developer-text">- {t('primary_title.tatsiana_text3')}</p>
               </div>
             </div>
             <div className="image-developer developer3"></div>

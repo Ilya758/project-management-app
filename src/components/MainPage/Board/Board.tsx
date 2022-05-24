@@ -12,10 +12,12 @@ import {
   DialogTitle,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useTranslation } from 'react-i18next';
 import './Board.scss';
 
 const Board = ({ board, updateBoards }: BoardProps) => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [open, setOpen] = useState(false);
   const [error, setError] = useState('');
@@ -63,16 +65,14 @@ const Board = ({ board, updateBoards }: BoardProps) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">Delete</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('modal.cancel')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">
-            Delete without possibility of recovery?
-          </DialogContentText>
+          <DialogContentText id="alert-dialog-description">{t('modal.title')}</DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>{t('modal.cancel')}</Button>
           <Button onClick={handleDeleteColumn} autoFocus>
-            Yes
+            {t('modal.yes')}
           </Button>
         </DialogActions>
       </Dialog>

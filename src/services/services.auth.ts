@@ -2,6 +2,20 @@ import axios, { AxiosRequestConfig } from 'axios';
 import { API_URL } from '../common/common.constants';
 import { IResponceError } from './services.types';
 
+export interface IErrorMessage {
+  response: { data: { message: string } };
+}
+
+axios.interceptors.request.use((config) => {
+  const token = localStorage.getItem('token');
+  if (token) {
+    config.headers = {
+      Authorization: `Bearer ${token}`,
+    };
+  }
+  return config;
+});
+
 const singin = async (login: string, password: string) => {
   try {
     const resp = await axios.post(API_URL + 'signin', { login, password });
@@ -9,6 +23,7 @@ const singin = async (login: string, password: string) => {
 
     if (token) {
       localStorage.setItem('login', login);
+      localStorage.setItem('token', token);
       document.cookie = `token=${token}; max-age=3600`;
     }
     return token;

@@ -17,6 +17,8 @@ import { useParams } from 'react-router-dom';
 import './BoardPage.scss';
 import AddIcon from '@mui/icons-material/Add';
 import columnsService from '../../services/services.columns';
+import { useTranslation } from 'react-i18next';
+import { ButtonBack } from '../ButtonBack/ButtonBack';
 
 const BoardPage = () => {
   const { boardId } = useParams();
@@ -24,6 +26,7 @@ const BoardPage = () => {
   const [error, setError] = useState('');
   const [openCreateColumn, setOpenCreateColumn] = useState(false);
   const [titleColumn, setTitleColumn] = useState('');
+  const { t } = useTranslation();
 
   function updateBoard() {
     if (boardId) {
@@ -91,6 +94,9 @@ const BoardPage = () => {
     <>
       {board && (
         <div className="boardPage">
+          <div>
+            <ButtonBack />
+          </div>
           <div className="boardPage__header">
             <div className="boardPage__title">{board.title}</div>
           </div>
@@ -116,13 +122,13 @@ const BoardPage = () => {
       )}
       {error && <Alert severity="error">{error}</Alert>}
       <Dialog open={openCreateColumn} onClose={handleCreateColumnClose}>
-        <DialogTitle>New column</DialogTitle>
+        <DialogTitle>{t('boards.new')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label="Title"
+            label={t('boards.tit')}
             type="text"
             fullWidth
             variant="standard"
@@ -131,8 +137,8 @@ const BoardPage = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCreateColumnClose}>Cancel</Button>
-          <Button onClick={handleCreateColumn}>Create</Button>
+          <Button onClick={handleCreateColumnClose}>{t('modal.cancel')}</Button>
+          <Button onClick={handleCreateColumn}>{t('boards.create')}</Button>
         </DialogActions>
       </Dialog>
     </>
