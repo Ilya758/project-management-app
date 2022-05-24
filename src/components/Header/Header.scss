@@ -87,7 +87,6 @@
 }
 
 .signUp,
-.language,
 .login-link,
 .registration-link {
   border: 1px solid #00deb6;
@@ -100,9 +99,28 @@
   text-align: center;
 }
 
-.language {
+.language__container {
+  display: flex;
+}
+
+.language__btn {
   background: none;
   color: #61dafb;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.language__btn:hover,
+.language__btn[data-active="true"] {
+  color: #00deb6;
+}
+
+.language__btn[data-active="true"] {
+  font-weight: 700;
+}
+
+.language__btn:first-child {
+  border-right: 1px solid #00deb6;
 }
 
 .signUp > svg,
@@ -112,8 +130,7 @@
 }
 
 .signUp > svg:hover,
-.signUp > svg:hover,
-.language:hover {
+.signUp > svg:hover {
   border-color: #61dafb;
   color: #00deb6;
   box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);

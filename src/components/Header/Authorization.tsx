@@ -5,14 +5,14 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { LANGUAGE } from '../../constants/utils';
 import authService from '../../services/services.auth';
 import './Header.scss';
+import React from 'react';
 
 export const Authorization = () => {
   const { t, i18n } = useTranslation();
   const isAuthorize = authService.isAuthorize();
   const navigate = useNavigate();
 
-  const onLangChange = () => {
-    const nextLang = i18n.language == LANGUAGE.En ? LANGUAGE.Ru : LANGUAGE.En;
+  const onLangChange = (nextLang: string) => {
     i18n.changeLanguage(nextLang);
   };
 
@@ -44,9 +44,26 @@ export const Authorization = () => {
           <FontAwesomeIcon icon={faPersonWalkingArrowRight} />
         </NavLink>
       )}
-      <button className="language" onClick={onLangChange}>
-        {t('language.en')}
-      </button>
+      <div className="language__container">
+        <div
+          className="language__btn"
+          onClick={() => {
+            onLangChange(LANGUAGE.En);
+          }}
+          data-active={i18n.language == LANGUAGE.En}
+        >
+          {t('language.en')}
+        </div>
+        <div
+          className="language__btn"
+          data-active={i18n.language == LANGUAGE.Ru}
+          onClick={() => {
+            onLangChange(LANGUAGE.Ru);
+          }}
+        >
+          {t('language.ru')}
+        </div>
+      </div>
     </nav>
   );
 };

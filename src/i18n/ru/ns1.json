@@ -1,6 +1,7 @@
 {
   "language": {
-    "en": "Рус"
+    "en": "EN",
+    "ru": "RU"
   },
   "button": {
     "back": "Назад"
