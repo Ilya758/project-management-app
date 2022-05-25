@@ -17,18 +17,17 @@
 }
 
 .nav {
-  width: 120px;
-  height: 100%;
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 10px;
 }
 
-.container-nav-button {
+.user__container {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .nav-container {
@@ -59,9 +58,11 @@
   font-size: 16px;
 }
 
+.signUp:hover,
 .link-profile:hover {
   color: #00deb6;
 }
+
 .delete-user:hover {
   color: orangered;
 }
@@ -95,12 +96,20 @@
   cursor: pointer !important;
   transition: 0.5s;
   display: block;
-  width: 41px;
   text-align: center;
+  color: #61dafb;
+  text-decoration: none;
+}
+
+.nav__text {
+  color: inherit;
+  margin: 0 5px;
 }
 
 .language__container {
   display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
 }
 
 .language__btn {
@@ -126,12 +135,5 @@
 .signUp > svg,
 .signUp > svg {
   margin-right: auto;
-  color: #61dafb;
-}
-
-.signUp > svg:hover,
-.signUp > svg:hover {
-  border-color: #61dafb;
-  color: #00deb6;
-  box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
+  color: inherit;
 }

@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-import { PATH } from '../../constants/path';
-import axios from 'axios';
-import { IUser } from '../../models/users';
+import { useState, useEffect, useContext } from 'react';
 import authService, { IErrorMessage } from '../../services/services.auth';
 import {
   Alert,
@@ -16,19 +13,23 @@ import {
   DialogContentText,
   DialogTitle,
 } from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
 import '../Authentication/Authentication.scss';
 import { useNavigate } from 'react-router-dom';
-import { editUser } from '../../requests/user';
 import { useTranslation } from 'react-i18next';
+import { Context } from '../../common/common.context';
+import { userDefault, UserInfo } from '../../common/common.types';
+import usersService from '../../services/services.users';
 
 export const EditProfile = () => {
-  const [name, setName] = useState('');
-  const [login, setLogin] = useState('');
-  const [password, setPassword] = useState('');
-  const [user, setUser] = useState<IUser>({} as IUser);
-  const [error, setError] = useState('');
   const navigate = useNavigate();
   const { t } = useTranslation();
+
+  const { setIsAuthorize } = useContext(Context);
+
+  const [user, setUser] = useState<UserInfo>(userDefault);
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
@@ -39,31 +40,42 @@ export const EditProfile = () => {
     setOpen(false);
   };
 
-  const signOut = () => {
-    authService.singout();
-    navigate('/authentication/login');
-  };
-
-  const handleDeleteUser = (id: string) => {
-    axios.delete(PATH.DELETE_USER(id)).then(signOut).then(handleClose);
+  const handleDeleteUser = () => {
+    usersService
+      .deleteUser(user.id)
+      .then(() => {
+        authService.singout();
+        setIsAuthorize(false);
+        navigate('/');
+      })
+      .catch((error) => {
+        setError((error as IErrorMessage).response.data.message);
+      });
   };
 
   useEffect(() => {
-    editUser().then((user) => {
-      if (user) {
-        setUser(user);
-        setName(user.name);
-        setLogin(user.login);
-      }
-    });
+    setError('');
+    usersService
+      .getUsers()
+      .then((result) => {
+        const login = localStorage.getItem('login');
+        const users = result as UserInfo[];
+        const findUser = users.find((x) => x.login == login);
+        if (findUser) {
+          setUser(findUser);
+        }
+      })
+      .catch((error) => {
+        setError((error as IErrorMessage).response.data.message);
+      });
   }, []);
 
   const handleOnChangeName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setName(e.currentTarget.value as string);
+    setUser({ ...user, name: e.currentTarget.value as string });
   };
 
   const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setLogin(e.currentTarget.value as string);
+    setUser({ ...user, login: e.currentTarget.value as string });
   };
   const handleOnChangePassword = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPassword(e.currentTarget.value as string);
@@ -71,22 +83,22 @@ export const EditProfile = () => {
 
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await axios
-        .put(PATH.UPDATE_USER(user.id), { login, name, password })
-        .then(() => navigate('/main'));
-    } catch (error) {
-      setError((error as IErrorMessage).response.data.message);
-    }
+    setError('');
+    usersService
+      .updateUser(user, password)
+      .then(() => navigate('/main'))
+      .catch((error) => {
+        setError((error as IErrorMessage).response.data.message);
+      });
   };
 
   return (
     <div className="wrapper-component center">
       <Container component="div" maxWidth="xs">
         <Typography component="h3" variant="h5">
-          {t('edit_Profile.edit_profile')}
+          {t('edit_Profile.title')}
         </Typography>
-        <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handerSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
@@ -94,7 +106,7 @@ export const EditProfile = () => {
             label={t('edit_Profile.name')}
             autoComplete="name"
             autoFocus
-            value={name}
+            value={user.name}
             onChange={handleOnChangeName}
           />
           <TextField
@@ -104,7 +116,7 @@ export const EditProfile = () => {
             label={t('edit_Profile.login')}
             autoComplete="login"
             autoFocus
-            value={login}
+            value={user.login}
             onChange={handleOnChangeLogin}
           />
           <TextField
@@ -113,14 +125,21 @@ export const EditProfile = () => {
             fullWidth
             label={t('edit_Profile.password')}
             type="password"
-            autoComplete="Create Your Password"
+            autoComplete="password"
             value={password}
             onChange={handleOnChangePassword}
           />
           <Box sx={{ display: 'flex', gap: '10px' }}>
-            <button className="delete-user" onClick={handleClickOpen} title={t('delete.title')}>
-              {t('delete.title')}
-            </button>
+            <Button
+              className="delete-user"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleClickOpen}
+              title={t('delete.title')}
+            >
+              <DeleteIcon />
+              <span style={{ margin: '0 8px' }}>{t('delete.title')}</span>
+            </Button>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
               {t('edit_Profile.save')}
             </Button>
@@ -140,7 +159,7 @@ export const EditProfile = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('modal.cancel')}</Button>
-          <Button onClick={() => handleDeleteUser(user.id)} autoFocus>
+          <Button onClick={handleDeleteUser} autoFocus>
             {t('modal.yes')}
           </Button>
         </DialogActions>

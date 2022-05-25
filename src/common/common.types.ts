@@ -33,6 +33,12 @@ export type UserInfo = {
   login: string;
 };
 
+export const userDefault = {
+  id: '',
+  name: '',
+  login: '',
+};
+
 export const taskDefault: TaskInfo = {
   id: '',
   title: '',

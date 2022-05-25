@@ -24,45 +24,13 @@ export const Authorization = () => {
 
   const signOut = () => {
     authService.singout();
-    setIsAuthorize(authService.isAuthorize());
-    navigate('/authentication/login');
+    setIsAuthorize(false);
+    navigate('/');
   };
 
   return (
     <>
       <nav className="nav">
-        {!isAuthorize ? (
-          <>
-            <NavLink to="authentication/login" className="signUp" title={t('login.signin')}>
-              <FontAwesomeIcon icon={faUser} />
-              <span>{t('login.signin')}</span>
-            </NavLink>
-            <NavLink
-              to="authentication/registration"
-              className="signUp"
-              title={t('registration.signup')}
-            >
-              <FontAwesomeIcon icon={faUserPlus} />
-              <span>{t('registration.signup')}</span>
-            </NavLink>
-          </>
-        ) : (
-          <>
-            <NavLink to="profile" className="link-profile" title={t('edit_Profile.title')}>
-              <FontAwesomeIcon icon={faUserEdit} />
-              <span>{t('edit_Profile.title')}</span>
-            </NavLink>
-            <NavLink
-              to="authentication/login"
-              className="signUp"
-              title={t('sign_Out.title')}
-              onClick={signOut}
-            >
-              <FontAwesomeIcon icon={faPersonWalkingArrowRight} />
-              <span>{t('sign_Out.title')}</span>
-            </NavLink>
-          </>
-        )}
         <div className="language__container">
           <div
             className="language__btn"
@@ -82,6 +50,40 @@ export const Authorization = () => {
           >
             {t('language.ru')}
           </div>
+        </div>
+        <div className="user__container">
+          {!isAuthorize ? (
+            <>
+              <NavLink to="authentication/login" className="signUp" title={t('login.signin')}>
+                <FontAwesomeIcon icon={faUser} />
+                <span className="nav__text">{t('login.signin')}</span>
+              </NavLink>
+              <NavLink
+                to="authentication/registration"
+                className="signUp"
+                title={t('registration.title')}
+              >
+                <FontAwesomeIcon icon={faUserPlus} />
+                <span className="nav__text">{t('registration.title')}</span>
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink to="profile" className="signUp" title={t('edit_Profile.title')}>
+                <FontAwesomeIcon icon={faUserEdit} />
+                <span className="nav__text">{t('edit_Profile.title')}</span>
+              </NavLink>
+              <NavLink
+                to="authentication/login"
+                className="signUp"
+                title={t('sign_Out.title')}
+                onClick={signOut}
+              >
+                <FontAwesomeIcon icon={faPersonWalkingArrowRight} />
+                <span className="nav__text">{t('sign_Out.title')}</span>
+              </NavLink>
+            </>
+          )}
         </div>
       </nav>
     </>
