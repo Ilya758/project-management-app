@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import authService from '../../services/services.auth';
 import Button from '@mui/material/Button';
 import { Alert, Avatar, Box, Container, TextField, Typography } from '@mui/material';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { Context } from '../../common/common.context';
 
 const RegistrationPage = () => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
   const [name, setName] = useState('');
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-  const { t } = useTranslation();
+  const { setIsAuthorize } = useContext(Context);
 
   const handleOnChangeName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setName(e.currentTarget.value as string);
@@ -25,8 +29,12 @@ const RegistrationPage = () => {
 
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setError('');
     try {
       await authService.singup(name, login, password);
+      await authService.singin(login, password);
+      setIsAuthorize(true);
+      navigate('/main');
     } catch (error) {
       setError((error as { message: string }).message);
     }
@@ -43,7 +51,7 @@ const RegistrationPage = () => {
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-          <LockOutlinedIcon />
+          <PersonAddIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
           {t('registration.title')}

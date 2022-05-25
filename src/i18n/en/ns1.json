@@ -1,6 +1,7 @@
 {
   "language": {
-    "en": "Eng"
+    "en": "EN",
+    "ru": "RU"
   },
   "button": {
     "back": "Back"
@@ -10,7 +11,7 @@
     "signin": "Sign In"
   },
   "registration": {
-    "title": "Registration your account",
+    "title": "Registration",
     "signup": "Sign Up"
   },
   "sign_Out": {
@@ -25,15 +26,14 @@
     "tit": "Title"
   },
   "edit_Profile": {
-    "title": "Edit Profile",
-    "edit_profile": "Edit Profile",
-    "name": "Create Your Name",
-    "login": "Create Your Login",
-    "password": "Create Your Password",
+    "title": "Profile",
+    "name": "Name",
+    "login": "Login",
+    "password": "Password",
     "save": "Save"
   },
   "delete": {
-    "title": "Delete User"
+    "title": "Delete"
   },
   "modal": {
     "title": "Delete without possibility of recovery?",

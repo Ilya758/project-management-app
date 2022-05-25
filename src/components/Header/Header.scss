@@ -17,18 +17,17 @@
 }
 
 .nav {
-  width: 120px;
-  height: 100%;
   display: flex;
-  flex-wrap: wrap-reverse;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-evenly;
+  gap: 10px;
 }
 
-.container-nav-button {
+.user__container {
   width: 100%;
   display: flex;
   justify-content: space-between;
+  gap: 10px;
 }
 
 .nav-container {
@@ -59,9 +58,11 @@
   font-size: 16px;
 }
 
+.signUp:hover,
 .link-profile:hover {
   color: #00deb6;
 }
+
 .delete-user:hover {
   color: orangered;
 }
@@ -87,7 +88,6 @@
 }
 
 .signUp,
-.language,
 .login-link,
 .registration-link {
   border: 1px solid #00deb6;
@@ -96,25 +96,44 @@
   cursor: pointer !important;
   transition: 0.5s;
   display: block;
-  width: 41px;
   text-align: center;
+  color: #61dafb;
+  text-decoration: none;
 }
 
-.language {
+.nav__text {
+  color: inherit;
+  margin: 0 5px;
+}
+
+.language__container {
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+}
+
+.language__btn {
   background: none;
   color: #61dafb;
+  cursor: pointer;
+  padding: 0 10px;
+}
+
+.language__btn:hover,
+.language__btn[data-active='true'] {
+  color: #00deb6;
+}
+
+.language__btn[data-active='true'] {
+  font-weight: 700;
+}
+
+.language__btn:first-child {
+  border-right: 1px solid #00deb6;
 }
 
 .signUp > svg,
 .signUp > svg {
   margin-right: auto;
-  color: #61dafb;
-}
-
-.signUp > svg:hover,
-.signUp > svg:hover,
-.language:hover {
-  border-color: #61dafb;
-  color: #00deb6;
-  box-shadow: 4px 4px 8px 0 rgba(2, 189, 214, 0.56);
+  color: inherit;
 }
