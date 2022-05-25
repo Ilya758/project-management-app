@@ -22,7 +22,9 @@
     "new": "New column",
     "new_boards": "New Boards",
     "create": "Create",
-    "tit": "Title"
+    "tit": "Title",
+    "description": "Description",
+    "upload": "Upload File"
   },
   "edit_Profile": {
     "title": "Edit Profile",
@@ -30,7 +32,8 @@
     "name": "Create Your Name",
     "login": "Create Your Login",
     "password": "Create Your Password",
-    "save": "Save"
+    "save": "Save",
+    "user": "User"
   },
   "delete": {
     "title": "Delete User"
@@ -50,7 +53,7 @@
     "time_text": "Task management is the link between the planning of cases and their implementation. The task management software needed to provide an overview of the work in order to translate the idea into a result.",
     "time_text_br": "Try ProjectManagement: Join the world as our teams use our teams to digitize workflows and get a clear overview of task progress. Let,s get organized together!",
     "work": "PROJECTS, THAT WORK",
-    "work_text": "Whether you are managing your next big project or digitizing task management for your team is day-to-day work, you need to know who is doing what, when ProjectManagement</b> helps you manage tasks in a beautifully customizable environment that adapts perfectly to your needs.",
+    "work_text": "Whether you are managing your next big project or digitizing task management for your team is day-to-day work, you need to know who is doing what, when ProjectManagement helps you manage tasks in a beautifully customizable environment that adapts perfectly to your needs.",
     "work_distant": "DISTANT WORK",
     "work_distant_text": "When your team is working from home, an efficient way to share information is essential to being productive. Use ProjectManagement to improve collaboration, manage tasks efficiently, and ensure projects run smoothly.",
     "meet_team": "Meet Team",

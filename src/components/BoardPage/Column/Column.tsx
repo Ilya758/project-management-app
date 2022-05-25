@@ -245,14 +245,14 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
         </DialogActions>
       </Dialog>
       <Dialog open={openEdit} onClose={handleTaskEditClose}>
-        <DialogTitle>{task.id ? `${task.title}` : 'New task'}</DialogTitle>
+        <DialogTitle>{task.id ? `${task.title}` : `${t('boards.new_boards')}`}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <Box sx={{ display: 'flex', flexDirection: 'column', m: 2 }}>
             <TextField
               margin="normal"
               required
-              label="Title"
+              label={t('boards.tit')}
               autoFocus
               value={task.title}
               onChange={(e) => {
@@ -262,7 +262,7 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
             <TextField
               margin="normal"
               required
-              label="Description"
+              label={t('boards.description')}
               value={task.description}
               onChange={(e) => {
                 setTask({ ...task, description: e.currentTarget.value });
@@ -274,7 +274,7 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
               value={user}
               onChange={handleChangeUser}
               renderInput={(params) => (
-                <TextField {...params} margin="normal" required label="User" />
+                <TextField {...params} margin="normal" required label={t('edit_Profile.user')} />
               )}
             />
             {task.id && (
@@ -291,7 +291,7 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
               />
             )}
             <Button variant="contained" component="label" sx={{ mt: 2 }}>
-              Upload File
+              {t('boards.upload')}
               <input
                 type="file"
                 hidden
@@ -327,8 +327,8 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
           </Box>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleTaskEditClose}>Cancel</Button>
-          <Button onClick={handleTaskEdit}>{task.id ? 'Save' : 'Create'}</Button>
+          <Button onClick={handleTaskEditClose}>{t('modal.cancel')}</Button>
+          <Button onClick={handleTaskEdit}>{task.id ? 'Save' : `${t('edit_Profile.save')}`}</Button>
         </DialogActions>
       </Dialog>
     </>

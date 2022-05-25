@@ -1,4 +1,4 @@
-export const API_URL = 'https://powerful-inlet-80553.herokuapp.com/';
+import { API_URL } from '../common/common.constants';
 
 export const PATH = {
   USERS: `${API_URL}users`,

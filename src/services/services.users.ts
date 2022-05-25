@@ -12,8 +12,18 @@ const getUsers = async () => {
   }
 };
 
+const createUsers = async (id: string) => {
+  try {
+    const resp = await axios.get(API_URL + `users${id}`, authService.getConfig());
+    return resp.data;
+  } catch (error) {
+    throw new Error((error as IResponceError).response.data.message);
+  }
+};
+
 const usersService = {
   getUsers,
+  createUsers,
 };
 
 export default usersService;

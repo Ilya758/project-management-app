@@ -10,7 +10,8 @@ export const ButtonBack = () => {
   return (
     <Button
       type="button"
-      variant="text"
+      variant="outlined"
+      color="success"
       sx={{ mt: 3, mb: 2 }}
       onClick={() => navigate(-1)}
       className="button_back"

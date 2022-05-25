@@ -4,6 +4,8 @@
   flex-direction: column;
   align-items: center;
   flex-grow: 1;
+  background: url("../../assets/jpg/Abstract_Grid.jpg") no-repeat center;
+  background-size: cover;
 
   & .container-login-form {
     width: 100%;
