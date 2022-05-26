@@ -4,6 +4,7 @@ import {
   faUser,
   faUserPlus,
   faUserEdit,
+  faHome,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useNavigate } from 'react-router-dom';
@@ -69,6 +70,10 @@ export const Authorization = () => {
             </>
           ) : (
             <>
+              <NavLink to="main" className="signUp" title={t('header.linkToMain')}>
+                <FontAwesomeIcon icon={faHome} />
+                <span className="nav__text">{t('header.linkToMain')}</span>
+              </NavLink>
               <NavLink to="profile" className="signUp" title={t('edit_Profile.title')}>
                 <FontAwesomeIcon icon={faUserEdit} />
                 <span className="nav__text">{t('edit_Profile.title')}</span>
