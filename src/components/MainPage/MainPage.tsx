@@ -91,7 +91,6 @@ const MainPage = () => {
           <Card sx={{ height: 'min-content' }}>
             <div className="mainPage__add" onClick={handleClickOpen}>
               <AddIcon color="success" />
-              <div>{t('modal.create.title')}</div>
             </div>
           </Card>
         </div>
