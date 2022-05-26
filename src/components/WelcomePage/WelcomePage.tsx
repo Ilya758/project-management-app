@@ -57,7 +57,9 @@ export const WelcomePage = () => {
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>{t('primary_title.illia')}</em> - {t('primary_title.illia_team')}
+                <em>{t('primary_title.illia')}</em>
+                <br />
+                {t('primary_title.illia_team')}
               </h3>
               <div className="skills-developer">
                 <p className="skills-developer-text">- {t('primary_title.illia_text1')}</p>
@@ -88,7 +90,9 @@ export const WelcomePage = () => {
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>{t('primary_title.tatsiana')}</em> - {t('primary_title.tatsiana_team')}
+                <em>{t('primary_title.tatsiana')}</em>
+                <br />
+                {t('primary_title.tatsiana_team')}
               </h3>
               <div className="skills-developer">
                 <p className="skills-developer-text">- {t('primary_title.tatsiana_text1')}</p>

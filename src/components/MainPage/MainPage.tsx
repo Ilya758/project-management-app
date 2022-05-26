@@ -16,6 +16,7 @@ import {
 } from '@mui/material';
 import Board from './Board/Board';
 import { useTranslation } from 'react-i18next';
+import { Spinner } from '../Spinner/Spinner';
 
 const MainPage = () => {
   const [boards, setBoards] = useState<BoardInfo[]>([]);
@@ -23,6 +24,7 @@ const MainPage = () => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
   const [board, setBoard] = useState<BoardInfo>(boardDefault);
+  const [isFetching, setIsFetching] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -33,6 +35,7 @@ const MainPage = () => {
   };
 
   const updateBoards = () => {
+    setIsFetching(true);
     boardsService
       .getBoards()
       .then((result) => {
@@ -40,7 +43,8 @@ const MainPage = () => {
       })
       .catch((error) => {
         setError((error as { message: string }).message);
-      });
+      })
+      .finally(() => setIsFetching(false));
   };
 
   useEffect(() => {
@@ -71,6 +75,7 @@ const MainPage = () => {
   return (
     <>
       <div className="mainPage">
+        {isFetching && <Spinner />}
         <div className="mainPage__header">
           <div className="mainPage__title">{t('boards.caption')}</div>
         </div>
