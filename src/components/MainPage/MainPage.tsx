@@ -77,11 +77,16 @@ const MainPage = () => {
       <div className="mainPage">
         {isFetching && <Spinner />}
         <div className="mainPage__header">
-          <div className="mainPage__title">{t('boards.title')}</div>
+          <div className="mainPage__title">{t('boards.caption')}</div>
         </div>
         <div className="mainPage__container">
           {boards.map((board) => (
-            <Board key={board.id} board={board} updateBoards={updateBoards}></Board>
+            <Board
+              key={board.id}
+              board={board}
+              updateBoards={updateBoards}
+              setError={setError}
+            ></Board>
           ))}
           <Card sx={{ height: 'min-content' }}>
             <div className="mainPage__add" onClick={handleClickOpen}>
@@ -91,13 +96,13 @@ const MainPage = () => {
         </div>
       </div>
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle>{t('boards.new_boards')}</DialogTitle>
+        <DialogTitle>{t('modal.create.title')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label={t('boards.tit')}
+            label={t('board.title')}
             type="text"
             fullWidth
             variant="standard"
@@ -106,7 +111,7 @@ const MainPage = () => {
           />
           <TextField
             margin="dense"
-            label={t('boards.description')}
+            label={t('board.description')}
             type="text"
             fullWidth
             variant="standard"
@@ -116,7 +121,7 @@ const MainPage = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('modal.cancel')}</Button>
-          <Button onClick={handleCreateBoard}>{t('boards.create')}</Button>
+          <Button onClick={handleCreateBoard}>{t('modal.create.yes')}</Button>
         </DialogActions>
       </Dialog>
       {error && <Alert severity="error">{error}</Alert>}

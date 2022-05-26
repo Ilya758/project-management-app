@@ -191,10 +191,10 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
             )}
             {isEditing && (
               <>
-                <div onClick={handleClickTitleDone}>
+                <div className="column__btn" onClick={handleClickTitleDone}>
                   <DoneIcon color="action" fontSize="small" />
                 </div>
-                <div onClick={handleClickTitleCancel}>
+                <div className="column__btn" onClick={handleClickTitleCancel}>
                   <CancelIcon color="action" fontSize="small" />
                 </div>
               </>
@@ -233,9 +233,11 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('modal.delete.title')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">{t('modal.title')}</DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            {t('modal.delete.description')}
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('modal.cancel')}</Button>
@@ -245,14 +247,14 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
         </DialogActions>
       </Dialog>
       <Dialog open={openEdit} onClose={handleTaskEditClose}>
-        <DialogTitle>{task.id ? `${task.title}` : `${t('boards.new_boards')}`}</DialogTitle>
+        <DialogTitle>{t('modal.create.title')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <Box sx={{ display: 'flex', flexDirection: 'column', m: 2 }}>
             <TextField
               margin="normal"
               required
-              label={t('boards.tit')}
+              label={t('task.title')}
               autoFocus
               value={task.title}
               onChange={(e) => {
@@ -262,7 +264,7 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
             <TextField
               margin="normal"
               required
-              label={t('boards.description')}
+              label={t('task.description')}
               value={task.description}
               onChange={(e) => {
                 setTask({ ...task, description: e.currentTarget.value });
@@ -274,41 +276,43 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
               value={user}
               onChange={handleChangeUser}
               renderInput={(params) => (
-                <TextField {...params} margin="normal" required label={t('edit_Profile.user')} />
+                <TextField {...params} margin="normal" required label={t('task.user')} />
               )}
             />
             {task.id && (
-              <TextField
-                margin="normal"
-                label="Order"
-                value={task.order}
-                onChange={(e) => {
-                  const order = Number.parseInt(e.currentTarget.value);
-                  if (!Number.isNaN(order)) {
-                    setTask({ ...task, order });
-                  }
-                }}
-              />
+              <>
+                <TextField
+                  margin="normal"
+                  label={t('task.order')}
+                  value={task.order}
+                  onChange={(e) => {
+                    const order = Number.parseInt(e.currentTarget.value);
+                    if (!Number.isNaN(order)) {
+                      setTask({ ...task, order });
+                    }
+                  }}
+                />
+                <Button variant="contained" component="label" sx={{ mt: 2 }}>
+                  {t('task.upload')}
+                  <input
+                    type="file"
+                    hidden
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      if (e.currentTarget.files) {
+                        filesService
+                          .upload(task, e.currentTarget.files)
+                          .then(() => {
+                            getTask(task);
+                          })
+                          .catch((error) => {
+                            showError((error as { message: string }).message);
+                          });
+                      }
+                    }}
+                  />
+                </Button>
+              </>
             )}
-            <Button variant="contained" component="label" sx={{ mt: 2 }}>
-              {t('boards.upload')}
-              <input
-                type="file"
-                hidden
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                  if (e.currentTarget.files) {
-                    filesService
-                      .upload(task, e.currentTarget.files)
-                      .then(() => {
-                        getTask(task);
-                      })
-                      .catch((error) => {
-                        showError((error as { message: string }).message);
-                      });
-                  }
-                }}
-              />
-            </Button>
             {task.files.length > 0 && (
               <Box sx={{ display: 'flex', flexDirection: 'column', m: 2 }}>
                 {task.files.map((file, index) => (
@@ -328,7 +332,9 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleTaskEditClose}>{t('modal.cancel')}</Button>
-          <Button onClick={handleTaskEdit}>{task.id ? 'Save' : `${t('edit_Profile.save')}`}</Button>
+          <Button onClick={handleTaskEdit}>
+            {task.id ? t('modal.edit.yes') : t('modal.create.yes')}
+          </Button>
         </DialogActions>
       </Dialog>
     </>
