@@ -23,9 +23,9 @@
     "title": "Заголовок",
     "order": "Порядок"
   },
-  "boards": { 
+  "boards": {
     "caption": "Проекты"
-  }, 
+  },
   "task": {
     "caption": "Задача",
     "title": "Заголовок",

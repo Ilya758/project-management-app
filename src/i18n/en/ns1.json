@@ -24,10 +24,10 @@
     "title": "Title",
     "order": "Order"
   },
-  "boards": { 
+  "boards": {
     "caption": "Boards",
-    "add" : "Add"
-  }, 
+    "add": "Add"
+  },
   "task": {
     "caption": "Task",
     "title": "Title",
