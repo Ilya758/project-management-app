@@ -26,7 +26,7 @@ const ModalDialog = ({ open, handleClose, title, description, handleOk }: Dialog
       <DialogActions>
         <Button onClick={handleClose}>{t('modal.cancel')}</Button>
         <Button onClick={handleOk} autoFocus>
-          Yes
+          {t('modal.yes')}
         </Button>
       </DialogActions>
     </Dialog>

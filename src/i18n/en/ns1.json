@@ -32,7 +32,8 @@
     "name": "Name",
     "login": "Login",
     "password": "Password",
-    "save": "Save"
+    "save": "Save",
+    "user": "User"
   },
   "delete": {
     "title": "Delete"
