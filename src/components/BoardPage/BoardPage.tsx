@@ -19,6 +19,7 @@ import AddIcon from '@mui/icons-material/Add';
 import columnsService from '../../services/services.columns';
 import { useTranslation } from 'react-i18next';
 import { ButtonBack } from '../ButtonBack/ButtonBack';
+import { Spinner } from '../Spinner/Spinner';
 
 const BoardPage = () => {
   const { boardId } = useParams();
@@ -26,9 +27,11 @@ const BoardPage = () => {
   const [error, setError] = useState('');
   const [openCreateColumn, setOpenCreateColumn] = useState(false);
   const [titleColumn, setTitleColumn] = useState('');
+  const [isFetching, setIsFetching] = useState(false);
   const { t } = useTranslation();
 
   function updateBoard() {
+    setIsFetching(true);
     if (boardId) {
       boardsService
         .getBoard(boardId)
@@ -38,7 +41,8 @@ const BoardPage = () => {
         })
         .catch((error) => {
           setError((error as { message: string }).message);
-        });
+        })
+        .finally(() => setIsFetching(false));
     } else {
       setError('Id is required.');
     }
@@ -94,7 +98,8 @@ const BoardPage = () => {
     <>
       {board && (
         <div className="boardPage">
-          <div>
+          {isFetching && <Spinner />}
+          <div className="button-back">
             <ButtonBack />
           </div>
           <div className="boardPage__header">

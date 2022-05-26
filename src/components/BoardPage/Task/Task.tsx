@@ -64,7 +64,7 @@ const Task = ({ task, boardId, columnId, editTask, updateBoard, showError }: Tas
       >
         <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">{t('modal.cancel')}</DialogContentText>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('modal.cancel')}</Button>
