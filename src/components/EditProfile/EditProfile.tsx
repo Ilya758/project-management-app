@@ -94,7 +94,11 @@ export const EditProfile = () => {
 
   return (
     <div className="wrapper-component center">
-      <Container component="div" maxWidth="xs">
+      <Container
+        component="div"
+        maxWidth="xs"
+        sx={{ bgcolor: 'rgb(250, 250, 250)', borderRadius: '5px', pt: 2 }}
+      >
         <Typography component="h3" variant="h5">
           {t('user.caption')}
         </Typography>

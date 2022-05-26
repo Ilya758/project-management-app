@@ -41,6 +41,9 @@ const LoginPage = () => {
           display: 'flex',
           flexDirection: 'column',
           alignItems: 'center',
+          bgcolor: 'rgb(250, 250, 250)',
+          borderRadius: '5px',
+          p: 2,
         }}
       >
         <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
@@ -49,7 +52,7 @@ const LoginPage = () => {
         <Typography component="h1" variant="h5">
           {t('header.signin')}
         </Typography>
-        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handleSubmit} noValidate sx={{ m: 1 }}>
           <TextField
             margin="normal"
             required
