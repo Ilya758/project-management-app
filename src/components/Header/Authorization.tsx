@@ -55,17 +55,17 @@ export const Authorization = () => {
         <div className="user__container">
           {!isAuthorize ? (
             <>
-              <NavLink to="authentication/login" className="signUp" title={t('login.signin')}>
+              <NavLink to="authentication/login" className="signUp" title={t('header.signin')}>
                 <FontAwesomeIcon icon={faUser} />
-                <span className="nav__text">{t('login.signin')}</span>
+                <span className="nav__text">{t('header.signin')}</span>
               </NavLink>
               <NavLink
                 to="authentication/registration"
                 className="signUp"
-                title={t('registration.title')}
+                title={t('header.signup')}
               >
                 <FontAwesomeIcon icon={faUserPlus} />
-                <span className="nav__text">{t('registration.title')}</span>
+                <span className="nav__text">{t('header.signup')}</span>
               </NavLink>
             </>
           ) : (
@@ -74,18 +74,18 @@ export const Authorization = () => {
                 <FontAwesomeIcon icon={faHome} />
                 <span className="nav__text">{t('header.linkToMain')}</span>
               </NavLink>
-              <NavLink to="profile" className="signUp" title={t('edit_Profile.title')}>
+              <NavLink to="profile" className="signUp" title={t('header.profile')}>
                 <FontAwesomeIcon icon={faUserEdit} />
-                <span className="nav__text">{t('edit_Profile.title')}</span>
+                <span className="nav__text">{t('header.profile')}</span>
               </NavLink>
               <NavLink
                 to="authentication/login"
                 className="signUp"
-                title={t('sign_Out.title')}
+                title={t('header.signout')}
                 onClick={signOut}
               >
                 <FontAwesomeIcon icon={faPersonWalkingArrowRight} />
-                <span className="nav__text">{t('sign_Out.title')}</span>
+                <span className="nav__text">{t('header.signout')}</span>
               </NavLink>
             </>
           )}

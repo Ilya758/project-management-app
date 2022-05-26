@@ -122,13 +122,13 @@ const BoardPage = () => {
       )}
       {error && <Alert severity="error">{error}</Alert>}
       <Dialog open={openCreateColumn} onClose={handleCreateColumnClose}>
-        <DialogTitle>{t('boards.new')}</DialogTitle>
+        <DialogTitle>{t('modal.create.title')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label={t('boards.tit')}
+            label={t('column.title')}
             type="text"
             fullWidth
             variant="standard"
@@ -138,7 +138,7 @@ const BoardPage = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCreateColumnClose}>{t('modal.cancel')}</Button>
-          <Button onClick={handleCreateColumn}>{t('boards.create')}</Button>
+          <Button onClick={handleCreateColumn}>{t('modal.create.yes')}</Button>
         </DialogActions>
       </Dialog>
     </>

@@ -3,46 +3,62 @@
     "en": "EN",
     "ru": "RU"
   },
+  "header": {
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "signout": "Sign Out",
+    "profile": "Profile",
+    "linkToMain": "Go to Main Page"
+  },
   "button": {
     "back": "Back"
   },
-  "login": {
-    "title": "Login",
-    "signin": "Sign In"
+  "board": {
+    "caption": "Board",
+    "title": "Title",
+    "description": "Description",
+    "back": "Back"
   },
-  "registration": {
-    "title": "Registration",
-    "signup": "Sign Up"
+  "column": {
+    "caption": "Column",
+    "title": "Title",
+    "order": "Order"
   },
-  "header": {
-    "linkToMain": "Go to Main Page"
+  "boards": { 
+    "caption": "Boards",
+    "add" : "Add"
+  }, 
+  "task": {
+    "caption": "Task",
+    "title": "Title",
+    "description": "Description",
+    "order": "Order",
+    "user": "User",
+    "upload": "Upload file"
   },
-  "sign_Out": {
-    "title": "Sign Out"
-  },
-  "boards": {
-    "title": "Boards",
-    "boards": "Boards",
-    "new": "New column",
-    "new_boards": "New Boards",
-    "create": "Create",
-    "tit": "Title"
-  },
-  "edit_Profile": {
-    "title": "Profile",
+  "user": {
+    "caption": "Edit profile",
     "name": "Name",
     "login": "Login",
-    "password": "Password",
-    "save": "Save"
-  },
-  "delete": {
-    "title": "Delete"
+    "password": "Password"
   },
   "modal": {
-    "title": "Delete without possibility of recovery?",
     "yes": "Yes",
     "cancel": "Cancel",
-    "tit": "Delete"
+    "delete": {
+      "title": "Delete",
+      "description": "Delete without possibility of recovery?"
+    },
+    "create": {
+      "title": "Create",
+      "description": "Create new item?",
+      "yes": "Create"
+    },
+    "edit": {
+      "title": "Edit",
+      "description": "Edit item?",
+      "yes": "Save"
+    }
   },
   "primary_title": {
     "tit": "your unlimited use cases",
@@ -63,10 +79,13 @@
     "illia_text2": "Support for the correct operation of the application;",
     "andrey": "Andrei Korozeev",
     "andrey_team": "Developer",
-    "andrey_text1": "Authorization of the user;",
-    "andrey_text2": "Full development to create and manage application projects;",
-    "andrey_text3": "",
-    "andrey_text4": "",
+    "andrey_text1": "Authorization, authentication and control of user's JWT token;",
+    "andrey_text2": "CRUID operations and functional logic for working with boards;",
+    "andrey_text3": "CRUID operations and functional logic for working with colummns;",
+    "andrey_text4": "CRUID operations and functional logic for working with tasks;",
+    "andrey_text5": "Deploy backend on Heroku;",
+    "andrey_text6": "Adding ability to upload/download files from server;",
+    "andrey_text7": "Сustomization UI, text transalte, code control and refactoring;",
     "tatsiana": "Tatsiana Tuzava",
     "tatsiana_team": "Developer",
     "tatsiana_text1": "Main page of the application;",

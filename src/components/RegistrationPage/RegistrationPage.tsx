@@ -54,14 +54,14 @@ const RegistrationPage = () => {
           <PersonAddIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          {t('registration.title')}
+          {t('header.signup')}
         </Typography>
         <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
-            label="Name"
+            label={t('user.name')}
             autoComplete="name"
             autoFocus
             value={name}
@@ -71,7 +71,7 @@ const RegistrationPage = () => {
             margin="normal"
             required
             fullWidth
-            label="Login"
+            label={t('user.login')}
             autoComplete="login"
             autoFocus
             value={login}
@@ -81,14 +81,14 @@ const RegistrationPage = () => {
             margin="normal"
             required
             fullWidth
-            label="Password"
+            label={t('user.password')}
             type="password"
             autoComplete="password"
             value={password}
             onChange={handleOnChangePassword}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-            {t('registration.signup')}
+            {t('header.signup')}
           </Button>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>

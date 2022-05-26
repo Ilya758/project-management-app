@@ -96,14 +96,14 @@ export const EditProfile = () => {
     <div className="wrapper-component center">
       <Container component="div" maxWidth="xs">
         <Typography component="h3" variant="h5">
-          {t('edit_Profile.title')}
+          {t('user.caption')}
         </Typography>
         <Box component="form" onSubmit={handerSubmit} sx={{ mt: 1 }}>
           <TextField
             margin="normal"
             required
             fullWidth
-            label={t('edit_Profile.name')}
+            label={t('user.name')}
             autoComplete="name"
             autoFocus
             value={user.name}
@@ -113,7 +113,7 @@ export const EditProfile = () => {
             margin="normal"
             required
             fullWidth
-            label={t('edit_Profile.login')}
+            label={t('user.login')}
             autoComplete="login"
             autoFocus
             value={user.login}
@@ -123,7 +123,7 @@ export const EditProfile = () => {
             margin="normal"
             required
             fullWidth
-            label={t('edit_Profile.password')}
+            label={t('user.password')}
             type="password"
             autoComplete="password"
             value={password}
@@ -135,13 +135,13 @@ export const EditProfile = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               onClick={handleClickOpen}
-              title={t('delete.title')}
+              title={t('modal.delete.title')}
             >
-              <DeleteIcon />
-              <span style={{ margin: '0 8px' }}>{t('delete.title')}</span>
+              <DeleteIcon sx={{ ml: 1 }} />
+              <span style={{ marginRight: '16px' }}>{t('modal.delete.title')}</span>
             </Button>
             <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
-              {t('edit_Profile.save')}
+              {t('modal.edit.yes')}
             </Button>
           </Box>
           {error && <Alert severity="error">{error}</Alert>}
@@ -153,9 +153,11 @@ export const EditProfile = () => {
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('modal.delete.title')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">{t('modal.title')}</DialogContentText>
+          <DialogContentText id="alert-dialog-description">
+            {t('modal.delete.description')}
+          </DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('modal.cancel')}</Button>
