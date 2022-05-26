@@ -112,9 +112,11 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
   };
 
   const getTask = async (task: TaskInfo) => {
-    tasksService.getTask(boardId, column.id, task.id).then((result) => {
-      setTask(result);
-    });
+    if (task.id) {
+      tasksService.getTask(boardId, column.id, task.id).then((result) => {
+        setTask(result);
+      });
+    }
   };
 
   const editTask = (task: TaskInfo) => {
