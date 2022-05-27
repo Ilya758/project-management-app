@@ -2,7 +2,15 @@ import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import authService from '../../services/services.auth';
 import Button from '@mui/material/Button';
-import { Alert, Avatar, Box, Container, TextField, Typography } from '@mui/material';
+import {
+  Alert,
+  Avatar,
+  Box,
+  LinearProgress,
+  Container,
+  TextField,
+  Typography,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useTranslation } from 'react-i18next';
 import { Context } from '../../common/common.context';
@@ -14,6 +22,8 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { setIsAuthorize } = useContext(Context);
+  const [verified, setVerified] = useState(false);
+  const [isWait, setIsWait] = useState(false);
 
   const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setLogin(e.currentTarget.value as string);
@@ -22,15 +32,23 @@ const LoginPage = () => {
     setPassword(e.currentTarget.value as string);
   };
 
+  const loginValid = () => !!login;
+  const passwordValid = () => !!password;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-      await authService.singin(login, password);
-      setIsAuthorize(true);
-      navigate('/main');
-    } catch (error) {
-      setError((error as { message: string }).message);
+    if (loginValid() && passwordValid()) {
+      setIsWait(true);
+      try {
+        await authService.singin(login, password);
+        setIsAuthorize(true);
+        navigate('/main');
+      } catch (error) {
+        setError((error as { message: string }).message);
+      }
+      setIsWait(false);
     }
+    setVerified(true);
   };
 
   return (
@@ -62,6 +80,8 @@ const LoginPage = () => {
             autoFocus
             value={login}
             onChange={handleOnChangeLogin}
+            error={verified && !loginValid()}
+            helperText={verified && !loginValid() ? t('validation.empty') : ''}
           />
           <TextField
             margin="normal"
@@ -72,10 +92,13 @@ const LoginPage = () => {
             autoComplete="password"
             value={password}
             onChange={handleOnChangePassword}
+            error={verified && !passwordValid()}
+            helperText={verified && !passwordValid() ? t('validation.empty') : ''}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             {t('header.signin')}
           </Button>
+          <Box sx={{ width: '100%' }}>{isWait && <LinearProgress color="secondary" />}</Box>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>
       </Box>
