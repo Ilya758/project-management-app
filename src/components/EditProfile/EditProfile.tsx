@@ -12,6 +12,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
+  LinearProgress,
 } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import '../Authentication/Authentication.scss';
@@ -31,6 +32,8 @@ export const EditProfile = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [open, setOpen] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [isWait, setIsWait] = useState(false);
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -81,15 +84,23 @@ export const EditProfile = () => {
     setPassword(e.currentTarget.value as string);
   };
 
+  const nameValid = () => !!user.name;
+  const passwordValid = () => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
-    usersService
-      .updateUser(user, password)
-      .then(() => navigate('/main'))
-      .catch((error) => {
-        setError((error as IErrorMessage).response.data.message);
-      });
+    if (nameValid() && passwordValid()) {
+      setIsWait(true);
+      setError('');
+      usersService
+        .updateUser(user, password)
+        .then(() => navigate('/main'))
+        .catch((error) => {
+          setError((error as IErrorMessage).response.data.message);
+        });
+      setIsWait(false);
+    }
+    setVerified(true);
   };
 
   return (
@@ -102,7 +113,16 @@ export const EditProfile = () => {
         <Typography component="h3" variant="h5">
           {t('user.caption')}
         </Typography>
-        <Box component="form" onSubmit={handerSubmit} sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            fullWidth
+            label={t('user.login')}
+            autoComplete="login"
+            disabled
+            value={user.login}
+            onChange={handleOnChangeLogin}
+          />
           <TextField
             margin="normal"
             required
@@ -112,16 +132,8 @@ export const EditProfile = () => {
             autoFocus
             value={user.name}
             onChange={handleOnChangeName}
-          />
-          <TextField
-            margin="normal"
-            required
-            fullWidth
-            label={t('user.login')}
-            autoComplete="login"
-            autoFocus
-            value={user.login}
-            onChange={handleOnChangeLogin}
+            error={verified && !nameValid()}
+            helperText={verified && !nameValid() ? t('validation.empty') : ''}
           />
           <TextField
             margin="normal"
@@ -129,9 +141,10 @@ export const EditProfile = () => {
             fullWidth
             label={t('user.password')}
             type="password"
-            autoComplete="password"
             value={password}
             onChange={handleOnChangePassword}
+            error={verified && !passwordValid()}
+            helperText={verified && !passwordValid() ? t('validation.password') : ''}
           />
           <Box sx={{ display: 'flex', gap: '10px' }}>
             <Button
@@ -148,6 +161,7 @@ export const EditProfile = () => {
               {t('modal.edit.yes')}
             </Button>
           </Box>
+          <Box sx={{ width: '100%' }}>{isWait && <LinearProgress color="secondary" />}</Box>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>
       </Container>

@@ -1,7 +1,15 @@
 import { useContext, useState } from 'react';
 import authService from '../../services/services.auth';
 import Button from '@mui/material/Button';
-import { Alert, Avatar, Box, Container, TextField, Typography } from '@mui/material';
+import {
+  Alert,
+  Avatar,
+  Box,
+  Container,
+  LinearProgress,
+  TextField,
+  Typography,
+} from '@mui/material';
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
@@ -15,6 +23,8 @@ const RegistrationPage = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const { setIsAuthorize } = useContext(Context);
+  const [verified, setVerified] = useState(false);
+  const [isWait, setIsWait] = useState(false);
 
   const handleOnChangeName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setName(e.currentTarget.value as string);
@@ -27,17 +37,26 @@ const RegistrationPage = () => {
     setPassword(e.currentTarget.value as string);
   };
 
+  const nameValid = () => !!name;
+  const loginValid = () => !!login;
+  const passwordValid = () => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setError('');
-    try {
-      await authService.singup(name, login, password);
-      await authService.singin(login, password);
-      setIsAuthorize(true);
-      navigate('/main');
-    } catch (error) {
-      setError((error as { message: string }).message);
+    if (nameValid() && loginValid() && passwordValid()) {
+      setIsWait(true);
+      setError('');
+      try {
+        await authService.singup(name, login, password);
+        await authService.singin(login, password);
+        setIsAuthorize(true);
+        navigate('/main');
+      } catch (error) {
+        setError((error as { message: string }).message);
+      }
+      setIsWait(false);
     }
+    setVerified(true);
   };
 
   return (
@@ -69,6 +88,8 @@ const RegistrationPage = () => {
             autoFocus
             value={name}
             onChange={handleOnChangeName}
+            error={verified && !nameValid()}
+            helperText={verified && !nameValid() ? t('validation.empty') : ''}
           />
           <TextField
             margin="normal"
@@ -79,6 +100,8 @@ const RegistrationPage = () => {
             autoFocus
             value={login}
             onChange={handleOnChangeLogin}
+            error={verified && !loginValid()}
+            helperText={verified && !loginValid() ? t('validation.empty') : ''}
           />
           <TextField
             margin="normal"
@@ -89,10 +112,13 @@ const RegistrationPage = () => {
             autoComplete="password"
             value={password}
             onChange={handleOnChangePassword}
+            error={verified && !passwordValid()}
+            helperText={verified && !passwordValid() ? t('validation.password') : ''}
           />
           <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             {t('header.signup')}
           </Button>
+          <Box sx={{ width: '100%' }}>{isWait && <LinearProgress color="secondary" />}</Box>
           {error && <Alert severity="error">{error}</Alert>}
         </Box>
       </Box>
