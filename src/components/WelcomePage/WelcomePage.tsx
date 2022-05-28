@@ -98,6 +98,7 @@ export const WelcomePage = () => {
                 <p className="skills-developer-text">- {t('primary_title.tatsiana_text1')}</p>
                 <p className="skills-developer-text">- {t('primary_title.tatsiana_text2')}</p>
                 <p className="skills-developer-text">- {t('primary_title.tatsiana_text3')}</p>
+                <p className="skills-developer-text">- {t('primary_title.tatsiana_text4')}</p>
               </div>
             </div>
             <div className="image-developer developer3"></div>
