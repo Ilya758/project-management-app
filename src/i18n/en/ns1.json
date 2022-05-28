@@ -90,7 +90,8 @@
     "tatsiana_team": "Developer",
     "tatsiana_text1": "Main page of the application;",
     "tatsiana_text2": "Project localization;",
-    "tatsiana_text3": "Registering and setting up a user profile;"
+    "tatsiana_text3": "Registering and setting up a user profile;",
+    "tatsiana_text4": "Additional functionality: button to raise the page to the top, spinner;"
   },
   "validation": {
     "empty": "Field cannot be empty",
