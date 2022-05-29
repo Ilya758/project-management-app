@@ -96,5 +96,9 @@
   "validation": {
     "empty": "Field cannot be empty",
     "password": "Passwords must contain minimum eight characters, at least one letter and one number"
+  },
+  "search": {
+    "placeholder": "Search",
+    "result": "Search result"
   }
 }
