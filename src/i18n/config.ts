@@ -19,7 +19,7 @@ i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    lng: 'ru',
+    lng: 'en',
     ns: ['ns1'],
     defaultNS,
     resources,

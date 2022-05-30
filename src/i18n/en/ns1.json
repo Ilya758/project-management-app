@@ -1,45 +1,64 @@
 {
   "language": {
-    "en": "Eng"
+    "en": "EN",
+    "ru": "RU"
+  },
+  "header": {
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "signout": "Sign Out",
+    "profile": "Profile",
+    "linkToMain": "Go to Main Page"
   },
   "button": {
     "back": "Back"
   },
-  "login": {
-    "title": "Login",
-    "signin": "Sign In"
+  "board": {
+    "caption": "Board",
+    "title": "Title",
+    "description": "Description",
+    "back": "Back"
   },
-  "registration": {
-    "title": "Registration your account",
-    "signup": "Sign Up"
-  },
-  "sign_Out": {
-    "title": "Sign Out"
+  "column": {
+    "caption": "Column",
+    "title": "Title",
+    "order": "Order"
   },
   "boards": {
-    "title": "Boards",
-    "boards": "Boards",
-    "new": "New column",
-    "new_boards": "New Boards",
-    "create": "Create",
-    "tit": "Title"
+    "caption": "Boards",
+    "add": "Add"
   },
-  "edit_Profile": {
-    "title": "Edit Profile",
-    "edit_profile": "Edit Profile",
-    "name": "Create Your Name",
-    "login": "Create Your Login",
-    "password": "Create Your Password",
-    "save": "Save"
+  "task": {
+    "caption": "Task",
+    "title": "Title",
+    "description": "Description",
+    "order": "Order",
+    "user": "User",
+    "upload": "Upload file"
   },
-  "delete": {
-    "title": "Delete User"
+  "user": {
+    "caption": "Edit profile",
+    "name": "Name",
+    "login": "Login",
+    "password": "Password"
   },
   "modal": {
-    "title": "Delete without possibility of recovery?",
     "yes": "Yes",
     "cancel": "Cancel",
-    "tit": "Delete"
+    "delete": {
+      "title": "Delete",
+      "description": "Delete without possibility of recovery?"
+    },
+    "create": {
+      "title": "Create",
+      "description": "Create new item?",
+      "yes": "Create"
+    },
+    "edit": {
+      "title": "Edit",
+      "description": "Edit item?",
+      "yes": "Save"
+    }
   },
   "primary_title": {
     "tit": "your unlimited use cases",
@@ -50,7 +69,7 @@
     "time_text": "Task management is the link between the planning of cases and their implementation. The task management software needed to provide an overview of the work in order to translate the idea into a result.",
     "time_text_br": "Try ProjectManagement: Join the world as our teams use our teams to digitize workflows and get a clear overview of task progress. Let,s get organized together!",
     "work": "PROJECTS, THAT WORK",
-    "work_text": "Whether you are managing your next big project or digitizing task management for your team is day-to-day work, you need to know who is doing what, when ProjectManagement</b> helps you manage tasks in a beautifully customizable environment that adapts perfectly to your needs.",
+    "work_text": "Whether you are managing your next big project or digitizing task management for your team is day-to-day work, you need to know who is doing what, when ProjectManagement helps you manage tasks in a beautifully customizable environment that adapts perfectly to your needs.",
     "work_distant": "DISTANT WORK",
     "work_distant_text": "When your team is working from home, an efficient way to share information is essential to being productive. Use ProjectManagement to improve collaboration, manage tasks efficiently, and ensure projects run smoothly.",
     "meet_team": "Meet Team",
@@ -60,14 +79,27 @@
     "illia_text2": "Support for the correct operation of the application;",
     "andrey": "Andrei Korozeev",
     "andrey_team": "Developer",
-    "andrey_text1": "Authorization of the user;",
-    "andrey_text2": "Full development to create and manage application projects;",
-    "andrey_text3": "",
-    "andrey_text4": "",
+    "andrey_text1": "Authorization, authentication and control of user's JWT token;",
+    "andrey_text2": "CRUID operations and functional logic for working with boards;",
+    "andrey_text3": "CRUID operations and functional logic for working with colummns;",
+    "andrey_text4": "CRUID operations and functional logic for working with tasks;",
+    "andrey_text5": "Deploy backend on Heroku;",
+    "andrey_text6": "Adding ability to upload/download files from server;",
+    "andrey_text7": "Сustomization UI, text transalte, code control and refactoring;",
+    "andrey_text8": "Global search;",
     "tatsiana": "Tatsiana Tuzava",
     "tatsiana_team": "Developer",
     "tatsiana_text1": "Main page of the application;",
     "tatsiana_text2": "Project localization;",
-    "tatsiana_text3": "Registering and setting up a user profile;"
+    "tatsiana_text3": "Registering and setting up a user profile;",
+    "tatsiana_text4": "Additional functionality: button to raise the page to the top, spinner;"
+  },
+  "validation": {
+    "empty": "Field cannot be empty",
+    "password": "Passwords must contain minimum eight characters, at least one letter and one number"
+  },
+  "search": {
+    "placeholder": "Search",
+    "result": "Search result"
   }
 }

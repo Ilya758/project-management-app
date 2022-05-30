@@ -24,7 +24,7 @@ const singin = async (login: string, password: string) => {
     if (token) {
       localStorage.setItem('login', login);
       localStorage.setItem('token', token);
-      document.cookie = `token=${token}; max-age=3600`;
+      document.cookie = `token=${token}; max-age=60*60*24`;
     }
     return token;
   } catch (error) {

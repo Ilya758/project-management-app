@@ -8,8 +8,10 @@ import {
 } from '@mui/material';
 
 import { DialogProps } from './ModalDialog.types';
+import { useTranslation } from 'react-i18next';
 
 const ModalDialog = ({ open, handleClose, title, description, handleOk }: DialogProps) => {
+  const { t } = useTranslation();
   return (
     <Dialog
       open={open}
@@ -22,9 +24,9 @@ const ModalDialog = ({ open, handleClose, title, description, handleOk }: Dialog
         <DialogContentText id="alert-dialog-description">{description}</DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>{t('modal.cancel')}</Button>
         <Button onClick={handleOk} autoFocus>
-          Yes
+          {t('modal.yes')}
         </Button>
       </DialogActions>
     </Dialog>

@@ -1,7 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { Menu } from './MenuProfile';
 import { Authorization } from './Authorization';
-
 import './Header.scss';
 import { RefObject, useEffect, useRef } from 'react';
 import { Classnames } from './constants';
@@ -28,7 +26,6 @@ export const Header = () => {
     <header ref={headerRef} className="header">
       <div className="nav-container">
         <NavLink to="/" className="logo"></NavLink>
-        <Menu />
       </div>
       <Authorization />
     </header>

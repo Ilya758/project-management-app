@@ -46,10 +46,10 @@ const deleteBoard = async (boardId: string) => {
   return result;
 };
 
-const updateBoard = async (boardId: string, board: BoardInfo) => {
+const updateBoard = async (board: BoardInfo) => {
   try {
     const resp = await axios.put(
-      API_URL + `boards/${boardId}`,
+      API_URL + `boards/${board.id}`,
       { title: board.title, description: board.description },
       authService.getConfig()
     );

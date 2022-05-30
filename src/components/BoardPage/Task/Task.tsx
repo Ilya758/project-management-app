@@ -168,9 +168,9 @@ const Task = ({
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description"
       >
-        <DialogTitle id="alert-dialog-title">{t('modal.tit')}</DialogTitle>
+        <DialogTitle id="alert-dialog-title">{t('modal.delete.title')}</DialogTitle>
         <DialogContent>
-          <DialogContentText id="alert-dialog-description">{t('modal.cancel')}</DialogContentText>
+          <DialogContentText id="alert-dialog-description"></DialogContentText>
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>{t('modal.cancel')}</Button>

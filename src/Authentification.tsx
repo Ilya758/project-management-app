@@ -9,7 +9,6 @@ interface IProps {
 const publicPaths = ['/authentication/login', '/authentication/registration', '/', '/board'];
 export const Authentification: FC<IProps> = ({ children }) => {
   const location = useLocation();
-
   if (!publicPaths.includes(location.pathname) && !authService.isAuthorize()) {
     return <Navigate to="/authentication/login" />;
   }

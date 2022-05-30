@@ -20,6 +20,7 @@ import columnsService from '../../services/services.columns';
 import { useTranslation } from 'react-i18next';
 import { ButtonBack } from '../ButtonBack/ButtonBack';
 import { updateColumnOrder } from '../../common/utils/updateColumnOrder';
+import { Spinner } from '../Spinner/Spinner';
 
 const BoardPage = () => {
   const { boardId } = useParams();
@@ -32,9 +33,11 @@ const BoardPage = () => {
   const [error, setError] = useState('');
   const [openCreateColumn, setOpenCreateColumn] = useState(false);
   const [titleColumn, setTitleColumn] = useState('');
+  const [isFetching, setIsFetching] = useState(false);
   const { t } = useTranslation();
 
   function updateBoard() {
+    setIsFetching(true);
     if (boardId) {
       boardsService
         .getBoard(boardId)
@@ -44,7 +47,8 @@ const BoardPage = () => {
         })
         .catch((error) => {
           setError((error as { message: string }).message);
-        });
+        })
+        .finally(() => setIsFetching(false));
     } else {
       setError('Id is required.');
     }
@@ -100,7 +104,8 @@ const BoardPage = () => {
     <>
       {board && (
         <div className="boardPage">
-          <div>
+          {isFetching && <Spinner />}
+          <div className="button-back">
             <ButtonBack />
           </div>
           <div className="boardPage__header">
@@ -132,13 +137,13 @@ const BoardPage = () => {
       )}
       {error && <Alert severity="error">{error}</Alert>}
       <Dialog open={openCreateColumn} onClose={handleCreateColumnClose}>
-        <DialogTitle>{t('boards.new')}</DialogTitle>
+        <DialogTitle>{t('modal.create.title')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label={t('boards.tit')}
+            label={t('column.title')}
             type="text"
             fullWidth
             variant="standard"
@@ -148,7 +153,7 @@ const BoardPage = () => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleCreateColumnClose}>{t('modal.cancel')}</Button>
-          <Button onClick={handleCreateColumn}>{t('boards.create')}</Button>
+          <Button onClick={handleCreateColumn}>{t('modal.create.yes')}</Button>
         </DialogActions>
       </Dialog>
     </>

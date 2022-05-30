@@ -57,7 +57,9 @@ export const WelcomePage = () => {
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>{t('primary_title.illia')}</em> - {t('primary_title.illia_team')}
+                <em>{t('primary_title.illia')}</em>
+                <br />
+                {t('primary_title.illia_team')}
               </h3>
               <div className="skills-developer">
                 <p className="skills-developer-text">- {t('primary_title.illia_text1')}</p>
@@ -71,13 +73,17 @@ export const WelcomePage = () => {
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>{t('primary_title.andrey')} </em> - {t('primary_title.andrey.team')}
+                <em>{t('primary_title.andrey')} </em> - {t('primary_title.andrey_team')}
               </h3>
               <div className="skills-developer">
                 <p className="skills-developer-text">- {t('primary_title.andrey_text1')}</p>
                 <p className="skills-developer-text">- {t('primary_title.andrey_text2')}</p>
                 <p className="skills-developer-text">- {t('primary_title.andrey_text3')}</p>
                 <p className="skills-developer-text">- {t('primary_title.andrey_text4')}</p>
+                <p className="skills-developer-text">- {t('primary_title.andrey_text5')}</p>
+                <p className="skills-developer-text">- {t('primary_title.andrey_text6')}</p>
+                <p className="skills-developer-text">- {t('primary_title.andrey_text7')}</p>
+                <p className="skills-developer-text">- {t('primary_title.andrey_text8')}</p>
               </div>
             </div>
             <div className="image-developer developer2"></div>
@@ -85,12 +91,15 @@ export const WelcomePage = () => {
           <div className="box-wrapper">
             <div className="info-developer">
               <h3 className="title-developer">
-                <em>{t('primary_title.tatsiana')}</em> - {t('primary_title.tatsiana_team')}
+                <em>{t('primary_title.tatsiana')}</em>
+                <br />
+                {t('primary_title.tatsiana_team')}
               </h3>
               <div className="skills-developer">
                 <p className="skills-developer-text">- {t('primary_title.tatsiana_text1')}</p>
                 <p className="skills-developer-text">- {t('primary_title.tatsiana_text2')}</p>
                 <p className="skills-developer-text">- {t('primary_title.tatsiana_text3')}</p>
+                <p className="skills-developer-text">- {t('primary_title.tatsiana_text4')}</p>
               </div>
             </div>
             <div className="image-developer developer3"></div>
