@@ -31,10 +31,10 @@
 }
 
 .nav-container {
-  width: 300px;
   height: 100%;
   display: flex;
   align-items: center;
+  gap: 20px;
 }
 
 .container-link {
@@ -110,9 +110,12 @@
   display: flex;
   justify-content: flex-end;
   align-self: flex-end;
+  
 }
 
 .language__btn {
+  display: flex;
+  align-items: center;
   background: none;
   color: #61dafb;
   cursor: pointer;
@@ -128,7 +131,7 @@
   font-weight: 700;
 }
 
-.language__btn:first-child {
+.language__btn-en {
   border-right: 1px solid #00deb6;
 }
 
@@ -137,3 +140,4 @@
   margin-right: auto;
   color: inherit;
 }
+
