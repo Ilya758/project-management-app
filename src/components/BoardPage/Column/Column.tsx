@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Task from '../Task/Task';
 import {
   Autocomplete,
@@ -19,15 +19,29 @@ import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import DoneIcon from '@mui/icons-material/Done';
 import columnsService from '../../../services/services.columns';
-import { taskDefault, TaskInfo, UserInfo } from '../../../common/common.types';
+import {
+  BoardInfo,
+  ColumnInfo,
+  taskDefault,
+  TaskInfo,
+  UserInfo,
+} from '../../../common/common.types';
 import usersService from '../../../services/services.users';
 import tasksService from '../../../services/services.tasks';
 import filesService from '../../../services/services.files';
 import { useTranslation } from 'react-i18next';
+import { useDrag, useDrop } from 'react-dnd';
+import { ItemTypes } from './constants';
 
-const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
+const Column = ({
+  column,
+  boardId,
+  updateBoard,
+  showError,
+  updateColumnOrder,
+  setBoard,
+}: ColumnProps) => {
   const [title, setTitle] = useState(column.title);
-
   const [open, setOpen] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
@@ -164,9 +178,39 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
     return `${(bytes / Math.pow(1024, i)).toFixed(1)} ${sizes[i]}`;
   }
 
+  const [, drag] = useDrag(() => ({
+    type: ItemTypes.column,
+    item: () => {
+      return { boardId, id: column.id, type: ItemTypes.column };
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  }));
+
+  const [, drop] = useDrop(() => ({
+    accept: ItemTypes.column,
+    drop: (item: ColumnInfo) => {
+      setBoard((prevState: BoardInfo | null) => {
+        const cloneColumns = (prevState as BoardInfo).columns;
+        const dropArea = cloneColumns.find((col) => col.id === column.id) as ColumnInfo;
+        return updateColumnOrder(
+          item.id,
+          dropArea.order,
+          prevState as BoardInfo,
+          prevState?.id as string
+        );
+      });
+    },
+  }));
+
+  const ref = useRef(null);
+
+  drag(drop(ref));
+
   return (
     <>
-      <div className="column">
+      <div ref={ref} className="column">
         <div className="column__header">
           {isEditing || (
             <div className="column__title" onClick={handleClickTitle}>
@@ -217,6 +261,7 @@ const Column = ({ column, boardId, updateBoard, showError }: ColumnProps) => {
                   updateBoard={updateBoard}
                   editTask={editTask}
                   showError={showError}
+                  setBoard={setBoard}
                 />
               ))}
           </div>

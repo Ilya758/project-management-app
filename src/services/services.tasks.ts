@@ -59,17 +59,22 @@ const deleteTask = async (boardId: string, columnId: string, taskId: string) => 
   return result;
 };
 
-const updateTask = async (boardId: string, columnId: string, task: TaskInfo) => {
+const updateTask = async (
+  boardId: string,
+  newColumnId: string,
+  task: TaskInfo,
+  columnId?: string
+) => {
   try {
     const resp = await axios.put(
-      API_URL + `boards/${boardId}/columns/${columnId}/tasks/${task.id}`,
+      API_URL + `boards/${boardId}/columns/${columnId || newColumnId}/tasks/${task.id}`,
       {
         title: task.title,
         order: task.order,
         description: task.description,
         userId: task.userId,
         boardId: boardId,
-        columnId: columnId,
+        columnId: newColumnId,
       },
       authService.getConfig()
     );

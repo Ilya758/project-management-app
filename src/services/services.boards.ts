@@ -50,7 +50,7 @@ const updateBoard = async (boardId: string, board: BoardInfo) => {
   try {
     const resp = await axios.put(
       API_URL + `boards/${boardId}`,
-      { title: board.title },
+      { title: board.title, description: board.description },
       authService.getConfig()
     );
     return resp.data;
