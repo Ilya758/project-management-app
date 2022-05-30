@@ -19,11 +19,17 @@ import AddIcon from '@mui/icons-material/Add';
 import columnsService from '../../services/services.columns';
 import { useTranslation } from 'react-i18next';
 import { ButtonBack } from '../ButtonBack/ButtonBack';
+import { updateColumnOrder } from '../../common/utils/updateColumnOrder';
 import { Spinner } from '../Spinner/Spinner';
 
 const BoardPage = () => {
   const { boardId } = useParams();
-  const [board, setBoard] = useState<BoardInfo>();
+  const [board, setBoard] = useState<BoardInfo | null>({
+    columns: [],
+    description: '',
+    id: '',
+    title: '',
+  });
   const [error, setError] = useState('');
   const [openCreateColumn, setOpenCreateColumn] = useState(false);
   const [titleColumn, setTitleColumn] = useState('');
@@ -115,6 +121,10 @@ const BoardPage = () => {
                   boardId={board.id}
                   updateBoard={updateBoard}
                   showError={showError}
+                  updateColumnOrder={updateColumnOrder}
+                  columns={board.columns}
+                  setBoard={setBoard}
+                  board={board}
                 />
               ))}
             <Card sx={{ height: 'min-content' }}>
