@@ -13,6 +13,7 @@ import authService from '../../services/services.auth';
 import './Header.scss';
 import { Context } from '../../common/common.context';
 import { useContext } from 'react';
+import { SearchPage } from './Search/SearchPage';
 
 export const Authorization = () => {
   const { t, i18n } = useTranslation();
@@ -33,8 +34,9 @@ export const Authorization = () => {
     <>
       <nav className="nav">
         <div className="language__container">
+          <SearchPage />
           <div
-            className="language__btn"
+            className="language__btn language__btn-en"
             onClick={() => {
               onLangChange(LANGUAGE.En);
             }}
