@@ -1,10 +1,12 @@
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { Authorization } from './Authorization';
 import './Header.scss';
 import { RefObject, useEffect, useRef } from 'react';
 import { Classnames } from './constants';
 
 export const Header = () => {
+  const { pathname } = useLocation();
+
   const headerRef = useRef(null) as RefObject<HTMLElement>;
 
   useEffect(() => {
@@ -20,6 +22,14 @@ export const Header = () => {
     window.addEventListener('scroll', handleScroll);
 
     return () => window.removeEventListener('scroll', handleScroll);
+  });
+
+  useEffect(() => {
+    if (pathname.match('main') || pathname.match('boards')) document.body.style.overflow = 'hidden';
+
+    return () => {
+      document.body.style.overflow = 'initial';
+    };
   });
 
   return (
