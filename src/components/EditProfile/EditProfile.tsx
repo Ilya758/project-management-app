@@ -1,72 +1,189 @@
-import { useState } from 'react';
-// import { PATH } from '../../constants/path';
-// import axios from 'axios';
+import { useState, useEffect, useContext } from 'react';
+import authService, { IErrorMessage } from '../../services/services.auth';
+import {
+  Alert,
+  Box,
+  Button,
+  Container,
+  TextField,
+  Typography,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  LinearProgress,
+} from '@mui/material';
+import DeleteIcon from '@mui/icons-material/Delete';
+import '../Authentication/Authentication.scss';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
+import { Context } from '../../common/common.context';
+import { userDefault, UserInfo } from '../../common/common.types';
+import usersService from '../../services/services.users';
 
 export const EditProfile = () => {
-  const [name, setName] = useState('');
-  const [login, setLogin] = useState('');
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const { setIsAuthorize } = useContext(Context);
+
+  const [user, setUser] = useState<UserInfo>(userDefault);
   const [password, setPassword] = useState('');
-  // const [error, setError] = useState('');
+  const [error, setError] = useState('');
+  const [open, setOpen] = useState(false);
+  const [verified, setVerified] = useState(false);
+  const [isWait, setIsWait] = useState(false);
 
-  // useEffect(() => {
-  //   axios.get(PATH.PROFILE());
-  // }, []);
-
-  const handleOnChangeName = (e: React.FormEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value as string);
+  const handleClickOpen = () => {
+    setOpen(true);
   };
 
-  const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement>) => {
-    setLogin(e.currentTarget.value as string);
+  const handleClose = () => {
+    setOpen(false);
   };
-  const handleOnChangePassword = (e: React.FormEvent<HTMLInputElement>) => {
+
+  const handleDeleteUser = () => {
+    usersService
+      .deleteUser(user.id)
+      .then(() => {
+        authService.singout();
+        setIsAuthorize(false);
+        navigate('/');
+      })
+      .catch((error) => {
+        setError((error as IErrorMessage).response.data.message);
+      });
+  };
+
+  useEffect(() => {
+    setError('');
+    usersService
+      .getUsers()
+      .then((result) => {
+        const login = localStorage.getItem('login');
+        const users = result as UserInfo[];
+        const findUser = users.find((x) => x.login == login);
+        if (findUser) {
+          setUser(findUser);
+        }
+      })
+      .catch((error) => {
+        setError((error as IErrorMessage).response.data.message);
+      });
+  }, []);
+
+  const handleOnChangeName = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setUser({ ...user, name: e.currentTarget.value as string });
+  };
+
+  const handleOnChangeLogin = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setUser({ ...user, login: e.currentTarget.value as string });
+  };
+  const handleOnChangePassword = (e: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPassword(e.currentTarget.value as string);
   };
 
+  const nameValid = () => !!user.name;
+  const passwordValid = () => /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password);
+
   const handerSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    try {
-    } catch (error) {}
+    if (nameValid() && passwordValid()) {
+      setIsWait(true);
+      setError('');
+      usersService
+        .updateUser(user, password)
+        .then(() => navigate('/main'))
+        .catch((error) => {
+          setError((error as IErrorMessage).response.data.message);
+        });
+      setIsWait(false);
+    }
+    setVerified(true);
   };
 
   return (
-    <div className="wrapper-component">
-      <div className="title">Edit your profile</div>
-      <form className="form" onSubmit={handerSubmit}>
-        <div className="form__row">
-          <div className="form__row-label">Name</div>
-          <div className="form__row-input">
-            <input className="form__input" type="text" value={name} onChange={handleOnChangeName} />
-          </div>
-        </div>
-
-        <div className="form__row">
-          <div className="form__row-label">Login</div>
-          <div className="form__row-input">
-            <input
-              className="form__input"
-              type="text"
-              value={login}
-              onChange={handleOnChangeLogin}
-            />
-          </div>
-        </div>
-        <div className="form__row">
-          <div className="form__row-label">Password</div>
-          <div className="form__row-input">
-            <input
-              className="form__input"
-              type="password"
-              value={password}
-              onChange={handleOnChangePassword}
-            />
-          </div>
-        </div>
-        <div></div>
-        <div className="form__row form__row-fotter">
-          <input className="form__submit" type="submit" value="Save" />
-        </div>
-      </form>
+    <div className="wrapper-component center">
+      <Container
+        component="div"
+        maxWidth="xs"
+        sx={{ bgcolor: 'rgb(250, 250, 250)', borderRadius: '5px', pt: 2 }}
+      >
+        <Typography component="h3" variant="h5">
+          {t('user.caption')}
+        </Typography>
+        <Box component="form" onSubmit={handerSubmit} noValidate sx={{ mt: 1 }}>
+          <TextField
+            margin="normal"
+            fullWidth
+            label={t('user.login')}
+            autoComplete="login"
+            disabled
+            value={user.login}
+            onChange={handleOnChangeLogin}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label={t('user.name')}
+            autoComplete="name"
+            autoFocus
+            value={user.name}
+            onChange={handleOnChangeName}
+            error={verified && !nameValid()}
+            helperText={verified && !nameValid() ? t('validation.empty') : ''}
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            label={t('user.password')}
+            type="password"
+            value={password}
+            onChange={handleOnChangePassword}
+            error={verified && !passwordValid()}
+            helperText={verified && !passwordValid() ? t('validation.password') : ''}
+          />
+          <Box sx={{ display: 'flex', gap: '10px' }}>
+            <Button
+              className="delete-user"
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+              onClick={handleClickOpen}
+              title={t('modal.delete.title')}
+            >
+              <DeleteIcon sx={{ ml: 1 }} />
+              <span style={{ marginRight: '16px' }}>{t('modal.delete.title')}</span>
+            </Button>
+            <Button type="submit" fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
+              {t('modal.edit.yes')}
+            </Button>
+          </Box>
+          <Box sx={{ width: '100%' }}>{isWait && <LinearProgress color="secondary" />}</Box>
+          {error && <Alert severity="error">{error}</Alert>}
+        </Box>
+      </Container>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">{t('modal.delete.title')}</DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {t('modal.delete.description')}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>{t('modal.cancel')}</Button>
+          <Button onClick={handleDeleteUser} autoFocus>
+            {t('modal.yes')}
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };

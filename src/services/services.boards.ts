@@ -13,9 +13,13 @@ const getBoards = async () => {
   }
 };
 
-const createBoard = async (title: string) => {
+const createBoard = async (board: BoardInfo) => {
   try {
-    const resp = await axios.post(API_URL + `boards`, { title: title }, authService.getConfig());
+    const resp = await axios.post(
+      API_URL + `boards`,
+      { title: board.title, description: board.description },
+      authService.getConfig()
+    );
     return resp.data;
   } catch (error) {
     throw new Error((error as IResponceError).response.data.message);
@@ -42,11 +46,11 @@ const deleteBoard = async (boardId: string) => {
   return result;
 };
 
-const updateBoard = async (boardId: string, board: BoardInfo) => {
+const updateBoard = async (board: BoardInfo) => {
   try {
     const resp = await axios.put(
-      API_URL + `boards/${boardId}`,
-      { title: board.title },
+      API_URL + `boards/${board.id}`,
+      { title: board.title, description: board.description },
       authService.getConfig()
     );
     return resp.data;

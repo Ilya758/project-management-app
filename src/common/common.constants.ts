@@ -1,1 +1,1 @@
-export const API_URL = 'https://powerful-inlet-80553.herokuapp.com/';
+export const API_URL = 'https://glacial-crag-52444.herokuapp.com/';

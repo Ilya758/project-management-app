@@ -17,15 +17,27 @@ import { useParams } from 'react-router-dom';
 import './BoardPage.scss';
 import AddIcon from '@mui/icons-material/Add';
 import columnsService from '../../services/services.columns';
+import { useTranslation } from 'react-i18next';
+import { ButtonBack } from '../ButtonBack/ButtonBack';
+import { updateColumnOrder } from '../../common/utils/updateColumnOrder';
+import { Spinner } from '../Spinner/Spinner';
 
 const BoardPage = () => {
   const { boardId } = useParams();
-  const [board, setBoard] = useState<BoardInfo>();
+  const [board, setBoard] = useState<BoardInfo | null>({
+    columns: [],
+    description: '',
+    id: '',
+    title: '',
+  });
   const [error, setError] = useState('');
   const [openCreateColumn, setOpenCreateColumn] = useState(false);
   const [titleColumn, setTitleColumn] = useState('');
+  const [isFetching, setIsFetching] = useState(false);
+  const { t } = useTranslation();
 
   function updateBoard() {
+    setIsFetching(true);
     if (boardId) {
       boardsService
         .getBoard(boardId)
@@ -35,7 +47,8 @@ const BoardPage = () => {
         })
         .catch((error) => {
           setError((error as { message: string }).message);
-        });
+        })
+        .finally(() => setIsFetching(false));
     } else {
       setError('Id is required.');
     }
@@ -67,7 +80,7 @@ const BoardPage = () => {
   const handleCreateColumn = () => {
     if (board) {
       columnsService
-        .createColumn(board.id, titleColumn, board.columns.length + 1)
+        .createColumn(board.id, titleColumn)
         .then(() => {
           setTitleColumn('');
           updateBoard();
@@ -91,6 +104,10 @@ const BoardPage = () => {
     <>
       {board && (
         <div className="boardPage">
+          {isFetching && <Spinner />}
+          <div className="button-back">
+            <ButtonBack />
+          </div>
           <div className="boardPage__header">
             <div className="boardPage__title">{board.title}</div>
           </div>
@@ -104,6 +121,10 @@ const BoardPage = () => {
                   boardId={board.id}
                   updateBoard={updateBoard}
                   showError={showError}
+                  updateColumnOrder={updateColumnOrder}
+                  columns={board.columns}
+                  setBoard={setBoard}
+                  board={board}
                 />
               ))}
             <Card sx={{ height: 'min-content' }}>
@@ -116,13 +137,13 @@ const BoardPage = () => {
       )}
       {error && <Alert severity="error">{error}</Alert>}
       <Dialog open={openCreateColumn} onClose={handleCreateColumnClose}>
-        <DialogTitle>New column</DialogTitle>
+        <DialogTitle>{t('modal.create.title')}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description"></DialogContentText>
           <TextField
             autoFocus
             margin="dense"
-            label="Title"
+            label={t('column.title')}
             type="text"
             fullWidth
             variant="standard"
@@ -131,8 +152,8 @@ const BoardPage = () => {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleCreateColumnClose}>Cancel</Button>
-          <Button onClick={handleCreateColumn}>Create</Button>
+          <Button onClick={handleCreateColumnClose}>{t('modal.cancel')}</Button>
+          <Button onClick={handleCreateColumn}>{t('modal.create.yes')}</Button>
         </DialogActions>
       </Dialog>
     </>

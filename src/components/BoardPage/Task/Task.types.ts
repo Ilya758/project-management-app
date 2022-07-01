@@ -1,4 +1,4 @@
-import { TaskInfo } from '../../../common/common.types';
+import { BoardInfo, TaskInfo } from '../../../common/common.types';
 
 export type TaskProps = {
   task: TaskInfo;
@@ -7,4 +7,5 @@ export type TaskProps = {
   updateBoard: () => void;
   editTask: (task: TaskInfo) => void;
   showError: (message: string) => void;
+  setBoard: React.Dispatch<React.SetStateAction<BoardInfo | null>>;
 };

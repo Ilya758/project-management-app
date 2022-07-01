@@ -1,31 +1,22 @@
-import { NavLink, useNavigate } from 'react-router-dom';
-import authService from '../../services/services.auth';
+import { NavLink } from 'react-router-dom';
 import './Header.scss';
+import { useTranslation } from 'react-i18next';
+import { useContext } from 'react';
+import { Context } from '../../common/common.context';
 
 export const Menu = () => {
-  const navigate = useNavigate();
-  const isAuthorize = authService.isAuthorize();
-  const signOut = () => {
-    authService.singout();
-    navigate('/authentication/login');
-  };
+  const { t } = useTranslation();
+  const { isAuthorize } = useContext(Context);
 
   return (
-    <div className="container-link">
+    <>
       {isAuthorize && (
-        <>
+        <div className="container-link">
           <NavLink to="main" className="link-profile">
-            Boards
+            {t('boards.title')}
           </NavLink>
-          <NavLink to="profile" className="link-profile">
-            Edit Profile
-          </NavLink>
-          <button className="link-profile" onClick={signOut}>
-            Sign Out
-          </button>
-          <button className="delete-user">Delete User</button>
-        </>
+        </div>
       )}
-    </div>
+    </>
   );
 };
